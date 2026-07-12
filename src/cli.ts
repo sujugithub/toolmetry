@@ -5,6 +5,8 @@ import { Command } from 'commander';
 import { loadSuite } from './scenarios/loader.js';
 import { measureSuite, type MeasureResult } from './harness/runner.js';
 import { McpTarget } from './harness/target.js';
+import { FireworksClient } from './harness/fireworks.js';
+import type { MessageCreator } from './harness/agent.js';
 import { estimateCostUsd, formatUsd } from './harness/cost.js';
 import { saveResult, type SavedResult } from './report/results.js';
 import { diffReport } from './report/diff.js';
@@ -13,6 +15,28 @@ import {
   failingScenarios,
   proposeRewrites,
 } from './optimizer/rewrite.js';
+
+/** Model id decides the provider: accounts/... → Fireworks, else Anthropic. */
+function makeClient(model: string): MessageCreator {
+  if (model.startsWith('accounts/')) {
+    const key = process.env['FIREWORKS_API_KEY'];
+    if (!key) {
+      throw new Error(
+        `model "${model}" is a Fireworks id but FIREWORKS_API_KEY is not set`,
+      );
+    }
+    return new FireworksClient(key);
+  }
+  return new Anthropic();
+}
+
+function warnIfUnpriced(model: string): void {
+  if (estimateCostUsd(model, { inputTokens: 1, outputTokens: 1 }) === null) {
+    console.warn(
+      `⚠ no pricing data for "${model}" — cost estimates unavailable and the USD budget guard is INACTIVE for this run.`,
+    );
+  }
+}
 
 const DEFAULT_AGENT_MODEL =
   process.env['HITRATE_AGENT_MODEL'] ?? 'claude-haiku-4-5';
@@ -79,8 +103,9 @@ program
       ? (JSON.parse(readFileSync(opts.overrides, 'utf8')) as Record<string, string>)
       : undefined;
 
+    warnIfUnpriced(opts.model);
     const result = await measureSuite(suite, {
-      client: new Anthropic(),
+      client: makeClient(opts.model),
       model: opts.model,
       runs,
       ...(opts.setup ? { setupCommand: opts.setup } : {}),
@@ -113,9 +138,10 @@ program
     const suite = loadSuite(suitePath);
     const runs = Number(opts.runs);
     const budgetUsd = Number(opts.budget);
-    const client = new Anthropic();
+    warnIfUnpriced(opts.model);
+    warnIfUnpriced(opts.rewriter);
     const common = {
-      client,
+      client: makeClient(opts.model),
       model: opts.model as string,
       runs,
       ...(opts.setup ? { setupCommand: opts.setup } : {}),
@@ -151,7 +177,7 @@ program
     const tools = target.listTools();
     await target.close();
     const proposal = await proposeRewrites({
-      client,
+      client: makeClient(opts.rewriter),
       model: opts.rewriter,
       baseline,
       tools,
