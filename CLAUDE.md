@@ -123,14 +123,21 @@ This file is the single source of truth for Claude Code sessions on this project
 
 | ID | Story | Status | Notes |
 |----|-------|--------|-------|
-| A5 | Target server + scenarios | To Do | |
-| A1 | Scenario schema | To Do | |
-| A2 | Harness | To Do | |
-| A3 | Metrics | To Do | |
-| A4 | Optimizer v0 | To Do | |
-| A6 | Report | To Do | |
+| A5 | Target server + scenarios | Done | `@modelcontextprotocol/server-filesystem`, 18 scenarios + `setup-sandbox.sh` fixture reset |
+| A1 | Scenario schema | Done | zod strict, kebab-case ids, partial-match args |
+| A2 | Harness | Done | `McpTarget` + manual tool-use loop + N-run runner + budget guard; integration-tested vs fixture server with a scripted model client |
+| A3 | Metrics | Done | hit rate / arg correctness / extra-call rate / strict success |
+| A4 | Optimizer v0 | Done (code) | Sonnet 5 rewriter, forced structured output, hallucinated tool names dropped; **live E2E not yet run — blocked on API key** |
+| A6 | Report | Done | markdown before/after diff, headline hit-rate delta; `hitrate report <a.json> <b.json>` |
 
-**Blocked/decisions needed:** —
+**Blocked/decisions needed:**
+- `ANTHROPIC_API_KEY` is not set on this machine (no `ant` CLI either). The Sprint-Review baseline/optimize run — the §7 numbers and the decision gate — is blocked on it. Everything else is verified by 40 green tests + typecheck. When the key is available:
+  ```bash
+  export ANTHROPIC_API_KEY=...
+  npx tsx src/cli.ts optimize scenarios/filesystem/filesystem.yaml \
+    --setup 'sh scenarios/filesystem/setup-sandbox.sh'
+  ```
+- PO to ratify: sandbox reset is a CLI flag (`--setup <cmd>`), not a scenario-schema field — chosen to avoid changing the schema without approval (working agreement #2).
 
 ---
 
