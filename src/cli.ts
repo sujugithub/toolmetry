@@ -14,7 +14,11 @@ import {
   proposeRewrites,
 } from './optimizer/rewrite.js';
 
-const DEFAULT_AGENT_MODEL = 'claude-haiku-4-5';
+const DEFAULT_AGENT_MODEL =
+  process.env['HITRATE_AGENT_MODEL'] ?? 'claude-haiku-4-5';
+const DEFAULT_JUDGE_MODEL =
+  process.env['HITRATE_JUDGE_MODEL'] ?? DEFAULT_REWRITER_MODEL;
+const DEFAULT_BUDGET_USD = process.env['HITRATE_BUDGET_USD'] ?? '5';
 
 function pct(v: number | null): string {
   return v === null ? 'n/a' : `${(v * 100).toFixed(0)}%`;
@@ -56,7 +60,7 @@ program
   .option('-n, --runs <n>', 'runs per scenario (report floor is 5)', '5')
   .option('-m, --model <id>', 'agent model', DEFAULT_AGENT_MODEL)
   .option('-s, --setup <cmd>', 'shell command run before every run (sandbox reset)')
-  .option('-b, --budget <usd>', 'hard cost ceiling in USD', '5')
+  .option('-b, --budget <usd>', 'hard cost ceiling in USD', DEFAULT_BUDGET_USD)
   .option(
     '--overrides <file>',
     'JSON file of {toolName: newDescription} applied in-memory (optimized run)',
@@ -100,9 +104,9 @@ program
   .argument('<suite>', 'path to a scenario suite YAML file')
   .option('-n, --runs <n>', 'runs per scenario', '5')
   .option('-m, --model <id>', 'agent model', DEFAULT_AGENT_MODEL)
-  .option('--rewriter <id>', 'rewriter/judge model', DEFAULT_REWRITER_MODEL)
+  .option('--rewriter <id>', 'rewriter/judge model', DEFAULT_JUDGE_MODEL)
   .option('-s, --setup <cmd>', 'shell command run before every run (sandbox reset)')
-  .option('-b, --budget <usd>', 'hard cost ceiling in USD (whole loop)', '5')
+  .option('-b, --budget <usd>', 'hard cost ceiling in USD (whole loop)', DEFAULT_BUDGET_USD)
   .option('--baseline <file>', 'reuse a saved baseline result JSON instead of re-measuring')
   .option('--max-iterations <n>', 'agent loop iteration cap', '6')
   .action(async (suitePath: string, opts) => {
