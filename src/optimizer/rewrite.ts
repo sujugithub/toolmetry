@@ -123,12 +123,20 @@ export async function proposeRewrites(opts: {
   model?: string;
   baseline: MeasureResult;
   tools: Anthropic.Tool[];
+  /** Long-reasoning models need headroom before the forced tool call. */
+  maxTokens?: number;
 }): Promise<RewriteProposal> {
-  const { client, model = DEFAULT_REWRITER_MODEL, baseline, tools } = opts;
+  const {
+    client,
+    model = DEFAULT_REWRITER_MODEL,
+    baseline,
+    tools,
+    maxTokens = 32768,
+  } = opts;
 
   const response = await client.messages.create({
     model,
-    max_tokens: 8192,
+    max_tokens: maxTokens,
     tools: [PROPOSE_TOOL],
     tool_choice: { type: 'tool', name: 'propose_rewrites' },
     messages: [{ role: 'user', content: buildRewritePrompt(baseline, tools) }],
@@ -139,7 +147,7 @@ export async function proposeRewrites(opts: {
   );
   if (!call) {
     throw new Error(
-      `rewriter returned no propose_rewrites call (stop_reason: ${response.stop_reason})`,
+      `rewriter returned no propose_rewrites call (stop_reason: ${response.stop_reason}, output tokens: ${response.usage.output_tokens}/${maxTokens})`,
     );
   }
 
