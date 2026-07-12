@@ -130,14 +130,11 @@ This file is the single source of truth for Claude Code sessions on this project
 | A4 | Optimizer v0 | Done (code) | Sonnet 5 rewriter, forced structured output, hallucinated tool names dropped; **live E2E not yet run — blocked on API key** |
 | A6 | Report | Done | markdown before/after diff, headline hit-rate delta; `hitrate report <a.json> <b.json>` |
 
-**Blocked/decisions needed:**
-- `ANTHROPIC_API_KEY` is not set on this machine (no `ant` CLI either). The Sprint-Review baseline/optimize run — the §7 numbers and the decision gate — is blocked on it. Everything else is verified by 40 green tests + typecheck. When the key is available:
-  ```bash
-  export ANTHROPIC_API_KEY=...
-  npx tsx src/cli.ts optimize scenarios/filesystem/filesystem.yaml \
-    --setup 'sh scenarios/filesystem/setup-sandbox.sh'
-  ```
-- PO to ratify: sandbox reset is a CLI flag (`--setup <cmd>`), not a scenario-schema field — chosen to avoid changing the schema without approval (working agreement #2).
+**Blocked/decisions needed (PO calls for next session):**
+1. **Decision gate:** hit-rate Δ was +2.2 pts (< +10 gate) but ceiling-limited (baseline 94.4%); strict success Δ was exactly +10.0 pts. Does strict success count as passing → Epic B, or do we run the methodology pivot (harder scenarios / weaker agent) first?
+2. Anthropic key valid but $0 credit; run executed on Fireworks (gpt-oss-120b agent, kimi-k2p6 rewriter) via the provider adapter. Re-validate on Haiku 4.5 once credit exists (`-m claude-haiku-4-5`, same command).
+3. Ratify: sandbox reset as CLI flag (`--setup <cmd>`) rather than a scenario-schema field (working agreement #2).
+4. Both API keys were pasted in chat — rotate them (Anthropic console / fireworks.ai) before publishing anything.
 
 ---
 
@@ -145,13 +142,20 @@ This file is the single source of truth for Claude Code sessions on this project
 
 | Date | Server | Scenarios | Baseline hit rate | Optimized hit rate | Δ | Cost |
 |------|--------|-----------|-------------------|--------------------|---|------|
-| — | — | — | — | — | — | — |
+| 2026-07-13 | @modelcontextprotocol/server-filesystem | 18 × N=5 | 94.4% | 96.7% | +2.2 pts | ~$0 (Fireworks credits; pricing untracked) |
+
+**2026-07-13 detail (agent: gpt-oss-120b on Fireworks — NOT Haiku, see caveat):** strict success 74.4% → 84.4% (**+10.0 pts**), extra-call rate 25.6% → 15.6% (−10.0 pts), arg correctness 100% → 100%. Hit rate was ceiling-limited: baseline already 94.4%, max possible Δ was +5.6 pts. The one wrong-tool scenario (compare-two-configs) went 0% → 40% hit. Caveat: run on an open model because both Anthropic accounts had no credit; re-validate on Haiku 4.5 before publishing. Full data: `results/2026-07-12T14-*`.
 
 ---
 
 ## 8. Retrospective Log
 
 *(3 bullets per sprint: keep / change / try)*
+
+**Sprint 1 (2026-07-13):**
+- **Keep:** fixture-server + scripted-model integration tests — the whole pipeline was verified before spending a single API token; the only live failure (rewriter max_tokens truncation) was found and fixed in one iteration because baseline results were reusable via `--baseline`.
+- **Change:** the decision-gate metric. Raw hit rate saturates on capable models (baseline 94.4% left max +5.6 pts of headroom); strict success (hit + args + no extra calls) is the honest headline — it moved exactly +10.0 pts. PO must ratify re-framing the gate before Epic B.
+- **Try:** scenario suites deliberately built for headroom (more confusable-cluster prompts like compare-two-configs, which went 0%→40%), and a weaker/cheaper agent model as the default measurement target.
 
 ---
 
