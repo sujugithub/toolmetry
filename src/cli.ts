@@ -1,11 +1,18 @@
 #!/usr/bin/env node
-import { readFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import Anthropic from '@anthropic-ai/sdk';
 import { Command } from 'commander';
 import { loadSuite } from './scenarios/loader.js';
 import { measureSuite, type MeasureResult } from './harness/runner.js';
-import { formatUsd } from './harness/cost.js';
-import { saveResult } from './report/results.js';
+import { McpTarget } from './harness/target.js';
+import { estimateCostUsd, formatUsd } from './harness/cost.js';
+import { saveResult, type SavedResult } from './report/results.js';
+import { diffReport } from './report/diff.js';
+import {
+  DEFAULT_REWRITER_MODEL,
+  failingScenarios,
+  proposeRewrites,
+} from './optimizer/rewrite.js';
 
 const DEFAULT_AGENT_MODEL = 'claude-haiku-4-5';
 
@@ -83,6 +90,131 @@ program
     const file = saveResult(result, opts.label);
     console.log(`\nsaved: ${file}`);
     if (result.aborted) process.exitCode = 2;
+  });
+
+program
+  .command('optimize')
+  .description(
+    'Measure baseline → diagnose failures → rewrite descriptions → re-measure → report',
+  )
+  .argument('<suite>', 'path to a scenario suite YAML file')
+  .option('-n, --runs <n>', 'runs per scenario', '5')
+  .option('-m, --model <id>', 'agent model', DEFAULT_AGENT_MODEL)
+  .option('--rewriter <id>', 'rewriter/judge model', DEFAULT_REWRITER_MODEL)
+  .option('-s, --setup <cmd>', 'shell command run before every run (sandbox reset)')
+  .option('-b, --budget <usd>', 'hard cost ceiling in USD (whole loop)', '5')
+  .option('--baseline <file>', 'reuse a saved baseline result JSON instead of re-measuring')
+  .option('--max-iterations <n>', 'agent loop iteration cap', '6')
+  .action(async (suitePath: string, opts) => {
+    const suite = loadSuite(suitePath);
+    const runs = Number(opts.runs);
+    const budgetUsd = Number(opts.budget);
+    const client = new Anthropic();
+    const common = {
+      client,
+      model: opts.model as string,
+      runs,
+      ...(opts.setup ? { setupCommand: opts.setup } : {}),
+      maxIterations: Number(opts.maxIterations),
+      onProgress: (m: string) => console.log(`  ${m}`),
+    };
+
+    // 1. baseline
+    let baseline: MeasureResult;
+    if (opts.baseline) {
+      baseline = (JSON.parse(readFileSync(opts.baseline, 'utf8')) as SavedResult)
+        .result;
+      console.log(`using saved baseline: ${opts.baseline}`);
+    } else {
+      console.log('measuring baseline…');
+      baseline = await measureSuite(suite, { ...common, budgetUsd });
+      printSummary(baseline);
+      console.log(`saved: ${saveResult(baseline, 'baseline')}`);
+      if (baseline.aborted) {
+        console.error('baseline aborted on budget — not optimizing partial data');
+        process.exit(2);
+      }
+    }
+
+    if (failingScenarios(baseline).length === 0) {
+      console.log('nothing to optimize — every scenario already passes.');
+      return;
+    }
+
+    // 2. rewrite (needs the live tool list)
+    console.log(`\ndiagnosing failures with ${opts.rewriter}…`);
+    const target = await McpTarget.spawn(suite.server);
+    const tools = target.listTools();
+    await target.close();
+    const proposal = await proposeRewrites({
+      client,
+      model: opts.rewriter,
+      baseline,
+      tools,
+    });
+    const rewriteCost = estimateCostUsd(opts.rewriter, proposal.usage);
+    console.log(`\n${proposal.diagnosis}\n`);
+    for (const [tool, desc] of Object.entries(proposal.overrides)) {
+      console.log(`  ${tool}: ${proposal.rationales[tool]}`);
+      console.log(`    → ${desc}\n`);
+    }
+    mkdirSync('results', { recursive: true });
+    const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+    const overridesFile = `results/${stamp}-${suite.suite}-overrides.json`;
+    writeFileSync(
+      overridesFile,
+      JSON.stringify(
+        { diagnosis: proposal.diagnosis, rationales: proposal.rationales, overrides: proposal.overrides },
+        null,
+        2,
+      ),
+    );
+    console.log(`overrides saved: ${overridesFile}`);
+    console.log(`rewriter cost: ${formatUsd(rewriteCost)}`);
+
+    // 3. re-measure with overrides
+    const spentSoFar = (baseline.estimatedCostUsd ?? 0) + (rewriteCost ?? 0);
+    console.log('\nre-measuring with rewritten descriptions…');
+    const optimized = await measureSuite(suite, {
+      ...common,
+      budgetUsd: Math.max(0, budgetUsd - spentSoFar),
+      descriptionOverrides: proposal.overrides,
+    });
+    printSummary(optimized);
+    console.log(`saved: ${saveResult(optimized, 'optimized')}`);
+
+    // 4. report
+    const md = diffReport(baseline, optimized, proposal.overrides);
+    const reportFile = `results/${new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)}-${suite.suite}-report.md`;
+    writeFileSync(reportFile, md);
+    console.log(`\nreport: ${reportFile}`);
+    const headline = Math.round(
+      (optimized.aggregate.hitRate - baseline.aggregate.hitRate) * 100,
+    );
+    console.log(
+      `\nHIT RATE: ${Math.round(baseline.aggregate.hitRate * 100)}% → ${Math.round(optimized.aggregate.hitRate * 100)}% (${headline >= 0 ? '+' : ''}${headline} pts)`,
+    );
+  });
+
+program
+  .command('report')
+  .description('Render a markdown diff report from two saved result files')
+  .argument('<baseline>', 'baseline result JSON (from measure)')
+  .argument('<optimized>', 'optimized result JSON (from measure --overrides)')
+  .option('-o, --out <file>', 'write markdown here instead of stdout')
+  .action((baselinePath: string, optimizedPath: string, opts) => {
+    const baseline = (JSON.parse(readFileSync(baselinePath, 'utf8')) as SavedResult)
+      .result;
+    const optimized = (
+      JSON.parse(readFileSync(optimizedPath, 'utf8')) as SavedResult
+    ).result;
+    const md = diffReport(baseline, optimized, optimized.descriptionOverrides);
+    if (opts.out) {
+      writeFileSync(opts.out, md);
+      console.log(`wrote ${opts.out}`);
+    } else {
+      console.log(md);
+    }
   });
 
 program.parseAsync().catch((err) => {
