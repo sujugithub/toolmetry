@@ -1,0 +1,11 @@
+# deps / build
+node_modules/
+dist/
+
+# secrets — never commit
+.env
+.env.*
+!.env.example
+
+# OS noise
+.DS_Store
