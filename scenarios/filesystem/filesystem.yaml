@@ -1,0 +1,145 @@
+# Scenario suite for @modelcontextprotocol/server-filesystem (official MCP server).
+#
+# Chosen because its 14 tools form confusable clusters (verified live 2026-07-13
+# via scripts/inspect-tools.mts):
+#   read:  read_file (DEPRECATED) / read_text_file / read_media_file / read_multiple_files
+#   list:  list_directory / list_directory_with_sizes / directory_tree / list_allowed_directories
+#   write: write_file / edit_file
+#   meta:  search_files / get_file_info / move_file / create_directory
+#
+# The harness must create the fixture layout described in README.md inside
+# /tmp/hitrate-sandbox before each run batch.
+suite: filesystem
+description: >
+  Tool-selection scenarios for the official filesystem MCP server, targeting
+  its overlapping read/list/write tool clusters.
+server:
+  command: npx
+  args: ["-y", "@modelcontextprotocol/server-filesystem", "/tmp/hitrate-sandbox"]
+scenarios:
+  # --- read cluster -------------------------------------------------------
+  - id: read-whole-text-file
+    prompt: Show me the full contents of /tmp/hitrate-sandbox/notes.txt
+    expected_tool: read_text_file
+    expected_args:
+      path: /tmp/hitrate-sandbox/notes.txt
+
+  - id: read-first-lines
+    prompt: What are the first 10 lines of /tmp/hitrate-sandbox/logs/app.log?
+    expected_tool: read_text_file
+    expected_args:
+      path: /tmp/hitrate-sandbox/logs/app.log
+      head: 10
+
+  - id: read-last-lines
+    prompt: Show me just the last 5 lines of /tmp/hitrate-sandbox/logs/app.log
+    expected_tool: read_text_file
+    expected_args:
+      path: /tmp/hitrate-sandbox/logs/app.log
+      tail: 5
+
+  - id: read-image-file
+    prompt: Load the image /tmp/hitrate-sandbox/assets/logo.png so I can look at it
+    expected_tool: read_media_file
+    expected_args:
+      path: /tmp/hitrate-sandbox/assets/logo.png
+
+  - id: compare-two-configs
+    prompt: >
+      Compare /tmp/hitrate-sandbox/config/dev.json and
+      /tmp/hitrate-sandbox/config/prod.json and tell me what each contains.
+    expected_tool: read_multiple_files
+    expected_args:
+      paths:
+        - /tmp/hitrate-sandbox/config/dev.json
+        - /tmp/hitrate-sandbox/config/prod.json
+
+  - id: count-lines-in-file
+    prompt: How many lines are in /tmp/hitrate-sandbox/notes.txt?
+    expected_tool: read_text_file
+    expected_args:
+      path: /tmp/hitrate-sandbox/notes.txt
+
+  # --- list cluster -------------------------------------------------------
+  - id: list-directory-flat
+    prompt: What files are in /tmp/hitrate-sandbox?
+    expected_tool: list_directory
+    expected_args:
+      path: /tmp/hitrate-sandbox
+
+  - id: list-by-size
+    prompt: Which files in /tmp/hitrate-sandbox/logs are taking up the most space?
+    expected_tool: list_directory_with_sizes
+    expected_args:
+      path: /tmp/hitrate-sandbox/logs
+
+  - id: nested-structure
+    prompt: Show me the entire nested folder structure under /tmp/hitrate-sandbox/src
+    expected_tool: directory_tree
+    expected_args:
+      path: /tmp/hitrate-sandbox/src
+
+  - id: which-dirs-accessible
+    prompt: Which directories on this machine are you actually able to access?
+    expected_tool: list_allowed_directories
+
+  # --- write cluster ------------------------------------------------------
+  - id: create-new-file
+    prompt: Create a file at /tmp/hitrate-sandbox/todo.md containing exactly "# TODO"
+    expected_tool: write_file
+    expected_args:
+      path: /tmp/hitrate-sandbox/todo.md
+      content: "# TODO"
+
+  - id: edit-one-line
+    prompt: >
+      In /tmp/hitrate-sandbox/notes.txt, replace the line that says
+      "status: draft" with "status: final".
+    expected_tool: edit_file
+    expected_args:
+      path: /tmp/hitrate-sandbox/notes.txt
+    max_calls: 2 # reading the file first is acceptable
+
+  # --- filesystem manipulation --------------------------------------------
+  - id: make-nested-directory
+    prompt: Set up a new empty folder at /tmp/hitrate-sandbox/build/cache
+    expected_tool: create_directory
+    expected_args:
+      path: /tmp/hitrate-sandbox/build/cache
+
+  - id: rename-in-place
+    prompt: >
+      Rename /tmp/hitrate-sandbox/data.csv to data-2025.csv, keeping it in the
+      same folder.
+    expected_tool: move_file
+    expected_args:
+      source: /tmp/hitrate-sandbox/data.csv
+      destination: /tmp/hitrate-sandbox/data-2025.csv
+
+  - id: move-into-archive
+    prompt: Move /tmp/hitrate-sandbox/old-report.txt into /tmp/hitrate-sandbox/archive/
+    expected_tool: move_file
+    expected_args:
+      source: /tmp/hitrate-sandbox/old-report.txt
+      destination: /tmp/hitrate-sandbox/archive/old-report.txt
+
+  # --- search / metadata ---------------------------------------------------
+  - id: find-by-extension
+    prompt: Find every .ts file anywhere under /tmp/hitrate-sandbox/src
+    expected_tool: search_files
+    expected_args:
+      path: /tmp/hitrate-sandbox/src
+
+  - id: file-metadata
+    prompt: How big is /tmp/hitrate-sandbox/data.csv and when was it last modified?
+    expected_tool: get_file_info
+    expected_args:
+      path: /tmp/hitrate-sandbox/data.csv
+
+  - id: file-or-directory
+    prompt: >
+      Without opening it, tell me whether /tmp/hitrate-sandbox/mystery is a
+      file or a directory.
+    expected_tool: get_file_info
+    expected_args:
+      path: /tmp/hitrate-sandbox/mystery
