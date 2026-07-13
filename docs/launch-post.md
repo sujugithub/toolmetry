@@ -1,6 +1,6 @@
 # I let an LLM rewrite the tool descriptions of 4 popular MCP servers. Here's the before/after data.
 
-*(Draft — v1, 2026-07-13. Target: personal blog + HN/lobste.rs + r/mcp. Numbers are final; tone pass pending.)*
+*(Published 2026-07-13: [toolmetry-one.vercel.app/launch](https://toolmetry-one.vercel.app/launch). This file is the source; edit here and redeploy site/launch.html.)*
 
 Agents don't read your server's code. They pick tools using three strings: the tool's **name**, its **description**, and its **parameter schema**. That's the entire interface. If two descriptions overlap, the agent guesses. If a description doesn't say "this creates parent directories too," the agent calls it four times. Every one of those mistakes looks like *your server being flaky*.
 

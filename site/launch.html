@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I let an LLM rewrite the tool descriptions of 4 popular MCP servers — the before/after data</title>
+<meta name="description" content="If you change nothing but the descriptions, how much better do agents get? Measured N=5 on four official MCP servers: +66, +34.5, +21.7, +10 points strict success.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF8F1; --ink:#26221B; --ink-dim:#6F685B;
+    --red:#BC3F30; --blue:#2743A6;
+    --blue-soft:rgba(39,67,166,.09); --red-soft:rgba(188,63,48,.07);
+    --rule:rgba(38,34,27,.18);
+    --grid-minor:rgba(190,128,70,.11); --grid-major:rgba(190,128,70,.26);
+    --max:720px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:var(--paper) 0 0/24px 24px
+      linear-gradient(var(--grid-minor) 1px, transparent 1px),
+      var(--paper) 0 0/24px 24px
+      linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px);
+    background:
+      linear-gradient(var(--grid-minor) 1px, transparent 1px) 0 0/24px 24px,
+      linear-gradient(90deg, var(--grid-minor) 1px, transparent 1px) 0 0/24px 24px,
+      linear-gradient(var(--grid-major) 1px, transparent 1px) 0 0/120px 120px,
+      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px) 0 0/120px 120px,
+      var(--paper);
+    color:var(--ink);
+    font:400 17.5px/1.7 "Instrument Sans",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--blue-soft)}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+  nav{padding:26px 0;display:flex;align-items:baseline;gap:22px;flex-wrap:wrap}
+  .brand{font-family:"Instrument Serif",serif;font-style:italic;font-size:24px;color:var(--ink);text-decoration:none}
+  nav a:not(.brand){font-size:14.5px;color:var(--ink-dim);text-decoration:none}
+  nav a:not(.brand):hover{color:var(--ink)}
+  .eyebrow{font-family:"Fragment Mono",monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:56px 0 18px}
+  h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(32px,6vw,50px);line-height:1.06;letter-spacing:-.01em;max-width:22ch}
+  .byline{margin:22px 0 46px;font-size:14.5px;color:var(--ink-dim)}
+  .byline a{color:var(--blue)}
+  h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(25px,3.6vw,32px);margin:52px 0 16px}
+  p{margin:0 0 20px}
+  article strong{font-weight:600}
+  article em{font-family:"Instrument Serif",serif;font-style:italic;font-size:1.06em}
+  code{font-family:"Fragment Mono",monospace;font-size:.86em;background:var(--blue-soft);padding:1px 5px;border-radius:3px}
+  pre{background:#26221B;color:#F4EFE4;border-radius:8px;padding:16px 18px;overflow-x:auto;margin:0 0 20px}
+  pre code{background:none;color:inherit;padding:0;font-size:13.5px}
+  ul{margin:0 0 20px;padding-left:22px}
+  li{margin-bottom:8px}
+  table{width:100%;border-collapse:collapse;margin:6px 0 22px;font-size:16px}
+  th{font-family:"Fragment Mono",monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim);font-weight:400;text-align:left;padding:0 12px 8px 0}
+  td{border-top:1px solid var(--rule);padding:10px 12px 10px 0;vertical-align:baseline}
+  td .before{color:var(--red)} td .after{color:var(--blue);font-weight:600}
+  td.delta{font-family:"Fragment Mono",monospace;color:var(--blue);white-space:nowrap}
+  a{color:var(--blue)}
+  .cut{border:none;border-top:1px solid var(--rule);margin:44px 0}
+  footer{margin:64px 0 56px;padding-top:22px;border-top:1px solid var(--rule);font-size:14.5px;color:var(--ink-dim)}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  :focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="/">Toolmetry</a>
+    <a href="/">home</a>
+    <a href="https://github.com/sujugithub/toolmetry">GitHub</a>
+    <a href="https://www.npmjs.com/package/mcp-toolmetry">npm</a>
+  </nav>
+
+  <article>
+    <p class="eyebrow">Field notes · 2026-07-13</p>
+    <h1>I let an LLM rewrite the tool descriptions of 4 popular MCP servers. Here's the before/after data.</h1>
+    <p class="byline">By <a href="https://github.com/sujugithub">Sujay</a> · every number below is reproducible from the <a href="https://github.com/sujugithub/toolmetry/tree/main/results">committed run data</a></p>
+
+    <p>Agents don't read your server's code. They pick tools using three strings: the tool's <strong>name</strong>, its <strong>description</strong>, and its <strong>parameter schema</strong>. That's the entire interface. If two descriptions overlap, the agent guesses. If a description doesn't say "this creates parent directories too," the agent calls it four times. Every one of those mistakes looks like <em>your server being flaky</em>.</p>
+    <p>I built <a href="https://toolmetry-one.vercel.app">Toolmetry</a> to answer a simple question: <strong>if you change nothing but the descriptions, how much better do agents get?</strong></p>
+
+    <h2>The method</h2>
+    <ul>
+      <li>Write 10–18 realistic scenarios per server (a prompt + the tool a well-designed server should elicit + expected args).</li>
+      <li>Run each scenario <strong>5 times</strong> against the live server with a real agent loop; record every actual tool call.</li>
+      <li>Score three things: <strong>hit rate</strong> (right tool?), <strong>arg correctness</strong>, and <strong>extra calls</strong> (did it pad the task with unnecessary calls?). "Strict success" = all three at once.</li>
+      <li>Feed the failures + current descriptions to an LLM rewriter. Apply the rewritten descriptions <strong>in-memory</strong> — the server is never modified.</li>
+      <li>Re-measure. Keep the rewrite only if it measurably improved. Discard regressions.</li>
+    </ul>
+    <p>Agent: <code>gpt-oss-120b</code> (a deliberately mid-tier agent — more on why below). Rewriter: Kimi K2. Total API spend for everything in this post: <strong>about $4</strong>.</p>
+
+    <h2>The results</h2>
+    <table>
+      <thead><tr><th>server</th><th>strict success</th><th>Δ</th></tr></thead>
+      <tbody>
+        <tr><td>official sqlite server</td><td><span class="before">34.0%</span> → <span class="after">100%</span></td><td class="delta">+66.0</td></tr>
+        <tr><td>official memory server</td><td><span class="before">61.8%</span> → <span class="after">96.4%</span></td><td class="delta">+34.5</td></tr>
+        <tr><td>official git server</td><td><span class="before">75.0%</span> → <span class="after">96.7%</span></td><td class="delta">+21.7</td></tr>
+        <tr><td>official filesystem server</td><td><span class="before">74.4%</span> → <span class="after">84.4%</span></td><td class="delta">+10.0</td></tr>
+      </tbody>
+    </table>
+    <p>Three different failure archetypes showed up, and description rewrites fixed all three:</p>
+    <p><strong>1. Wrong-tool confusion (memory server).</strong> The knowledge-graph memory server has <code>create_entities</code>, <code>add_observations</code>, <code>search_nodes</code>, <code>open_nodes</code> — and the baseline agent confused them 20% of the time. The rewriter added explicit "use X instead when…" cross-references. Hit rate went <strong><span class="before">80%</span> → <span class="after">100%</span></strong>.</p>
+    <p><strong>2. Ritual extra calls (sqlite, git).</strong> The sqlite agent called <code>list_tables</code> + <code>describe_table</code> before <em>two-thirds</em> of queries — even "how many users are there?". One added sentence ("Do not call this merely to check that a table exists before querying it") took the extra-call rate from 66% to zero. Strict success: <strong><span class="before">34%</span> → <span class="after">100%</span></strong>.</p>
+    <p><strong>3. Deprecated-alias traps (filesystem).</strong> The filesystem server ships a deprecated <code>read_file</code> whose description still reads like the primary tool. Agents kept walking into it. The fix: make the deprecation the <em>first word</em> and name the replacement.</p>
+
+    <h2>The part that surprised me</h2>
+    <p>I ran the same optimization with <strong>Claude Haiku 4.5</strong> as the agent instead. Its <em>baseline</em> (84.4%) roughly equaled the mid-tier model's <em>optimized</em> score — and optimization only moved it +2.2 pts.</p>
+    <p><strong>Better agents route around your bad descriptions. Weaker agents can't.</strong> Which means description quality is a tax on exactly the agents people deploy for high-volume work — the cheap, fast ones. If your MCP server is "flaky with cheap models," this might be why, and it's fixable for under a dollar.</p>
+    <p>The other honest finding: <strong>LLM rewrites are high-variance.</strong> Two independent rewrite attempts on the same baseline scored <span class="after">+10.0</span> and <span class="before">−2.2</span> points. You cannot one-shot this — you have to measure, and you have to be willing to throw a rewrite away. (Toolmetry's loop does this automatically; it discarded regressions twice during these runs.)</p>
+
+    <h2>Ship it without forking</h2>
+    <p>The rewritten descriptions live in a JSON file. <code>toolmetry proxy</code> wraps any MCP server and rewrites its <code>tools/list</code> responses on the fly:</p>
+    <pre><code>npx mcp-toolmetry proxy --overrides best.json -- uvx mcp-server-sqlite --db-path ./my.db</code></pre>
+    <p>Point your MCP client at that instead of the server. No fork, no patch, reversible in one line.</p>
+
+    <h2>Caveats, because data without caveats is marketing</h2>
+    <ul>
+      <li>N=5 per scenario quantizes rates to 20-pt steps; trust the aggregates, not individual scenario deltas.</li>
+      <li>Scenarios encode ground truth; a debatable <code>expected_tool</code> makes a debatable metric. All 51 scenarios are in the repo — judge them yourself.</li>
+      <li>Deltas are agent-specific (see the Haiku result). Measure with the agent tier you actually serve.</li>
+      <li>Some failures are tool-<em>design</em> problems no description can fix. The per-scenario report shows you which.</li>
+    </ul>
+
+    <hr class="cut">
+    <p>All code, scenarios, per-run results, and the winning description diffs: <a href="https://github.com/sujugithub/toolmetry">github.com/sujugithub/toolmetry</a> — or start at <a href="https://toolmetry-one.vercel.app">the landing page</a>. I'd love PRs with scenario suites for your favorite server — and if you maintain one of the measured servers, the description diffs are yours for the taking (the memory and git rewrites are already upstream as <a href="https://github.com/modelcontextprotocol/servers/pull/4519">servers#4519</a> and <a href="https://github.com/modelcontextprotocol/servers/pull/4520">servers#4520</a>).</p>
+  </article>
+
+  <footer>
+    <a class="brand" style="font-size:20px" href="/">Toolmetry</a> · open source, MIT ·
+    <a href="https://github.com/sujugithub/toolmetry">GitHub</a> ·
+    <a href="https://www.npmjs.com/package/mcp-toolmetry">npm: mcp-toolmetry</a>
+  </footer>
+</div>
+</body>
+</html>
