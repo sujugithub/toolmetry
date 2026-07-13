@@ -11,7 +11,7 @@ import {
 } from '@modelcontextprotocol/sdk/types.js';
 import type { ServerSpec } from '../scenarios/schema.js';
 
-/** Accept either a plain {tool: description} map or the file `hitrate optimize`
+/** Accept either a plain {tool: description} map or the file `toolmetry optimize`
  * saves ({diagnosis, rationales, overrides}). */
 export function parseOverridesFile(raw: string): Record<string, string> {
   const parsed = JSON.parse(raw) as Record<string, unknown>;
@@ -30,7 +30,7 @@ export function parseOverridesFile(raw: string): Record<string, string> {
 /** Stdio MCP server that spawns the real target and forwards everything,
  * rewriting tool descriptions in tools/list. This is how users ship optimized
  * descriptions without forking the target server: point their MCP config at
- * `hitrate proxy` instead of the server itself.
+ * `toolmetry proxy` instead of the server itself.
  *
  * Uses the low-level Server API deliberately: a proxy must pass through
  * arbitrary target inputSchemas verbatim, which the high-level registerTool
@@ -45,11 +45,11 @@ export async function startProxy(
     env: { ...getDefaultEnvironment(), ...spec.env },
     stderr: 'inherit',
   });
-  const target = new Client({ name: 'hitrate-proxy-client', version: '0.1.0' });
+  const target = new Client({ name: 'toolmetry-proxy-client', version: '0.1.0' });
   await target.connect(targetTransport);
 
   const server = new Server(
-    { name: 'hitrate-proxy', version: '0.1.0' },
+    { name: 'toolmetry-proxy', version: '0.1.0' },
     { capabilities: { tools: {} } },
   );
 
@@ -60,7 +60,7 @@ export async function startProxy(
     for (const t of tools) unknownOverrides.delete(t.name);
     if (unknownOverrides.size) {
       console.error(
-        `hitrate-proxy: overrides for unknown tool(s) ignored: ${[...unknownOverrides].join(', ')}`,
+        `toolmetry-proxy: overrides for unknown tool(s) ignored: ${[...unknownOverrides].join(', ')}`,
       );
       unknownOverrides.clear();
     }
@@ -77,6 +77,6 @@ export async function startProxy(
 
   await server.connect(new StdioServerTransport());
   console.error(
-    `hitrate-proxy: forwarding to "${spec.command} ${spec.args.join(' ')}" with ${Object.keys(overrides).length} description override(s)`,
+    `toolmetry-proxy: forwarding to "${spec.command} ${spec.args.join(' ')}" with ${Object.keys(overrides).length} description override(s)`,
   );
 }

@@ -118,7 +118,7 @@ scenarios:
 
 describe('loadSuite', () => {
   it('loads a suite from a file on disk', () => {
-    const dir = mkdtempSync(join(tmpdir(), 'hitrate-test-'));
+    const dir = mkdtempSync(join(tmpdir(), 'toolmetry-test-'));
     const file = join(dir, 'suite.yaml');
     writeFileSync(file, VALID_SUITE);
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>hitrate — the diff that fixes how agents use your MCP server</title>
+<title>toolmetry — the diff that fixes how agents use your MCP server</title>
 <meta name="description" content="Measure how well AI agents use your MCP server's tools, auto-rewrite the descriptions, and prove the improvement with before/after data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,20 +146,20 @@
 <body>
 <div class="wrap">
   <nav>
-    <a class="brand" href="#">hitrate</a>
+    <a class="brand" href="#">toolmetry</a>
     <a href="#results">results</a>
     <a href="#how">how it works</a>
     <a href="#limits">limitations</a>
-    <a class="gh" href="https://github.com/sujugithub/hitrate">GitHub ↗</a>
+    <a class="gh" href="https://github.com/sujugithub/toolmetry">GitHub ↗</a>
   </nav>
 
   <header>
     <p class="kicker">description optimizer for MCP servers · every claim measured, N=5</p>
     <h1>Agents use your tools right <span class="was">34%</span> <span class="now">100%</span> of the time.</h1>
-    <p class="sub">Agents choose tools by reading three strings: name, description, schema. <strong>hitrate</strong> measures how often they get it wrong on your MCP server, rewrites the descriptions, and re-measures — so the improvement is a number, not a vibe.</p>
+    <p class="sub">Agents choose tools by reading three strings: name, description, schema. <strong>Toolmetry</strong> measures how often they get it wrong on your MCP server, rewrites the descriptions, and re-measures — so the improvement is a number, not a vibe.</p>
     <div class="cta-row">
-      <span class="cmd mono">npx hitrate measure ./scenarios</span>
-      <a class="btn" href="https://github.com/sujugithub/hitrate">Get the CLI</a>
+      <span class="cmd mono">npx toolmetry measure ./scenarios</span>
+      <a class="btn" href="https://github.com/sujugithub/toolmetry">Get the CLI</a>
     </div>
 
     <!-- signature: a real diff from the sqlite run -->
@@ -223,12 +223,12 @@
 
   <section id="how">
     <h2>The loop other tools leave open</h2>
-    <p class="lede">Eval runners tell you agents misuse your tools. hitrate is the step after: fix, re-measure, prove — and throw the fix away if it doesn't measure better.</p>
+    <p class="lede">Eval runners tell you agents misuse your tools. Toolmetry is the step after: fix, re-measure, prove — and throw the fix away if it doesn't measure better.</p>
     <ol class="pipe">
       <li><h3>Measure</h3><p>Realistic scenarios run <span class="mono">N=5</span> against your live server. Every actual tool call is recorded — hits, wrong args, extra calls.</p></li>
       <li><h3>Diagnose</h3><p>Failing runs plus your current descriptions go to an LLM that explains which description made the wrong tool look right.</p></li>
       <li><h3>Rewrite</h3><p>Descriptions are rewritten and applied <span class="mono">in-memory</span> — your server is never modified.</p></li>
-      <li><h3>Prove</h3><p>Re-measure. Improvements are kept; regressions are discarded automatically. Ship winners through <span class="mono">hitrate proxy</span>, no fork needed.</p></li>
+      <li><h3>Prove</h3><p>Re-measure. Improvements are kept; regressions are discarded automatically. Ship winners through <span class="mono">toolmetry proxy</span>, no fork needed.</p></li>
     </ol>
   </section>
 
@@ -270,15 +270,15 @@
     <h2>Measure yours.</h2>
     <p>A suite is ~15 YAML scenarios. A full optimize run costs less than a coffee.</p>
     <div class="cta-row" style="justify-content:center">
-      <span class="cmd mono">npx hitrate optimize scenarios/your-server.yaml</span>
-      <a class="btn" href="https://github.com/sujugithub/hitrate">Read the docs</a>
+      <span class="cmd mono">npx toolmetry optimize scenarios/your-server.yaml</span>
+      <a class="btn" href="https://github.com/sujugithub/toolmetry">Read the docs</a>
     </div>
   </div>
 
   <footer>
     <span>MIT · built on the MCP SDK</span>
-    <a href="https://github.com/sujugithub/hitrate">GitHub</a>
-    <a href="https://github.com/sujugithub/hitrate/tree/main/results">raw results</a>
+    <a href="https://github.com/sujugithub/toolmetry">GitHub</a>
+    <a href="https://github.com/sujugithub/toolmetry/tree/main/results">raw results</a>
   </footer>
 </div>
 

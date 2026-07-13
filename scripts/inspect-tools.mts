@@ -18,7 +18,7 @@ const transport = new StdioClientTransport({
   env: getDefaultEnvironment(),
   stderr: 'ignore',
 });
-const client = new Client({ name: 'hitrate-inspect', version: '0.0.1' });
+const client = new Client({ name: 'toolmetry-inspect', version: '0.0.1' });
 await client.connect(transport);
 
 const { tools } = await client.listTools();

@@ -1,10 +1,10 @@
-# hitrate
+# Toolmetry
 
 > Measure how well AI agents actually use your MCP server's tools — then automatically rewrite the tool descriptions and **prove** the improvement with before/after data.
 
 Agents choose tools using nothing but your tool **names, descriptions, and schemas**. When descriptions overlap, overpromise, or under-specify, agents pick the wrong tool, pass the wrong arguments, or pad every task with wasteful extra calls — and your server gets blamed for it.
 
-`hitrate` closes the loop that every eval tool leaves open: it doesn't just *detect* misuse, it *fixes* the descriptions and re-measures to prove the fix.
+`toolmetry` closes the loop that every eval tool leaves open: it doesn't just *detect* misuse, it *fixes* the descriptions and re-measures to prove the fix.
 
 ## Measured results
 
@@ -31,13 +31,13 @@ npm install && npm run build
 
 # 2. Measure the baseline (N=5 runs per scenario)
 export ANTHROPIC_API_KEY=...
-npx hitrate measure scenarios/sqlite/sqlite.yaml
+npx toolmetry measure scenarios/sqlite/sqlite.yaml
 
 # 3. Optimize: diagnose failures → rewrite descriptions → re-measure → report
-npx hitrate optimize scenarios/sqlite/sqlite.yaml --rounds 2
+npx toolmetry optimize scenarios/sqlite/sqlite.yaml --rounds 2
 
 # 4. Ship the winning descriptions WITHOUT forking the server:
-npx hitrate proxy --overrides results/<timestamp>-overrides-r1.json \
+npx toolmetry proxy --overrides results/<timestamp>-overrides-r1.json \
   -- uvx mcp-server-sqlite --db-path ./my.db
 # point your MCP client config at that command instead of the server itself
 ```
@@ -80,7 +80,7 @@ scenarios/*.yaml ──▶ harness: spawn target server over stdio, hand its too
                 └──▶ report: markdown before/after diff, per-scenario deltas
 ```
 
-The optimizer never edits your server. Overrides live in a JSON file; `hitrate proxy` serves them by rewriting `tools/list` responses on the fly.
+The optimizer never edits your server. Overrides live in a JSON file; `toolmetry proxy` serves them by rewriting `tools/list` responses on the fly.
 
 ## Honest limitations
 
@@ -94,9 +94,9 @@ The optimizer never edits your server. Overrides live in a JSON file; `hitrate p
 
 | command | what it does |
 |---|---|
-| `hitrate measure <suite-or-dir>` | N-run measurement, per-scenario + aggregate metrics, saved to `results/` |
-| `hitrate optimize <suite>` | baseline → diagnose → rewrite → re-measure loop (`--rounds`), report |
-| `hitrate report <a.json> <b.json>` | markdown diff between any two saved runs |
-| `hitrate proxy --overrides <o.json> -- <server cmd…>` | serve a server with rewritten descriptions, no fork |
+| `toolmetry measure <suite-or-dir>` | N-run measurement, per-scenario + aggregate metrics, saved to `results/` |
+| `toolmetry optimize <suite>` | baseline → diagnose → rewrite → re-measure loop (`--rounds`), report |
+| `toolmetry report <a.json> <b.json>` | markdown diff between any two saved runs |
+| `toolmetry proxy --overrides <o.json> -- <server cmd…>` | serve a server with rewritten descriptions, no fork |
 
 MIT licensed. Built with the [MCP SDK](https://github.com/modelcontextprotocol/typescript-sdk).

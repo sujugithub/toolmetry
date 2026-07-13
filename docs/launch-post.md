@@ -4,7 +4,7 @@
 
 Agents don't read your server's code. They pick tools using three strings: the tool's **name**, its **description**, and its **parameter schema**. That's the entire interface. If two descriptions overlap, the agent guesses. If a description doesn't say "this creates parent directories too," the agent calls it four times. Every one of those mistakes looks like *your server being flaky*.
 
-I built [hitrate](https://github.com/sujugithub/hitrate) to answer a simple question: **if you change nothing but the descriptions, how much better do agents get?**
+I built [Toolmetry](https://github.com/sujugithub/toolmetry) to answer a simple question: **if you change nothing but the descriptions, how much better do agents get?**
 
 ## The method
 
@@ -39,14 +39,14 @@ I ran the same optimization with **Claude Haiku 4.5** as the agent instead. Its 
 
 **Better agents route around your bad descriptions. Weaker agents can't.** Which means description quality is a tax on exactly the agents people deploy for high-volume work — the cheap, fast ones. If your MCP server is "flaky with cheap models," this might be why, and it's fixable for under a dollar.
 
-The other honest finding: **LLM rewrites are high-variance.** Two independent rewrite attempts on the same baseline scored +10.0 and −2.2 points. You cannot one-shot this — you have to measure, and you have to be willing to throw a rewrite away. (hitrate's loop does this automatically; it discarded regressions twice during these runs.)
+The other honest finding: **LLM rewrites are high-variance.** Two independent rewrite attempts on the same baseline scored +10.0 and −2.2 points. You cannot one-shot this — you have to measure, and you have to be willing to throw a rewrite away. (Toolmetry's loop does this automatically; it discarded regressions twice during these runs.)
 
 ## Ship it without forking
 
-The rewritten descriptions live in a JSON file. `hitrate proxy` wraps any MCP server and rewrites its `tools/list` responses on the fly:
+The rewritten descriptions live in a JSON file. `toolmetry proxy` wraps any MCP server and rewrites its `tools/list` responses on the fly:
 
 ```bash
-npx hitrate proxy --overrides best.json -- uvx mcp-server-sqlite --db-path ./my.db
+npx toolmetry proxy --overrides best.json -- uvx mcp-server-sqlite --db-path ./my.db
 ```
 
 Point your MCP client at that instead of the server. No fork, no patch, reversible in one line.
@@ -58,4 +58,4 @@ Point your MCP client at that instead of the server. No fork, no patch, reversib
 - Deltas are agent-specific (see the Haiku result). Measure with the agent tier you actually serve.
 - Some failures are tool-*design* problems no description can fix. The per-scenario report shows you which.
 
-All code, scenarios, per-run results, and the winning description diffs: [github.com/sujugithub/hitrate](https://github.com/sujugithub/hitrate). I'd love PRs with scenario suites for your favorite server — and if you maintain one of the measured servers, the description diffs are yours for the taking.
+All code, scenarios, per-run results, and the winning description diffs: [github.com/sujugithub/toolmetry](https://github.com/sujugithub/toolmetry). I'd love PRs with scenario suites for your favorite server — and if you maintain one of the measured servers, the description diffs are yours for the taking.

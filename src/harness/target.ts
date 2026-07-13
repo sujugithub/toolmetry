@@ -33,7 +33,7 @@ export class McpTarget {
       env: { ...getDefaultEnvironment(), ...spec.env },
       stderr: 'ignore',
     });
-    const client = new Client({ name: 'hitrate', version: '0.1.0' });
+    const client = new Client({ name: 'toolmetry', version: '0.1.0' });
     await client.connect(transport);
 
     const { tools } = await client.listTools();

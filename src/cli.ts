@@ -82,10 +82,10 @@ function applyCustomPricing(
 }
 
 const DEFAULT_AGENT_MODEL =
-  process.env['HITRATE_AGENT_MODEL'] ?? 'claude-haiku-4-5';
+  process.env['TOOLMETRY_AGENT_MODEL'] ?? 'claude-haiku-4-5';
 const DEFAULT_JUDGE_MODEL =
-  process.env['HITRATE_JUDGE_MODEL'] ?? DEFAULT_REWRITER_MODEL;
-const DEFAULT_BUDGET_USD = process.env['HITRATE_BUDGET_USD'] ?? '5';
+  process.env['TOOLMETRY_JUDGE_MODEL'] ?? DEFAULT_REWRITER_MODEL;
+const DEFAULT_BUDGET_USD = process.env['TOOLMETRY_BUDGET_USD'] ?? '5';
 
 function pct(v: number | null): string {
   return v === null ? 'n/a' : `${(v * 100).toFixed(0)}%`;
@@ -163,7 +163,7 @@ function defaultSetupFor(suiteFile: string): string | undefined {
 const program = new Command();
 program
   .enablePositionalOptions()
-  .name('hitrate')
+  .name('toolmetry')
   .description(
     "Measure how well AI agents use your MCP server's tools — then fix the descriptions and prove it.",
   )
@@ -171,12 +171,12 @@ program
     'after',
     `
 Examples:
-  $ hitrate measure ./scenarios                        measure every suite, N=5 each
-  $ hitrate measure scenarios/sqlite/sqlite.yaml -n 1  quick smoke run (not reportable)
-  $ hitrate optimize scenarios/sqlite/sqlite.yaml --rounds 2
+  $ toolmetry measure ./scenarios                        measure every suite, N=5 each
+  $ toolmetry measure scenarios/sqlite/sqlite.yaml -n 1  quick smoke run (not reportable)
+  $ toolmetry optimize scenarios/sqlite/sqlite.yaml --rounds 2
                                                        baseline → rewrite → re-measure
-  $ hitrate report results/a.json results/b.json -o diff.md
-  $ hitrate proxy --overrides best.json -- npx -y @modelcontextprotocol/server-filesystem /data
+  $ toolmetry report results/a.json results/b.json -o diff.md
+  $ toolmetry proxy --overrides best.json -- npx -y @modelcontextprotocol/server-filesystem /data
                                                        serve rewritten descriptions live
 
   A setup-sandbox.sh next to a suite YAML is run automatically before every run.
@@ -379,11 +379,11 @@ program
 program
   .command('proxy')
   .description(
-    'Run an MCP server with rewritten tool descriptions — point your MCP config here instead of the target. Usage: hitrate proxy --overrides o.json -- npx -y some-mcp-server args…',
+    'Run an MCP server with rewritten tool descriptions — point your MCP config here instead of the target. Usage: toolmetry proxy --overrides o.json -- npx -y some-mcp-server args…',
   )
   .requiredOption(
     '--overrides <file>',
-    'JSON: plain {tool: description} map, or the file saved by `hitrate optimize`',
+    'JSON: plain {tool: description} map, or the file saved by `toolmetry optimize`',
   )
   .argument('<command>', 'target server command')
   .argument('[args...]', 'target server arguments')

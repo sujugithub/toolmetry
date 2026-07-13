@@ -10,7 +10,7 @@ describe('parseOverridesFile', () => {
     expect(parseOverridesFile('{"a":"desc"}')).toEqual({ a: 'desc' });
   });
 
-  it('accepts the hitrate optimize output shape', () => {
+  it('accepts the toolmetry optimize output shape', () => {
     expect(
       parseOverridesFile(
         '{"diagnosis":"…","rationales":{"a":"r"},"overrides":{"a":"desc"}}',
@@ -23,11 +23,11 @@ describe('parseOverridesFile', () => {
   });
 });
 
-describe('hitrate proxy (integration: proxy → echo fixture)', () => {
+describe('toolmetry proxy (integration: proxy → echo fixture)', () => {
   let proxied: McpTarget;
 
   beforeAll(async () => {
-    const dir = mkdtempSync(join(tmpdir(), 'hitrate-proxy-'));
+    const dir = mkdtempSync(join(tmpdir(), 'toolmetry-proxy-'));
     const overridesFile = join(dir, 'overrides.json');
     writeFileSync(
       overridesFile,
