@@ -1,0 +1,16 @@
+{
+  "round": 3,
+  "diagnosis": "compare-two-configs: The agent called read_text_file twice instead of read_multiple_files. The read_text_file description says it reads a \"single text file\" which the agent interpreted as one file per call, while the guidance to use read_multiple_files was buried mid-sentence and easy to miss. The read_multiple_files description used the weak phrase \"Always prefer this\" instead of an imperative.\n\ncreate-new-file: The agent called create_directory before write_file in one run. Both descriptions already prohibit this, but the agent ignored the middle-sentence instruction.\n\nmake-nested-directory: The agent called create_directory multiple times for nested paths instead of once. The description said it \"creates nested directories in a single call,\" but the agent did not grasp that one call automatically builds all missing parent directories, and it still felt the need to call parent paths separately.\n\nmove-into-archive: The agent called list_directory or create_directory before move_file. The move_file description only forbade create_directory and get_file_info, leaving list_directory as an apparently valid way to verify paths. The \"beforehand\" prohibition was also too weak.",
+  "rationales": {
+    "read_text_file": "Prevents the agent from calling read_text_file twice when comparing two files by making the one-file limit explicit and mandatory.",
+    "read_multiple_files": "Forces the agent to choose read_multiple_files instead of repeated read_text_file calls by making it a requirement for two or more files.",
+    "create_directory": "Stops the agent from making redundant parent-path calls by clarifying that one call with the full path handles all nesting automatically.",
+    "move_file": "Eliminates unnecessary verification calls before moving by explicitly forbidding list_directory and any other tool beforehand."
+  },
+  "overrides": {
+    "read_text_file": "Use this to read exactly one text file. If you need to read two or more files, you must use read_multiple_files instead of calling this tool repeatedly. Use the 'head' or 'tail' parameter to read only the first or last N lines. Only works within allowed directories.",
+    "read_multiple_files": "Use this to read two or more text files in a single call, especially when comparing or analyzing them. You must use this instead of calling read_text_file multiple times. Each file's content is returned with its path as a reference. Only works within allowed directories.",
+    "create_directory": "Use this only when the user explicitly asks to create a new directory. Pass the full nested path and call it exactly once; it automatically creates all missing parent directories. Do not call it multiple times for the same path or parent paths, and do not use it before write_file or move_file. Only works within allowed directories.",
+    "move_file": "Use this to move or rename a file or directory. Provide the exact source path and the full destination path including the filename. The operation will fail if a file already exists at the destination. Do not call list_directory, create_directory, get_file_info, or any other tool to verify paths before moving. Only works within allowed directories."
+  }
+}

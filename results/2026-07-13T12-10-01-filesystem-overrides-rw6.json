@@ -1,0 +1,16 @@
+{
+  "round": 6,
+  "diagnosis": "In make-nested-directory, create_directory's description relied on negative prohibitions ('Do not call it for parent paths', 'Do not call it multiple times') that the agent ignored. The description failed to positively assert that a single call creates the full nested path and needs no follow-up, so the agent repeatedly called create_directory for parent paths and the target, and misused list_directory to verify. In move-into-archive, move_file's description used negative prohibitions ('Do not call ... create_directory beforehand') but did not positively reassure the agent that the destination directory is assumed to exist and no preparation is needed. The agent's prior that moves require an existing directory overrode the weak negative instruction, leading it to call create_directory anyway. list_directory and get_file_info lacked explicit prohibitions against pre-move verification, making them available for the agent to misuse.",
+  "rationales": {
+    "create_directory": "Replaces ignored negative caveats with a strong positive 'exactly once' instruction, emphasizing that intermediate parents are handled automatically so the agent stops making redundant parent and duplicate calls.",
+    "move_file": "Replaces weak negative prohibitions with a clear positive instruction that the destination is assumed to exist and no preparation tools are needed, eliminating the agent's motivation to verify or create directories beforehand.",
+    "list_directory": "Explicitly forbids using this tool to verify paths before move_file, closing the gap that let the agent misuse it as a pre-move check.",
+    "get_file_info": "Strengthens the prohibition from 'merely to check' to an absolute 'never call', explicitly naming move_file to prevent the agent from using it as a pre-move existence check."
+  },
+  "overrides": {
+    "create_directory": "Use this only when the user explicitly asks to create a new directory or folder. Provide the exact full target path; this creates the directory and all missing intermediate parents automatically in a single call. Call exactly once per requested directory—never repeat the same path and never call for any intermediate parent path. Do not call before write_file or move_file.",
+    "move_file": "Move or rename a file or directory by providing the exact source and full destination paths. The destination path must include the target filename and the destination directory is assumed to already exist. Call this directly without listing, checking metadata, or creating directories first.",
+    "list_directory": "Use this for a flat, non-recursive listing of a single directory. Results clearly distinguish files with [FILE] and directories with [DIR] prefixes. For recursive pattern searches, use search_files instead. Never call to verify a source or destination path before move_file or write_file. Only works within allowed directories.",
+    "get_file_info": "Use this only when the user asks for metadata such as size, modification time, or permissions. Never call to check existence before read_file, read_text_file, move_file, or write_file. Only works within allowed directories."
+  }
+}

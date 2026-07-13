@@ -1,0 +1,12 @@
+{
+  "round": 6,
+  "diagnosis": "make-nested-directory: The agent called create_directory repeatedly for the full path and parent paths instead of making a single call. The current create_directory description relied on negative prohibitions (‘Do not call it for parent paths’, ‘Do not call it multiple times’) that the agent ignored, and failed to convey that one call with the complete target path is fully self-sufficient.\n\nmove-into-archive: The agent called create_directory, list_directory, or get_file_info before the expected move_file. The move_file description listed negative prohibitions against these preparatory calls that the agent ignored, and did not make clear that the destination path must include the filename and that no prior verification or directory creation is needed. The create_directory description also failed to prevent the agent from using it as a preparatory step before move_file.",
+  "rationales": {
+    "create_directory": "Replaces weak negative prohibitions with a positive ‘call it once with the complete target path’ instruction so the agent understands a single call is fully sufficient and stops after one call.",
+    "move_file": "Strengthens the instruction to call move_file directly, explicitly mentions the destination path must include the filename, and reaffirms that no preparatory verification or directory creation should happen."
+  },
+  "overrides": {
+    "create_directory": "This tool creates a directory at the exact path provided, automatically creating every missing parent directory in a single call. Use it ONLY when the user explicitly asks for a new directory or folder. Call it once with the complete target path and never call it again for the same task or for any intermediate parent path. Never use it as a preparatory step before write_file or move_file. Only works within allowed directories.",
+    "move_file": "Use this to move or rename a file or directory by providing the exact source path and the exact destination path including the filename. Call it directly without any preparatory steps; do not call list_directory, get_file_info, or create_directory beforehand for any reason. The operation will fail if a file already exists at the destination. Only works within allowed directories."
+  }
+}

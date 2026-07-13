@@ -1,0 +1,18 @@
+{
+  "round": 3,
+  "diagnosis": "**read_text_file**: The phrase ‘instead of calling this repeatedly’ was interpreted as applying only to three or more calls, so the agent used it twice in *compare-two-configs*. The grouped ‘head or tail’ phrasing weakened the association of each parameter with its specific direction, contributing to the *read-last-lines* head/tail confusion. **read_multiple_files**: ‘Prefer this over calling read_text_file repeatedly’ was too weak; the agent did not treat two files as ‘repeatedly’. **write_file**: It never stated that parent directories are created automatically, so the agent called create_directory first, and because list_directory was not prohibited, it also listed the target directory first. **create_directory**: The agent did not trust that nested directories are created in a single call, so it invoked the tool for parent paths separately. The prohibition on using it before write_file or move_file was also ignored. **move_file**: The description prohibited create_directory and get_file_info but not list_directory, so the agent used list_directory to verify paths before moving, and also called create_directory despite the prohibition.",
+  "rationales": {
+    "read_text_file": "Explicitly pairs head with first and tail with last, and removes the ambiguous word 'repeatedly' so two files are clearly covered.",
+    "read_multiple_files": "Replaces weak 'prefer' and 'repeatedly' with an absolute rule that any multi-file request must use this tool.",
+    "write_file": "Adds the missing parent-directory-auto-creation fact and explicitly forbids the two tools the agent incorrectly invoked first.",
+    "create_directory": "Emphasizes that the full path is passed once and parents are auto-created, and strengthens the prohibition on calling it before write_file or move_file.",
+    "move_file": "Adds list_directory to the forbidden pre/post-move checks and frames the prohibition broadly as 'verify or prepare paths' to prevent the agent from second-guessing the move."
+  },
+  "overrides": {
+    "read_text_file": "Use this to read the contents of a single text file. Use the 'head' parameter to read the first N lines and the 'tail' parameter to read the last N lines. Never use this for two or more files; always use read_multiple_files instead. Only works within allowed directories.",
+    "read_multiple_files": "Use this to read the contents of multiple text files at once, such as when comparing or analyzing them. Always use this when the task involves reading two or more files; never call read_text_file more than once for the same task. Only works within allowed directories.",
+    "write_file": "Use this to create a new text file or overwrite an existing one with the exact content provided. Automatically creates any missing parent directories. Do not call create_directory or list_directory before calling this tool. Only works within allowed directories.",
+    "create_directory": "Use this ONLY when the user explicitly asks to create a new directory or folder. Pass the full target path including all nested parents; this tool creates every missing parent automatically in a single call. Never invoke it for parent paths, and never call it before write_file or move_file. Only works within allowed directories.",
+    "move_file": "Use this to move or rename a file or directory by providing the source and full destination paths. The operation will fail if a file already exists at the destination. Do not verify or prepare paths with list_directory, create_directory, or get_file_info before or after calling this tool. Only works within allowed directories."
+  }
+}

@@ -1,0 +1,3203 @@
+{
+  "savedAt": "2026-07-13T12:06:54.054Z",
+  "gitSha": "4fb904f",
+  "label": "optimized-m3",
+  "result": {
+    "suite": "filesystem",
+    "model": "accounts/fireworks/models/gpt-oss-120b",
+    "runsPerScenario": 5,
+    "scenarios": [
+      {
+        "scenario": {
+          "id": "read-whole-text-file",
+          "prompt": "Show me the full contents of /tmp/hitrate-sandbox/notes.txt",
+          "expected_tool": "read_text_file",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/notes.txt"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "read-whole-text-file",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2446,
+              "outputTokens": 117
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2446,
+              "outputTokens": 132
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2446,
+              "outputTokens": 125
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2446,
+              "outputTokens": 113
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2446,
+              "outputTokens": 148
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "read-first-lines",
+          "prompt": "What are the first 10 lines of /tmp/hitrate-sandbox/logs/app.log?",
+          "expected_tool": "read_text_file",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/logs/app.log",
+            "head": 10
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "read-first-lines",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs/app.log",
+                  "head": 10
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2656,
+              "outputTokens": 320
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs/app.log",
+                  "head": 10
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2656,
+              "outputTokens": 329
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs/app.log",
+                  "head": 10
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2656,
+              "outputTokens": 323
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs/app.log",
+                  "head": 10
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2656,
+              "outputTokens": 336
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs/app.log",
+                  "head": 10
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2656,
+              "outputTokens": 322
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "read-last-lines",
+          "prompt": "Show me just the last 5 lines of /tmp/hitrate-sandbox/logs/app.log",
+          "expected_tool": "read_text_file",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/logs/app.log",
+            "tail": 5
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "read-last-lines",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs/app.log",
+                  "tail": 5
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2519,
+              "outputTokens": 219
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs/app.log",
+                  "tail": 5
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2519,
+              "outputTokens": 278
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs/app.log",
+                  "tail": 5
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2519,
+              "outputTokens": 182
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs/app.log",
+                  "tail": 5
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2519,
+              "outputTokens": 185
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs/app.log",
+                  "tail": 5
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2519,
+              "outputTokens": 256
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "read-image-file",
+          "prompt": "Load the image /tmp/hitrate-sandbox/assets/logo.png so I can look at it",
+          "expected_tool": "read_media_file",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/assets/logo.png"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "read-image-file",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "read_media_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/assets/logo.png"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2420,
+              "outputTokens": 131
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "read_media_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/assets/logo.png"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2420,
+              "outputTokens": 107
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "read_media_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/assets/logo.png"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2420,
+              "outputTokens": 109
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "read_media_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/assets/logo.png"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2420,
+              "outputTokens": 95
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "read_media_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/assets/logo.png"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2420,
+              "outputTokens": 115
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "compare-two-configs",
+          "prompt": "Compare /tmp/hitrate-sandbox/config/dev.json and /tmp/hitrate-sandbox/config/prod.json and tell me what each contains.\n",
+          "expected_tool": "read_multiple_files",
+          "expected_args": {
+            "paths": [
+              "/tmp/hitrate-sandbox/config/dev.json",
+              "/tmp/hitrate-sandbox/config/prod.json"
+            ]
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "compare-two-configs",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "read_multiple_files",
+                "args": {
+                  "paths": [
+                    "/tmp/hitrate-sandbox/config/dev.json",
+                    "/tmp/hitrate-sandbox/config/prod.json"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2503,
+              "outputTokens": 367
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "read_multiple_files",
+                "args": {
+                  "paths": [
+                    "/tmp/hitrate-sandbox/config/dev.json",
+                    "/tmp/hitrate-sandbox/config/prod.json"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2503,
+              "outputTokens": 315
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "read_multiple_files",
+                "args": {
+                  "paths": [
+                    "/tmp/hitrate-sandbox/config/dev.json",
+                    "/tmp/hitrate-sandbox/config/prod.json"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2503,
+              "outputTokens": 333
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "read_multiple_files",
+                "args": {
+                  "paths": [
+                    "/tmp/hitrate-sandbox/config/dev.json",
+                    "/tmp/hitrate-sandbox/config/prod.json"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2503,
+              "outputTokens": 370
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "read_multiple_files",
+                "args": {
+                  "paths": [
+                    "/tmp/hitrate-sandbox/config/dev.json",
+                    "/tmp/hitrate-sandbox/config/prod.json"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2503,
+              "outputTokens": 291
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "count-lines-in-file",
+          "prompt": "How many lines are in /tmp/hitrate-sandbox/notes.txt?",
+          "expected_tool": "read_text_file",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/notes.txt"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "count-lines-in-file",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2446,
+              "outputTokens": 148
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2446,
+              "outputTokens": 141
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2446,
+              "outputTokens": 171
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2446,
+              "outputTokens": 166
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "read_text_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2446,
+              "outputTokens": 151
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "list-directory-flat",
+          "prompt": "What files are in /tmp/hitrate-sandbox?",
+          "expected_tool": "list_directory",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "list-directory-flat",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "list_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2449,
+              "outputTokens": 170
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "list_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2449,
+              "outputTokens": 164
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "list_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2449,
+              "outputTokens": 183
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "list_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2449,
+              "outputTokens": 227
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "list_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2449,
+              "outputTokens": 186
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "list-by-size",
+          "prompt": "Which files in /tmp/hitrate-sandbox/logs are taking up the most space?",
+          "expected_tool": "list_directory_with_sizes",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/logs"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "list-by-size",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "list_directory_with_sizes",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs",
+                  "sortBy": "size"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2456,
+              "outputTokens": 164
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "list_directory_with_sizes",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs",
+                  "sortBy": "size"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2456,
+              "outputTokens": 156
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "list_directory_with_sizes",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs",
+                  "sortBy": "size"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2456,
+              "outputTokens": 195
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "list_directory_with_sizes",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs",
+                  "sortBy": "size"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2456,
+              "outputTokens": 157
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "list_directory_with_sizes",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/logs",
+                  "sortBy": "size"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2456,
+              "outputTokens": 170
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "nested-structure",
+          "prompt": "Show me the entire nested folder structure under /tmp/hitrate-sandbox/src",
+          "expected_tool": "directory_tree",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/src"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "nested-structure",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "directory_tree",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/src"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2519,
+              "outputTokens": 209
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "directory_tree",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/src"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2519,
+              "outputTokens": 199
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "directory_tree",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/src"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2519,
+              "outputTokens": 147
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "directory_tree",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/src"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2519,
+              "outputTokens": 127
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "directory_tree",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/src"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2519,
+              "outputTokens": 168
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "which-dirs-accessible",
+          "prompt": "Which directories on this machine are you actually able to access?",
+          "expected_tool": "list_allowed_directories",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "which-dirs-accessible",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "list_allowed_directories",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2413,
+              "outputTokens": 143
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "list_allowed_directories",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2413,
+              "outputTokens": 152
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "list_allowed_directories",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2413,
+              "outputTokens": 136
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "list_allowed_directories",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2413,
+              "outputTokens": 145
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "list_allowed_directories",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2413,
+              "outputTokens": 146
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "create-new-file",
+          "prompt": "Create a file at /tmp/hitrate-sandbox/todo.md containing exactly \"# TODO\"",
+          "expected_tool": "write_file",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/todo.md",
+            "content": "# TODO"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "create-new-file",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "write_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/todo.md",
+                  "content": "# TODO"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2435,
+              "outputTokens": 102
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "write_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/todo.md",
+                  "content": "# TODO"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2435,
+              "outputTokens": 87
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "write_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/todo.md",
+                  "content": "# TODO"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2435,
+              "outputTokens": 130
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "write_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/todo.md",
+                  "content": "# TODO"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2435,
+              "outputTokens": 114
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "write_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/todo.md",
+                  "content": "# TODO"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2435,
+              "outputTokens": 95
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "edit-one-line",
+          "prompt": "In /tmp/hitrate-sandbox/notes.txt, replace the line that says \"status: draft\" with \"status: final\".\n",
+          "expected_tool": "edit_file",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/notes.txt"
+          },
+          "max_calls": 2
+        },
+        "aggregate": {
+          "scenarioId": "edit-one-line",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "edit_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt",
+                  "edits": [
+                    {
+                      "oldText": "status: draft",
+                      "newText": "status: final"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2551,
+              "outputTokens": 114
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "edit_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt",
+                  "edits": [
+                    {
+                      "oldText": "status: draft",
+                      "newText": "status: final"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2551,
+              "outputTokens": 163
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "edit_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt",
+                  "edits": [
+                    {
+                      "oldText": "status: draft",
+                      "newText": "status: final"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2551,
+              "outputTokens": 153
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "edit_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt",
+                  "edits": [
+                    {
+                      "oldText": "status: draft",
+                      "newText": "status: final"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2551,
+              "outputTokens": 152
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "edit_file",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/notes.txt",
+                  "edits": [
+                    {
+                      "oldText": "status: draft",
+                      "newText": "status: final"
+                    }
+                  ],
+                  "dryRun": false
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2556,
+              "outputTokens": 117
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "make-nested-directory",
+          "prompt": "Set up a new empty folder at /tmp/hitrate-sandbox/build/cache",
+          "expected_tool": "create_directory",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/build/cache"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "make-nested-directory",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 1,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              },
+              {
+                "name": "list_allowed_directories",
+                "args": {}
+              },
+              {
+                "name": "list_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 7971,
+              "outputTokens": 699
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 7868,
+              "outputTokens": 568
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 7862,
+              "outputTokens": 542
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 7862,
+              "outputTokens": 539
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build"
+                }
+              },
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/build/cache"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 7862,
+              "outputTokens": 544
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "rename-in-place",
+          "prompt": "Rename /tmp/hitrate-sandbox/data.csv to data-2025.csv, keeping it in the same folder.\n",
+          "expected_tool": "move_file",
+          "expected_args": {
+            "source": "/tmp/hitrate-sandbox/data.csv",
+            "destination": "/tmp/hitrate-sandbox/data-2025.csv"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "rename-in-place",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "move_file",
+                "args": {
+                  "source": "/tmp/hitrate-sandbox/data.csv",
+                  "destination": "/tmp/hitrate-sandbox/data-2025.csv"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2463,
+              "outputTokens": 131
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "move_file",
+                "args": {
+                  "source": "/tmp/hitrate-sandbox/data.csv",
+                  "destination": "/tmp/hitrate-sandbox/data-2025.csv"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2463,
+              "outputTokens": 127
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "move_file",
+                "args": {
+                  "source": "/tmp/hitrate-sandbox/data.csv",
+                  "destination": "/tmp/hitrate-sandbox/data-2025.csv"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2463,
+              "outputTokens": 102
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "move_file",
+                "args": {
+                  "source": "/tmp/hitrate-sandbox/data.csv",
+                  "destination": "/tmp/hitrate-sandbox/data-2025.csv"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2463,
+              "outputTokens": 110
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "move_file",
+                "args": {
+                  "source": "/tmp/hitrate-sandbox/data.csv",
+                  "destination": "/tmp/hitrate-sandbox/data-2025.csv"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2463,
+              "outputTokens": 129
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "move-into-archive",
+          "prompt": "Move /tmp/hitrate-sandbox/old-report.txt into /tmp/hitrate-sandbox/archive/",
+          "expected_tool": "move_file",
+          "expected_args": {
+            "source": "/tmp/hitrate-sandbox/old-report.txt",
+            "destination": "/tmp/hitrate-sandbox/archive/old-report.txt"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "move-into-archive",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 1,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/archive"
+                }
+              },
+              {
+                "name": "move_file",
+                "args": {
+                  "source": "/tmp/hitrate-sandbox/old-report.txt",
+                  "destination": "/tmp/hitrate-sandbox/archive/old-report.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 3748,
+              "outputTokens": 200
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/archive"
+                }
+              },
+              {
+                "name": "move_file",
+                "args": {
+                  "source": "/tmp/hitrate-sandbox/old-report.txt",
+                  "destination": "/tmp/hitrate-sandbox/archive/old-report.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 3748,
+              "outputTokens": 227
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "create_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/archive"
+                }
+              },
+              {
+                "name": "move_file",
+                "args": {
+                  "source": "/tmp/hitrate-sandbox/old-report.txt",
+                  "destination": "/tmp/hitrate-sandbox/archive/old-report.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 3748,
+              "outputTokens": 142
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "list_directory",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox"
+                }
+              },
+              {
+                "name": "move_file",
+                "args": {
+                  "source": "/tmp/hitrate-sandbox/old-report.txt",
+                  "destination": "/tmp/hitrate-sandbox/archive/old-report.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 3822,
+              "outputTokens": 201
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "get_file_info",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/archive"
+                }
+              },
+              {
+                "name": "move_file",
+                "args": {
+                  "source": "/tmp/hitrate-sandbox/old-report.txt",
+                  "destination": "/tmp/hitrate-sandbox/archive/old-report.txt"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 3922,
+              "outputTokens": 216
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "find-by-extension",
+          "prompt": "Find every .ts file anywhere under /tmp/hitrate-sandbox/src",
+          "expected_tool": "search_files",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/src"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "find-by-extension",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "search_files",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/src",
+                  "pattern": "**/*.ts"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2447,
+              "outputTokens": 257
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "search_files",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/src",
+                  "pattern": "**/*.ts"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2447,
+              "outputTokens": 184
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "search_files",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/src",
+                  "pattern": "**/*.ts"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2447,
+              "outputTokens": 147
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "search_files",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/src",
+                  "pattern": "**/*.ts"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2447,
+              "outputTokens": 164
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "search_files",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/src",
+                  "pattern": "**/*.ts"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2447,
+              "outputTokens": 196
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "file-metadata",
+          "prompt": "How big is /tmp/hitrate-sandbox/data.csv and when was it last modified?",
+          "expected_tool": "get_file_info",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/data.csv"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "file-metadata",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "get_file_info",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/data.csv"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2514,
+              "outputTokens": 116
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "get_file_info",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/data.csv"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2514,
+              "outputTokens": 104
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "get_file_info",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/data.csv"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2514,
+              "outputTokens": 92
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "get_file_info",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/data.csv"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2514,
+              "outputTokens": 100
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "get_file_info",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/data.csv"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2514,
+              "outputTokens": 106
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "file-or-directory",
+          "prompt": "Without opening it, tell me whether /tmp/hitrate-sandbox/mystery is a file or a directory.\n",
+          "expected_tool": "get_file_info",
+          "expected_args": {
+            "path": "/tmp/hitrate-sandbox/mystery"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "file-or-directory",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "get_file_info",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/mystery"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2525,
+              "outputTokens": 127
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "get_file_info",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/mystery"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2525,
+              "outputTokens": 122
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "get_file_info",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/mystery"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2525,
+              "outputTokens": 254
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "get_file_info",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/mystery"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2525,
+              "outputTokens": 103
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "get_file_info",
+                "args": {
+                  "path": "/tmp/hitrate-sandbox/mystery"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2525,
+              "outputTokens": 107
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      }
+    ],
+    "aggregate": {
+      "scenarioCount": 18,
+      "hitRate": 1,
+      "argCorrectness": 1,
+      "extraCallRate": 0.1111111111111111,
+      "successRate": 0.8888888888888888
+    },
+    "usage": {
+      "inputTokens": 257228,
+      "outputTokens": 17622
+    },
+    "estimatedCostUsd": 0.310094,
+    "descriptionOverrides": {
+      "read_file": "DEPRECATED. Do not call this tool. Use read_text_file for text files and read_media_file for images and other media. Only works within allowed directories.",
+      "read_text_file": "Use this ONLY to read a single text file. For two or more files — including when comparing, analyzing, or reading them sequentially — always use read_multiple_files instead. Use the 'head' or 'tail' parameter to read only the first or last N lines. Only works within allowed directories.",
+      "read_multiple_files": "Use this to read two or more text files in a single call, such as when comparing or analyzing them. Always prefer this over read_text_file when multiple files are involved. Each file's content is returned with its path as a reference. Only works within allowed directories.",
+      "read_media_file": "Use this when the user wants to view or load an image, audio, or other media file. The file is returned as an image, audio, or embedded resource content block. Do not use read_file for media files. Only works within allowed directories.",
+      "write_file": "Use this to create a new text file or overwrite an existing one with the exact content provided. Automatically creates any missing parent directories. Do not call create_directory first. Only works within allowed directories.",
+      "create_directory": "Use this only when the user explicitly asks to create a new directory or folder. Creates the full nested path including all missing parent directories in a single call. Do not call it for parent paths, and do not call it multiple times for the same path. Do not use it before write_file or move_file. Only works within allowed directories.",
+      "list_directory": "Use this for a flat, non-recursive listing of a single directory. Results clearly distinguish files with [FILE] and directories with [DIR] prefixes. For recursive pattern searches, use search_files instead. Only works within allowed directories.",
+      "list_directory_with_sizes": "Use this only when the user asks for a directory listing that includes file sizes. For a simple listing without sizes, use list_directory instead. Only works within allowed directories.",
+      "directory_tree": "Use this only when the user asks for a recursive tree view of a directory structure. Do not use it to search for specific file types; use search_files for that. Only works within allowed directories.",
+      "move_file": "Use this to move or rename a file or directory by providing the source and full destination paths. The operation will fail if a file already exists at the destination. Do not call list_directory, get_file_info, or create_directory beforehand to verify the source or destination. Only works within allowed directories.",
+      "search_files": "Use this to find files by a glob pattern across subdirectories, such as '**/*.ext'. Returns the full paths of all matches. Do not use this for a simple flat listing of one directory; use list_directory instead. Only searches within allowed directories.",
+      "get_file_info": "Use this only when the user asks for metadata such as size, modification time, or permissions. Do not call it merely to check that a file exists before reading or moving it. Only works within allowed directories.",
+      "list_allowed_directories": "Use this only when the user asks which directories are accessible, or when a file operation returns a permission error. Do not call it before every read or write operation. Only works within allowed directories."
+    }
+  }
+}

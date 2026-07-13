@@ -85,7 +85,7 @@ The optimizer never edits your server. Overrides live in a JSON file; `toolmetry
 ## Honest limitations
 
 - **N=5 is a floor, not statistical certainty.** Per-scenario rates quantize to 20-point steps; small deltas (< ~5 pts) are noise. Judge aggregate movement, not single scenarios.
-- **Rewrites are high-variance.** Two independent rewrite attempts on the same baseline scored **+10.0** and **−2.2** points. The keep-best loop discards regressions (it did, twice, in our own runs), but expect round-to-round variance. Candidate sampling is on the roadmap.
+- **Rewrites are high-variance.** Two independent rewrite attempts on the same baseline scored **+10.0** and **−2.2** points. The keep-best loop discards regressions, and `--candidates K` samples K rewrites per round, screens them on the failing scenarios, and full-measures only the winner — on filesystem this turned the +10.0 single-shot best into **+16.7** (74.4% → 91.1%, hit rate 100%). `--seed known-good.json` starts the loop from previously winning overrides.
 - **Results are agent-specific.** Deltas measured on a weak agent shrink on stronger ones (see the Haiku comparison above). Measure with the agent tier you actually serve.
 - **Scenarios encode the ground truth.** If your scenario's `expected_tool` is debatable, the metric is too. Keep scenarios unambiguous; use `max_calls` to allow legitimate look-before-you-act patterns.
 - **Description-only lever.** Some failures live in tool *design* (overlapping capabilities, missing parameters) — no description rewrite fixes those. The report tells you which scenarios stayed broken.

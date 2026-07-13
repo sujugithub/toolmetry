@@ -1,0 +1,12 @@
+{
+  "round": 6,
+  "diagnosis": "In 'make-nested-directory', the agent called create_directory correctly for the full nested path but then repeatedly called create_directory again for the same path and for parent paths, and even called list_directory and list_allowed_directories. The current create_directory description buried the 'single call' guarantee among negative constraints ('Do not call it for parent paths...'), which the agent ignored or misinterpreted as merely discouraging rather than prohibiting redundant calls. The agent did not trust that one call was fully self-contained.\n\nIn 'move-into-archive', the agent called create_directory, list_directory, or get_file_info before move_file. The move_file description listed forbidden preparatory calls but, unlike write_file, never gave a positive reassurance that destination directories are handled automatically. The agent inferred from the omission that the destination directory might not exist and needed to be created or verified first, overriding the negative instruction.",
+  "rationales": {
+    "create_directory": "Replaces ambiguous negative phrasing ('Do not call it for parent paths') with an explicit positive instruction ('Call exactly once with the final full nested path') so the agent trusts that a single call is sufficient and complete.",
+    "move_file": "Adds the positive reassurance that missing destination directories are handled automatically, mirroring write_file's description, which removes the agent's motivation to call create_directory or other tools before moving."
+  },
+  "overrides": {
+    "create_directory": "Use this ONLY when the user explicitly asks to create a new directory or folder. Call exactly once with the final full nested path; all missing parent directories are created automatically. Do not create parent directories separately, do not call this tool multiple times for the same path, and do not call it before write_file or move_file. Only works within allowed directories.",
+    "move_file": "Use this to move or rename a file or directory by providing the source and the full destination file path. Automatically creates any missing destination directories. Do not call list_directory, get_file_info, or create_directory beforehand to verify or prepare the source or destination. Only works within allowed directories."
+  }
+}
