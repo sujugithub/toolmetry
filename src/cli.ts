@@ -15,6 +15,7 @@ import {
   failingScenarios,
   proposeRewrites,
 } from './optimizer/rewrite.js';
+import { parseOverridesFile, startProxy } from './proxy/proxy.js';
 
 /** Model id decides the provider: accounts/... → Fireworks, else Anthropic. */
 function makeClient(model: string): MessageCreator {
@@ -72,6 +73,7 @@ function printSummary(result: MeasureResult): void {
 
 const program = new Command();
 program
+  .enablePositionalOptions()
   .name('hitrate')
   .description(
     "Measure how well AI agents use your MCP server's tools — then fix the descriptions and prove it.",
@@ -224,6 +226,24 @@ program
     console.log(
       `\nHIT RATE: ${Math.round(baseline.aggregate.hitRate * 100)}% → ${Math.round(optimized.aggregate.hitRate * 100)}% (${headline >= 0 ? '+' : ''}${headline} pts)`,
     );
+  });
+
+program
+  .command('proxy')
+  .description(
+    'Run an MCP server with rewritten tool descriptions — point your MCP config here instead of the target. Usage: hitrate proxy --overrides o.json -- npx -y some-mcp-server args…',
+  )
+  .requiredOption(
+    '--overrides <file>',
+    'JSON: plain {tool: description} map, or the file saved by `hitrate optimize`',
+  )
+  .argument('<command>', 'target server command')
+  .argument('[args...]', 'target server arguments')
+  .passThroughOptions()
+  .action(async (command: string, args: string[], opts) => {
+    const overrides = parseOverridesFile(readFileSync(opts.overrides, 'utf8'));
+    await startProxy({ command, args }, overrides);
+    // keep the process alive; the transport closes us when the client goes away
   });
 
 program
