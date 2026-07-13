@@ -13,3 +13,5 @@ dist/
 # internal project management + session tooling (local only)
 CLAUDE.md
 .claude/
+.vercel
+.env*
