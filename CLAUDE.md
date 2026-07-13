@@ -125,7 +125,12 @@ This file is the single source of truth for Claude Code sessions on this project
 | B1 | tools/list rewrite proxy | Done | `hitrate proxy --overrides o.json -- <cmd…>`; integration-tested via nested MCP spawn |
 | B4 | Cost tracking + per-run budget guard | Done | `--price-in/--price-out` activates the guard for any model |
 | B3 | Multi-round optimization + convergence | Done | validated live: regressing round discarded, baseline kept, guard active ($0.31 spend) |
-| B2 | 5–10 popular servers (stretch) | 4/10 | memory +34.5, git +21.7, sqlite +66.0 strict-success pts; graphify now installed for future scenario work |
+| B2 | 5–10 popular servers | 4/10 | memory +34.5, git +21.7, sqlite +66.0 strict-success pts |
+| C1 | CLI polish | Done | dir input, auto setup detection, ANSI colors, help examples |
+| C2 | README | Done | real results table, honest limitations; quickstart GIF still to record |
+| C3 | Landing page | Done | site/index.html, single file; verified to 375px; needs hosting + GitHub URL swap (USER placeholder) |
+| C4 | Launch post draft | Done | docs/launch-post.md; tone pass + URL swap pending |
+| C5 | PRs to measured servers | To Do | description diffs ready in results/; needs PO GitHub account + rotated keys |
 
 **Blocked/decisions needed:**
 - Re-validate Sprint 1 numbers on Haiku 4.5 once Anthropic credit exists (`-m claude-haiku-4-5`, same command).
