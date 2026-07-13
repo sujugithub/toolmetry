@@ -254,6 +254,15 @@ program
   .option('--price-in <usd>', 'USD per MTok input for unpriced agent models (activates budget guard)')
   .option('--price-out <usd>', 'USD per MTok output for unpriced agent models')
   .option('--rounds <n>', 'max optimization rounds (rewrite → re-measure, keep improvements)', '1')
+  .option(
+    '--candidates <k>',
+    'rewrites sampled per round; screened on failing scenarios, only the winner is fully measured',
+    '1',
+  )
+  .option(
+    '--seed <file>',
+    'known-good overrides JSON evaluated as round 0 (kept only if it beats the baseline)',
+  )
   .action(async (suitePath: string, opts) => {
     const suite = loadSuite(suitePath);
     applyCustomPricing(opts.model, opts.priceIn, opts.priceOut);
@@ -303,13 +312,43 @@ program
     // only count spend from THIS invocation against the budget
     let spentUsd = opts.baseline ? 0 : (baseline.estimatedCostUsd ?? 0);
     let roundNum = 0;
+    const candidates = Number(opts.candidates);
+    const seed = opts.seed
+      ? parseOverridesFile(readFileSync(opts.seed, 'utf8'))
+      : undefined;
+    if (seed) {
+      console.log(
+        `\nseeding round 0 with ${Object.keys(seed).length} override(s) from ${opts.seed}`,
+      );
+    }
 
     const out = await optimizeLoop({
       baseline,
       maxRounds: Number(opts.rounds),
+      candidates,
+      ...(seed ? { seed } : {}),
+      screen: async (overrides, failingScenarioIds) => {
+        const sub = {
+          ...suite,
+          scenarios: suite.scenarios.filter((s) =>
+            failingScenarioIds.includes(s.id),
+          ),
+        };
+        const r = await measureSuite(sub, {
+          ...common,
+          budgetUsd: Math.max(0, budgetUsd - spentUsd),
+          descriptionOverrides: overrides,
+          onProgress: () => {}, // screening is noisy; summarize below instead
+        });
+        spentUsd += r.estimatedCostUsd ?? 0;
+        console.log(
+          `  [screen] candidate {${Object.keys(overrides).length} overrides} on ${sub.scenarios.length} failing scenario(s): strict success ${(r.aggregate.successRate * 100).toFixed(0)}%`,
+        );
+        return r.aggregate.successRate;
+      },
       rewrite: async (current, curOverrides) => {
         roundNum++;
-        console.log(`\n[round ${roundNum}] diagnosing failures with ${opts.rewriter}…`);
+        console.log(`\n[rewrite ${roundNum}] diagnosing failures with ${opts.rewriter}…`);
         const effectiveTools = tools.map((t) =>
           curOverrides[t.name] ? { ...t, description: curOverrides[t.name]! } : t,
         );
@@ -326,7 +365,7 @@ program
           console.log(`    → ${desc}\n`);
         }
         const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-        const overridesFile = `results/${stamp}-${suite.suite}-overrides-r${roundNum}.json`;
+        const overridesFile = `results/${stamp}-${suite.suite}-overrides-rw${roundNum}.json`;
         writeFileSync(
           overridesFile,
           JSON.stringify(
@@ -344,7 +383,7 @@ program
         return proposal.overrides;
       },
       measure: async (overrides) => {
-        console.log(`[round ${roundNum}] re-measuring with rewritten descriptions…`);
+        console.log(`[measure] full suite with rewritten descriptions…`);
         const r = await measureSuite(suite, {
           ...common,
           budgetUsd: Math.max(0, budgetUsd - spentUsd),
@@ -352,7 +391,7 @@ program
         });
         spentUsd += r.estimatedCostUsd ?? 0;
         printSummary(r);
-        console.log(`saved: ${saveResult(r, `optimized-r${roundNum}`)}`);
+        console.log(`saved: ${saveResult(r, `optimized-m${roundNum}`)}`);
         return r;
       },
     });

@@ -91,3 +91,77 @@ describe('optimizeLoop', () => {
     expect(out.best.result.aggregate.successRate).toBeCloseTo(0.3, 10);
   });
 });
+
+describe('optimizeLoop — B3.1 candidates + seed', () => {
+  it('screens K candidates on failing scenarios and full-measures only the winner', async () => {
+    // candidate quality: proposal "c2" screens best
+    const screenScores: Record<string, number> = { c1: 0.4, c2: 0.9, c3: 0.6 };
+    const measured: string[] = [];
+    let call = 0;
+
+    const out = await optimizeLoop({
+      baseline: resultWithSuccess(0.5),
+      candidates: 3,
+      rewrite: async () => ({ [`c${++call}`]: 'desc' }),
+      screen: async (overrides) => {
+        const key = Object.keys(overrides).find((k) => k.startsWith('c'))!;
+        return screenScores[key]!;
+      },
+      measure: async (overrides) => {
+        measured.push(Object.keys(overrides).join(','));
+        return resultWithSuccess(0.8);
+      },
+      maxRounds: 1,
+    });
+
+    // only the screening winner was fully measured
+    expect(measured).toEqual(['c2']);
+    expect(out.best.result.aggregate.successRate).toBe(0.8);
+    expect(out.rounds[0]!.kept).toBe(true);
+    expect(out.rounds[0]!.screened).toEqual([
+      { overrides: ['c1'], score: 0.4 },
+      { overrides: ['c2'], score: 0.9 },
+      { overrides: ['c3'], score: 0.6 },
+    ]);
+  });
+
+  it('keeps an improving seed as round 0 and builds on it', async () => {
+    const seed = { seeded_tool: 'known-good description' };
+    let rewriteSawSeed = false;
+
+    const out = await optimizeLoop({
+      baseline: resultWithSuccess(0.5),
+      seed,
+      rewrite: async (_cur, curOverrides) => {
+        rewriteSawSeed = 'seeded_tool' in curOverrides;
+        return { r1_tool: 'd' };
+      },
+      measure: async (overrides) =>
+        resultWithSuccess('r1_tool' in overrides ? 0.9 : 0.7),
+      maxRounds: 1,
+    });
+
+    expect(out.rounds[0]!.round).toBe(0); // seed round recorded
+    expect(out.rounds[0]!.kept).toBe(true);
+    expect(rewriteSawSeed).toBe(true);
+    expect(out.best.result.aggregate.successRate).toBe(0.9);
+    expect(Object.keys(out.best.overrides).sort()).toEqual(['r1_tool', 'seeded_tool']);
+  });
+
+  it('discards a seed that does not beat the baseline', async () => {
+    const out = await optimizeLoop({
+      baseline: resultWithSuccess(0.8),
+      seed: { bad_tool: 'worse description' },
+      rewrite: async () => ({ x: 'd' }),
+      measure: async (overrides) =>
+        resultWithSuccess('bad_tool' in overrides ? 0.6 : 0.85),
+      maxRounds: 1,
+    });
+
+    expect(out.rounds[0]!.round).toBe(0);
+    expect(out.rounds[0]!.kept).toBe(false);
+    // round 1 built on EMPTY overrides, not the bad seed
+    expect(Object.keys(out.best.overrides)).toEqual(['x']);
+    expect(out.best.result.aggregate.successRate).toBe(0.85);
+  });
+});
