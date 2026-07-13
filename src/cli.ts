@@ -29,7 +29,14 @@ function makeClient(model: string): MessageCreator {
     }
     return new FireworksClient(key);
   }
-  return new Anthropic();
+  // stream + finalMessage so large max_tokens (rewriter: 32k) doesn't trip the
+  // SDK's 10-minute non-streaming guard
+  const anthropic = new Anthropic();
+  return {
+    messages: {
+      create: (params) => anthropic.messages.stream(params).finalMessage(),
+    },
+  };
 }
 
 function warnIfUnpriced(model: string): void {
