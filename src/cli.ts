@@ -16,6 +16,7 @@ import {
   proposeRewrites,
 } from './optimizer/rewrite.js';
 import { parseOverridesFile, startProxy } from './proxy/proxy.js';
+import { optimizeLoop } from './optimizer/loop.js';
 
 /** Model id decides the provider: accounts/... → Fireworks, else Anthropic. */
 function makeClient(model: string): MessageCreator {
@@ -157,6 +158,7 @@ program
   .option('--max-iterations <n>', 'agent loop iteration cap', '6')
   .option('--price-in <usd>', 'USD per MTok input for unpriced agent models (activates budget guard)')
   .option('--price-out <usd>', 'USD per MTok output for unpriced agent models')
+  .option('--rounds <n>', 'max optimization rounds (rewrite → re-measure, keep improvements)', '1')
   .action(async (suitePath: string, opts) => {
     const suite = loadSuite(suitePath);
     applyCustomPricing(opts.model, opts.priceIn, opts.priceOut);
@@ -195,59 +197,86 @@ program
       return;
     }
 
-    // 2. rewrite (needs the live tool list)
-    console.log(`\ndiagnosing failures with ${opts.rewriter}…`);
+    // 2. multi-round: rewrite → re-measure → keep improvements (B3)
     const target = await McpTarget.spawn(suite.server);
     const tools = target.listTools();
     await target.close();
-    const proposal = await proposeRewrites({
-      client: makeClient(opts.rewriter),
-      model: opts.rewriter,
-      baseline,
-      tools,
-    });
-    const rewriteCost = estimateCostUsd(opts.rewriter, proposal.usage);
-    console.log(`\n${proposal.diagnosis}\n`);
-    for (const [tool, desc] of Object.entries(proposal.overrides)) {
-      console.log(`  ${tool}: ${proposal.rationales[tool]}`);
-      console.log(`    → ${desc}\n`);
-    }
     mkdirSync('results', { recursive: true });
-    const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-    const overridesFile = `results/${stamp}-${suite.suite}-overrides.json`;
-    writeFileSync(
-      overridesFile,
-      JSON.stringify(
-        { diagnosis: proposal.diagnosis, rationales: proposal.rationales, overrides: proposal.overrides },
-        null,
-        2,
-      ),
-    );
-    console.log(`overrides saved: ${overridesFile}`);
-    console.log(`rewriter cost: ${formatUsd(rewriteCost)}`);
 
-    // 3. re-measure with overrides
-    const spentSoFar = (baseline.estimatedCostUsd ?? 0) + (rewriteCost ?? 0);
-    console.log('\nre-measuring with rewritten descriptions…');
-    const optimized = await measureSuite(suite, {
-      ...common,
-      budgetUsd: Math.max(0, budgetUsd - spentSoFar),
-      descriptionOverrides: proposal.overrides,
+    // only count spend from THIS invocation against the budget
+    let spentUsd = opts.baseline ? 0 : (baseline.estimatedCostUsd ?? 0);
+    let roundNum = 0;
+
+    const out = await optimizeLoop({
+      baseline,
+      maxRounds: Number(opts.rounds),
+      rewrite: async (current, curOverrides) => {
+        roundNum++;
+        console.log(`\n[round ${roundNum}] diagnosing failures with ${opts.rewriter}…`);
+        const effectiveTools = tools.map((t) =>
+          curOverrides[t.name] ? { ...t, description: curOverrides[t.name]! } : t,
+        );
+        const proposal = await proposeRewrites({
+          client: makeClient(opts.rewriter),
+          model: opts.rewriter,
+          baseline: current,
+          tools: effectiveTools,
+        });
+        spentUsd += estimateCostUsd(opts.rewriter, proposal.usage) ?? 0;
+        console.log(`\n${proposal.diagnosis}\n`);
+        for (const [tool, desc] of Object.entries(proposal.overrides)) {
+          console.log(`  ${tool}: ${proposal.rationales[tool]}`);
+          console.log(`    → ${desc}\n`);
+        }
+        const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+        const overridesFile = `results/${stamp}-${suite.suite}-overrides-r${roundNum}.json`;
+        writeFileSync(
+          overridesFile,
+          JSON.stringify(
+            {
+              round: roundNum,
+              diagnosis: proposal.diagnosis,
+              rationales: proposal.rationales,
+              overrides: proposal.overrides,
+            },
+            null,
+            2,
+          ),
+        );
+        console.log(`overrides saved: ${overridesFile}`);
+        return proposal.overrides;
+      },
+      measure: async (overrides) => {
+        console.log(`[round ${roundNum}] re-measuring with rewritten descriptions…`);
+        const r = await measureSuite(suite, {
+          ...common,
+          budgetUsd: Math.max(0, budgetUsd - spentUsd),
+          descriptionOverrides: overrides,
+        });
+        spentUsd += r.estimatedCostUsd ?? 0;
+        printSummary(r);
+        console.log(`saved: ${saveResult(r, `optimized-r${roundNum}`)}`);
+        return r;
+      },
     });
-    printSummary(optimized);
-    console.log(`saved: ${saveResult(optimized, 'optimized')}`);
 
-    // 4. report
-    const md = diffReport(baseline, optimized, proposal.overrides);
+    // 3. report best vs baseline
+    const md = diffReport(baseline, out.best.result, out.best.overrides);
     const reportFile = `results/${new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19)}-${suite.suite}-report.md`;
     writeFileSync(reportFile, md);
-    console.log(`\nreport: ${reportFile}`);
-    const headline = Math.round(
-      (optimized.aggregate.hitRate - baseline.aggregate.hitRate) * 100,
+    console.log(`\nreport: ${reportFile} (stopped: ${out.stoppedBecause}, rounds: ${out.rounds.length})`);
+
+    const b = baseline.aggregate;
+    const o = out.best.result.aggregate;
+    const fmt = (x: number) => (x * 100).toFixed(1);
+    const pts = (d: number) => `${d >= 0 ? '+' : ''}${(d * 100).toFixed(1)} pts`;
+    console.log(
+      `\nSTRICT SUCCESS: ${fmt(b.successRate)}% → ${fmt(o.successRate)}% (${pts(o.successRate - b.successRate)})`,
     );
     console.log(
-      `\nHIT RATE: ${Math.round(baseline.aggregate.hitRate * 100)}% → ${Math.round(optimized.aggregate.hitRate * 100)}% (${headline >= 0 ? '+' : ''}${headline} pts)`,
+      `HIT RATE:       ${fmt(b.hitRate)}% → ${fmt(o.hitRate)}% (${pts(o.hitRate - b.hitRate)})`,
     );
+    console.log(`estimated spend this invocation: ${formatUsd(spentUsd)}`);
   });
 
 program
