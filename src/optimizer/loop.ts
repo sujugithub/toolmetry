@@ -115,9 +115,13 @@ export async function optimizeLoop(
         ),
       );
       const subset = failingIds(best.result);
-      const scores = await Promise.all(
-        proposals.map((p) => screen!({ ...best.overrides, ...p }, subset)),
-      );
+      // screenings run SEQUENTIALLY: they execute real scenario runs against a
+      // shared sandbox (setup scripts rm -rf the same path), so concurrent
+      // screeners corrupt each other's fixtures
+      const scores: number[] = [];
+      for (const p of proposals) {
+        scores.push(await screen!({ ...best.overrides, ...p }, subset));
+      }
       screened = proposals.map((p, i) => ({
         overrides: Object.keys(p),
         score: scores[i]!,

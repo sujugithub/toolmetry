@@ -165,3 +165,26 @@ describe('optimizeLoop — B3.1 candidates + seed', () => {
     expect(out.best.result.aggregate.successRate).toBe(0.85);
   });
 });
+
+describe('optimizeLoop — screening concurrency', () => {
+  it('never overlaps screen calls (shared sandbox contract)', async () => {
+    let active = 0;
+    let maxActive = 0;
+    let call = 0;
+    await optimizeLoop({
+      baseline: resultWithSuccess(0.5),
+      candidates: 3,
+      rewrite: async () => ({ [`c${++call}`]: 'd' }),
+      screen: async () => {
+        active++;
+        maxActive = Math.max(maxActive, active);
+        await new Promise((r) => setTimeout(r, 5));
+        active--;
+        return 0.5;
+      },
+      measure: async () => resultWithSuccess(0.6),
+      maxRounds: 2,
+    });
+    expect(maxActive).toBe(1);
+  });
+});
