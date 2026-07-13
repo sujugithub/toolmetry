@@ -101,7 +101,7 @@ This file is the single source of truth for Claude Code sessions on this project
 - [x] **C2 (2)** README with quickstart GIF, results table, honest limitations
 - [x] **C3 (3)** Landing page (your design skills = our unfair advantage)
 - [x] **C4 (2)** Launch post draft: "I rewrote the tool descriptions of 10 popular MCP servers — before/after hit rates"
-- [ ] **C5 (2)** PRs to 2–3 measured servers with eval data attached
+- [x] **C5 (2)** PRs to 2–3 measured servers with eval data attached
 
 ### EPIC D — Post-signal (do NOT start before real users)
 - Model-matrix runs (GPT/Gemini agents), hosted runs, GitHub Action, historical dashboards
@@ -130,7 +130,7 @@ This file is the single source of truth for Claude Code sessions on this project
 | C2 | README | Done | real results table, honest limitations; quickstart GIF still to record |
 | C3 | Landing page | Done | site/index.html, single file; verified to 375px; needs hosting + GitHub URL swap (USER placeholder) |
 | C4 | Launch post draft | Done | docs/launch-post.md; tone pass + URL swap pending |
-| C5 | PRs to measured servers | To Do | description diffs ready in results/; needs PO GitHub account + rotated keys |
+| C5 | PRs to measured servers | Done | [servers#4519](https://github.com/modelcontextprotocol/servers/pull/4519) (memory +34.5), [servers#4520](https://github.com/modelcontextprotocol/servers/pull/4520) (git +21.7); both promise a link to the open-sourced harness — push the hitrate repo and follow up |
 
 **Blocked/decisions needed:**
 - Re-validate Sprint 1 numbers on Haiku 4.5 once Anthropic credit exists (`-m claude-haiku-4-5`, same command).
