@@ -90,10 +90,11 @@ This file is the single source of truth for Claude Code sessions on this project
 - [x] **A6 (1)** Baseline vs optimized report (markdown table, per-scenario diff)
 
 ### EPIC B — Repeatability & Dataset *(Sprints 2–3)*
-- [ ] **B1 (3)** Description override without forking target server (proxy layer that rewrites `tools/list` responses)
+- [x] **B1 (3)** Description override without forking target server (proxy layer that rewrites `tools/list` responses)
 - [ ] **B2 (5)** Run pipeline against 5–10 popular servers; commit all results
-- [ ] **B3 (3)** Multi-round optimization with convergence/termination criteria
-- [ ] **B4 (2)** Cost tracking + budget guard per optimization run
+- [x] **B3 (3)** Multi-round optimization with convergence/termination criteria
+- [ ] **B3.1 (3)** De-noise the rewriter: sample K candidate rewrites per round and keep the measured best, and/or seed the loop from known-good overrides (`--seed`). Motivated by 2026-07-13 finding: two independent rewrites scored +10.0 and −2.2 pts — single-shot rewriting is high-variance.
+- [x] **B4 (2)** Cost tracking + budget guard per optimization run
 
 ### EPIC C — Public Release *(Sprint 4)*
 - [ ] **C1 (3)** Polish CLI: `npx hitrate measure ./scenarios`, `npx hitrate optimize`, good `--help`, pretty terminal output
@@ -123,7 +124,7 @@ This file is the single source of truth for Claude Code sessions on this project
 |----|-------|--------|-------|
 | B1 | tools/list rewrite proxy | Done | `hitrate proxy --overrides o.json -- <cmd…>`; integration-tested via nested MCP spawn |
 | B4 | Cost tracking + per-run budget guard | Done | `--price-in/--price-out` activates the guard for any model |
-| B3 | Multi-round optimization + convergence | Done (code) | keep-best loop, regression discard; live 2-round validation running |
+| B3 | Multi-round optimization + convergence | Done | validated live: regressing round discarded, baseline kept, guard active ($0.31 spend) |
 | B2 | 5–10 popular servers (stretch) | To Do | scenario suites are the time sink; graphify per server (§10) — **graphify CLI not installed on this machine** (`uv tool install graphifyy && graphify install` per §10) |
 
 **Blocked/decisions needed:**
