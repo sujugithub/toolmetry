@@ -1,0 +1,12 @@
+{
+  "round": 2,
+  "diagnosis": "In the failing runs, the agent called open_nodes before delete_observations. The delete_observations description is too vague: it lacks a prescriptive “Use this when…” sentence and fails to instruct the agent to call it directly (unlike the create tools, which explicitly say “Call this directly…”). This makes the agent uncertain whether it must first discover exact observation strings by reading the entity. Meanwhile, open_nodes promises “complete information” and has clear usage guidance, so it looks like the correct first step when the agent is unsure about the exact observation wording. In short, delete_observations looked like the wrong tool because it gave no direct usage heuristic, and open_nodes looked like the right tool because it offers complete entity information.",
+  "rationales": {
+    "delete_observations": "Adds a clear 'Use this when' directive and explicitly forbids the agent from calling open_nodes first, which stops the extra preparatory lookups seen in runs 4–5.",
+    "open_nodes": "Clarifies that open_nodes is for querying, not for editing prep, and explicitly directs the agent to delete_observations when the goal is to remove observations, preventing the mistaken two-step pattern."
+  },
+  "overrides": {
+    "delete_observations": "Use this when the user asks to remove one or more observations from an entity. Provide the exact observation strings in the observations parameter. Call this directly without first reading the entity; do not use open_nodes merely to look up observations before deleting.",
+    "open_nodes": "Retrieve the complete information for specific entities by their exact names. Use this when the user asks about known entities by name (e.g., 'What do you know about Alice?'). Do not use this solely to look up observations before deleting them; use delete_observations directly instead. Use search_nodes instead for fuzzy or keyword searches."
+  }
+}

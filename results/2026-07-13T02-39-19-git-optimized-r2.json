@@ -1,0 +1,2153 @@
+{
+  "savedAt": "2026-07-13T02:39:19.954Z",
+  "gitSha": "fdc6bd7",
+  "label": "optimized-r2",
+  "result": {
+    "suite": "git",
+    "model": "accounts/fireworks/models/gpt-oss-120b",
+    "runsPerScenario": 5,
+    "scenarios": [
+      {
+        "scenario": {
+          "id": "working-tree-status",
+          "prompt": "What's the current status of the repo at /tmp/hitrate-git-sandbox?",
+          "expected_tool": "git_status",
+          "expected_args": {
+            "repo_path": "/tmp/hitrate-git-sandbox"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "working-tree-status",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "git_status",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2337,
+              "outputTokens": 99
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "git_status",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2337,
+              "outputTokens": 121
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "git_status",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2337,
+              "outputTokens": 99
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "git_status",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2337,
+              "outputTokens": 110
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "git_status",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2337,
+              "outputTokens": 140
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "diff-unstaged",
+          "prompt": "Show me the changes in /tmp/hitrate-git-sandbox that I haven't staged yet.\n",
+          "expected_tool": "git_diff_unstaged",
+          "expected_args": {
+            "repo_path": "/tmp/hitrate-git-sandbox"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "diff-unstaged",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "git_diff_unstaged",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2298,
+              "outputTokens": 156
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "git_diff_unstaged",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2298,
+              "outputTokens": 170
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "git_diff_unstaged",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "context_lines": 3
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2303,
+              "outputTokens": 149
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "git_diff_unstaged",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2298,
+              "outputTokens": 180
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "git_diff_unstaged",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "context_lines": 3
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2303,
+              "outputTokens": 152
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "diff-staged",
+          "prompt": "Show me the diff of exactly what's currently staged for the next commit in /tmp/hitrate-git-sandbox.\n",
+          "expected_tool": "git_diff_staged",
+          "expected_args": {
+            "repo_path": "/tmp/hitrate-git-sandbox"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "diff-staged",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "git_diff_staged",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "context_lines": 3
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2300,
+              "outputTokens": 135
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "git_diff_staged",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "context_lines": 3
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2300,
+              "outputTokens": 129
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "git_diff_staged",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "context_lines": 3
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2300,
+              "outputTokens": 161
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "git_diff_staged",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "context_lines": 3
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2300,
+              "outputTokens": 154
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "git_diff_staged",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2295,
+              "outputTokens": 137
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "diff-against-branch",
+          "prompt": "In /tmp/hitrate-git-sandbox, show how the current branch differs from the feature/login branch.\n",
+          "expected_tool": "git_diff",
+          "expected_args": {
+            "repo_path": "/tmp/hitrate-git-sandbox",
+            "target": "feature/login"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "diff-against-branch",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0.4,
+          "successRate": 0.6,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "git_diff",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "target": "feature/login"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2359,
+              "outputTokens": 388
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "git_diff",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "target": "feature/login",
+                  "context_lines": 3
+                }
+              },
+              {
+                "name": "git_branch",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_type": "local"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 3680,
+              "outputTokens": 449
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "git_diff",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "target": "feature/login",
+                  "context_lines": 3
+                }
+              },
+              {
+                "name": "git_branch",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_type": "local"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 3680,
+              "outputTokens": 354
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "git_diff",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "target": "feature/login"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2359,
+              "outputTokens": 369
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "git_diff",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "target": "feature/login"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2359,
+              "outputTokens": 335
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "recent-history",
+          "prompt": "Show me the last 3 commits in /tmp/hitrate-git-sandbox.",
+          "expected_tool": "git_log",
+          "expected_args": {
+            "repo_path": "/tmp/hitrate-git-sandbox",
+            "max_count": 3
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "recent-history",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "git_log",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "max_count": 3
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2449,
+              "outputTokens": 298
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "git_log",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "max_count": 3
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2443,
+              "outputTokens": 278
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "git_log",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "max_count": 3
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2442,
+              "outputTokens": 277
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "git_log",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "max_count": 3
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2447,
+              "outputTokens": 279
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "git_log",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "max_count": 3
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2446,
+              "outputTokens": 284
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "show-latest-commit",
+          "prompt": "What exactly did the most recent commit in /tmp/hitrate-git-sandbox change? Show its contents.\n",
+          "expected_tool": "git_show",
+          "expected_args": {
+            "repo_path": "/tmp/hitrate-git-sandbox"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "show-latest-commit",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0.6,
+          "successRate": 0.4,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": ""
+                }
+              },
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": ""
+                }
+              },
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": ""
+                }
+              },
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": ""
+                }
+              },
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": "HEAD"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 7533,
+              "outputTokens": 535
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": ""
+                }
+              },
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox'}",
+                  "revision": ""
+                }
+              },
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": ""
+                }
+              },
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": "HEAD"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 6202,
+              "outputTokens": 526
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": "HEAD"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2355,
+              "outputTokens": 366
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": ""
+                }
+              },
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": ""
+                }
+              },
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox'}",
+                  "revision": ""
+                }
+              },
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": ""
+                }
+              },
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": ""
+                }
+              },
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": "HEAD"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 7479,
+              "outputTokens": 687
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "git_show",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "revision": "HEAD"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2353,
+              "outputTokens": 158
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "stage-one-file",
+          "prompt": "Stage the file notes.txt in /tmp/hitrate-git-sandbox.",
+          "expected_tool": "git_add",
+          "expected_args": {
+            "repo_path": "/tmp/hitrate-git-sandbox",
+            "files": [
+              "notes.txt"
+            ]
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "stage-one-file",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "git_add",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "files": [
+                    "notes.txt"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2233,
+              "outputTokens": 117
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "git_add",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "files": [
+                    "notes.txt"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2233,
+              "outputTokens": 144
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "git_add",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "files": [
+                    "notes.txt"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2233,
+              "outputTokens": 115
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "git_add",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "files": [
+                    "notes.txt"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2233,
+              "outputTokens": 157
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "git_add",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "files": [
+                    "notes.txt"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2233,
+              "outputTokens": 82
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "commit-staged",
+          "prompt": "Commit whatever is currently staged in /tmp/hitrate-git-sandbox with the message \"update config\".\n",
+          "expected_tool": "git_commit",
+          "expected_args": {
+            "repo_path": "/tmp/hitrate-git-sandbox",
+            "message": "update config"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "commit-staged",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "git_commit",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "message": "update config"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2273,
+              "outputTokens": 132
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "git_commit",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "message": "update config"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2267,
+              "outputTokens": 120
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "git_commit",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "message": "update config"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2270,
+              "outputTokens": 135
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "git_commit",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "message": "update config"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2273,
+              "outputTokens": 108
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "git_commit",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "message": "update config"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2269,
+              "outputTokens": 107
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "unstage-everything",
+          "prompt": "Unstage all the changes I've staged in /tmp/hitrate-git-sandbox.",
+          "expected_tool": "git_reset",
+          "expected_args": {
+            "repo_path": "/tmp/hitrate-git-sandbox"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "unstage-everything",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "git_reset",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2232,
+              "outputTokens": 110
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "git_reset",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2232,
+              "outputTokens": 94
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "git_reset",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2232,
+              "outputTokens": 106
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "git_reset",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2232,
+              "outputTokens": 112
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "git_reset",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2232,
+              "outputTokens": 108
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "create-branch",
+          "prompt": "Create a new branch called hotfix in /tmp/hitrate-git-sandbox.",
+          "expected_tool": "git_create_branch",
+          "expected_args": {
+            "repo_path": "/tmp/hitrate-git-sandbox",
+            "branch_name": "hotfix"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "create-branch",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "git_create_branch",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_name": "hotfix"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2246,
+              "outputTokens": 112
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "git_create_branch",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_name": "hotfix"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2246,
+              "outputTokens": 123
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "git_create_branch",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_name": "hotfix"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2246,
+              "outputTokens": 128
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "git_create_branch",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_name": "hotfix"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2246,
+              "outputTokens": 128
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "git_create_branch",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_name": "hotfix"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2246,
+              "outputTokens": 119
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "switch-branch",
+          "prompt": "Switch /tmp/hitrate-git-sandbox to the feature/login branch.",
+          "expected_tool": "git_checkout",
+          "expected_args": {
+            "repo_path": "/tmp/hitrate-git-sandbox",
+            "branch_name": "feature/login"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "switch-branch",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "git_checkout",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_name": "feature/login"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2289,
+              "outputTokens": 203
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "git_checkout",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_name": "feature/login"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2289,
+              "outputTokens": 217
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "git_checkout",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_name": "feature/login"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2289,
+              "outputTokens": 228
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "git_checkout",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_name": "feature/login"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2289,
+              "outputTokens": 189
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "git_checkout",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_name": "feature/login"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2289,
+              "outputTokens": 313
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "list-branches",
+          "prompt": "What branches exist in /tmp/hitrate-git-sandbox?",
+          "expected_tool": "git_branch",
+          "expected_args": {
+            "repo_path": "/tmp/hitrate-git-sandbox"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "list-branches",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "git_branch",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_type": "all"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2231,
+              "outputTokens": 90
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "git_branch",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_type": "all"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2231,
+              "outputTokens": 103
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "git_branch",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_type": "all"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2231,
+              "outputTokens": 138
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "git_branch",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_type": "local"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2231,
+              "outputTokens": 184
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "git_branch",
+                "args": {
+                  "repo_path": "/tmp/hitrate-git-sandbox",
+                  "branch_type": "all"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 2231,
+              "outputTokens": 135
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      }
+    ],
+    "aggregate": {
+      "scenarioCount": 12,
+      "hitRate": 1,
+      "argCorrectness": 1,
+      "extraCallRate": 0.08333333333333333,
+      "successRate": 0.9166666666666666
+    },
+    "usage": {
+      "inputTokens": 154773,
+      "outputTokens": 11832
+    },
+    "estimatedCostUsd": 0.190269,
+    "descriptionOverrides": {
+      "git_show": "Shows the contents and file changes of a commit. Use this directly when asked to inspect the most recent or a specific commit; for the latest commit, omit the revision parameter entirely so it defaults to HEAD. Do not call git_log first to obtain a hash.",
+      "git_log": "Lists the commit history with author, date, and message. Use this when the user wants a list of commits; use git_show instead when asked to inspect the contents or changes of the most recent or a specific commit.",
+      "git_checkout": "Switches the working tree to the specified branch_name. Use this directly when the user asks to switch branches; do not stage or commit pending changes first unless the user explicitly requests it.",
+      "git_add": "Stages the specified files for the next commit. Use this when the user asks to stage files; the operation is complete and does not require calling git_status or git_diff_staged to verify.",
+      "git_reset": "Unstages all staged changes, returning them to the working directory. Use this when the user asks to unstage everything; the operation is complete and does not require calling git_status to verify.",
+      "git_status": "Shows the current working tree and staged changes status. Use this only when the user explicitly asks for the repository status; do not use to verify the results of git_add, git_reset, or git_checkout.",
+      "git_diff_staged": "Shows the diff of changes currently staged for commit. Use this only when the user explicitly asks to see staged differences; do not use after git_add to verify that files were staged."
+    }
+  }
+}

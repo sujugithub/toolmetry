@@ -1,0 +1,18 @@
+{
+  "round": 1,
+  "diagnosis": "In count-rows, aggregate-query, and join-query, the agent called list_tables and/or describe_table before the expected read_query because the read_query description does not say schema inspection is unnecessary when table names are known. In insert-row and update-row, the agent called describe_table before the expected write_query because the write_query description does not say it can be used directly when column names are provided. In delete-row, the agent called list_tables before write_query because the list_tables description does not restrict it to unknown table names. In table-schema, the agent called list_tables before the expected describe_table because neither description clarifies that describe_table accepts a known table name directly. In new-table, the agent called list_tables after create_table because create_table does not discourage unnecessary verification. The root cause is that all five descriptions are too broad and lack explicit sibling disambiguation, making the agent treat discovery tools as mandatory prerequisites.",
+  "rationales": {
+    "list_tables": "Prevents the agent from using list_tables as a mandatory prerequisite when the table name is already known from the prompt.",
+    "describe_table": "Stops the agent from inspecting schema before every query when the table name is already provided in the prompt.",
+    "read_query": "Encourages the agent to run SELECT queries directly without unnecessary list_tables or describe_table calls.",
+    "write_query": "Encourages the agent to run DML queries directly without schema discovery when the operation and columns are already known.",
+    "create_table": "Discourages an unnecessary list_tables verification call after creating a table."
+  },
+  "overrides": {
+    "list_tables": "List all tables in the SQLite database. Use this ONLY when you need to discover unknown table names or when the user explicitly asks for a list of tables. If the user already names a specific table, use describe_table or read_query directly instead; do not call this tool first.",
+    "describe_table": "Get the schema (columns and types) for a specific table by providing its name. Use this ONLY when the user asks about table structure or when the required column names are genuinely unknown. If the user asks for data values and the table name is known, use read_query directly without calling this first.",
+    "read_query": "Execute a SELECT query to read data from the SQLite database. Use this directly when the user asks for values, counts, or aggregations; you do not need to inspect table schemas first when the table name is known. Use describe_table instead only when the user specifically asks for column names.",
+    "write_query": "Execute an INSERT, UPDATE, or DELETE query to modify data in the SQLite database. Use this directly when the user asks to add, change, or remove rows and the table and column names are provided; you do not need to inspect schemas first. To create a new table, use create_table instead.",
+    "create_table": "Create a new table by executing a CREATE TABLE query. Use this directly when the user asks to define a new table with specific columns. Do not verify creation afterward with list_tables; to modify existing data, use write_query instead."
+  }
+}

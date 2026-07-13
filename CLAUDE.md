@@ -125,7 +125,7 @@ This file is the single source of truth for Claude Code sessions on this project
 | B1 | tools/list rewrite proxy | Done | `hitrate proxy --overrides o.json -- <cmd…>`; integration-tested via nested MCP spawn |
 | B4 | Cost tracking + per-run budget guard | Done | `--price-in/--price-out` activates the guard for any model |
 | B3 | Multi-round optimization + convergence | Done | validated live: regressing round discarded, baseline kept, guard active ($0.31 spend) |
-| B2 | 5–10 popular servers (stretch) | To Do | scenario suites are the time sink; graphify per server (§10) — **graphify CLI not installed on this machine** (`uv tool install graphifyy && graphify install` per §10) |
+| B2 | 5–10 popular servers (stretch) | 4/10 | memory +34.5, git +21.7, sqlite +66.0 strict-success pts; graphify now installed for future scenario work |
 
 **Blocked/decisions needed:**
 - Re-validate Sprint 1 numbers on Haiku 4.5 once Anthropic credit exists (`-m claude-haiku-4-5`, same command).
@@ -140,6 +140,11 @@ This file is the single source of truth for Claude Code sessions on this project
 |------|--------|-----------|-------------------|--------------------|---|------|
 | 2026-07-13 | @modelcontextprotocol/server-filesystem | 18 × N=5 | 94.4% | 96.7% | +2.2 pts | ~$0 (Fireworks credits; pricing untracked) |
 | 2026-07-13 | @modelcontextprotocol/server-filesystem (Haiku 4.5 + Sonnet 5, canonical stack) | 18 × N=5 | 94.4% | 94.4% | +0.0 pts | ~$1.95 |
+| 2026-07-13 | @modelcontextprotocol/server-memory | 11 × N=5 | 80.0% | 100.0% | +20.0 pts | $0.37 |
+| 2026-07-13 | mcp-server-git | 12 × N=5 | 100.0% | 100.0% | +0.0 pts | $0.55 |
+| 2026-07-13 | mcp-server-sqlite | 10 × N=5 | 100.0% | 100.0% | +0.0 pts | $0.27 |
+
+**2026-07-13 B2 sweep (strict success, the ratified headline; agent gpt-oss-120b, rewriter kimi-k2p6, ≤2 rounds):** memory 61.8% → 96.4% (**+34.5**, converged); git 75.0% → 96.7% (**+21.7**, r2 regression discarded); sqlite 34.0% → 100.0% (**+66.0**, all-passing). With filesystem: 4 servers, 51 scenarios, every server improved, no regression ever kept. Failure archetypes covered: wrong-tool confusion (memory), extra-call padding (git, sqlite), deprecated-alias trap (filesystem).
 
 **2026-07-13 Haiku 4.5 re-validation (canonical stack, streaming fix in place):** strict success 84.4% → 86.7% (**+2.2 pts**, round 1 kept; round 2 regressed and was discarded by the B3 loop). Hit rate flat at 94.4%. Cross-model insight: Haiku's *baseline* (84.4%) ≈ gpt-oss-120b's *optimized* score — more capable agents are less sensitive to bad descriptions, so the value of optimization scales inversely with agent quality. Both models improved, no regression ever shipped. Best Haiku overrides: `results/2026-07-13T01-55-41-filesystem-overrides-r1.json`.
 

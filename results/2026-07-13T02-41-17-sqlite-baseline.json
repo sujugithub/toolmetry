@@ -1,0 +1,1935 @@
+{
+  "savedAt": "2026-07-13T02:41:17.380Z",
+  "gitSha": "fdc6bd7",
+  "label": "baseline",
+  "result": {
+    "suite": "sqlite",
+    "model": "accounts/fireworks/models/gpt-oss-120b",
+    "runsPerScenario": 5,
+    "scenarios": [
+      {
+        "scenario": {
+          "id": "count-rows",
+          "prompt": "How many users are in the database?",
+          "expected_tool": "read_query",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "count-rows",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 1,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT COUNT(*) AS user_count FROM users;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1634,
+              "outputTokens": 139
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT COUNT(*) as user_count FROM users;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1634,
+              "outputTokens": 146
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT COUNT(*) as user_count FROM users;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1005,
+              "outputTokens": 101
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT COUNT(*) AS user_count FROM users;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1005,
+              "outputTokens": 100
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT COUNT(*) AS count FROM users;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1632,
+              "outputTokens": 139
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "aggregate-query",
+          "prompt": "What's the largest order total in the database?",
+          "expected_tool": "read_query",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "aggregate-query",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 1,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "orders"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT MAX(total) AS max_total FROM orders;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1643,
+              "outputTokens": 144
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "orders"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT MAX(total) as max_total FROM orders;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1643,
+              "outputTokens": 158
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "orders"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT MAX(total) AS max_total FROM orders;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1643,
+              "outputTokens": 155
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "orders"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT MAX(total) AS max_total FROM orders"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1642,
+              "outputTokens": 150
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "orders"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT MAX(total) as max_total FROM orders;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1643,
+              "outputTokens": 141
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "join-query",
+          "prompt": "Which user placed the order with id 1? Give me their name.",
+          "expected_tool": "read_query",
+          "max_calls": 2
+        },
+        "aggregate": {
+          "scenarioId": "join-query",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 1,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "orders"
+                }
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT u.name FROM orders o JOIN users u ON o.user_id = u.id WHERE o.id = 1;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 2463,
+              "outputTokens": 256
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "orders"
+                }
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT user_id FROM orders WHERE id = 1;"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT name FROM users WHERE id = 1;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 3187,
+              "outputTokens": 288
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "orders"
+                }
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT u.name FROM orders o JOIN users u ON o.user_id = u.id WHERE o.id = 1;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 2463,
+              "outputTokens": 257
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "orders"
+                }
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT user_id FROM orders WHERE id = 1;"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT name FROM users WHERE id = 1;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 3187,
+              "outputTokens": 284
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "orders"
+                }
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT u.name FROM orders o JOIN users u ON o.user_id = u.id WHERE o.id = 1;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 2463,
+              "outputTokens": 267
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "insert-row",
+          "prompt": "Add a new user named Dave with email dave@example.com.",
+          "expected_tool": "write_query",
+          "max_calls": 2
+        },
+        "aggregate": {
+          "scenarioId": "insert-row",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 1,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "INSERT INTO users (name, email) VALUES ('Dave', 'dave@example.com');"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1663,
+              "outputTokens": 169
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "INSERT INTO users (name, email) VALUES ('Dave', 'dave@example.com');"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1663,
+              "outputTokens": 201
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "INSERT INTO users (name, email) VALUES ('Dave', 'dave@example.com');"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1663,
+              "outputTokens": 205
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "INSERT INTO users (name, email) VALUES ('Dave', 'dave@example.com');"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1663,
+              "outputTokens": 203
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "INSERT INTO users (name, email) VALUES ('Dave', 'dave@example.com');"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1663,
+              "outputTokens": 225
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "update-row",
+          "prompt": "Change Alice's email to alice@newcorp.com in the users table.",
+          "expected_tool": "write_query",
+          "max_calls": 2
+        },
+        "aggregate": {
+          "scenarioId": "update-row",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0.4,
+          "successRate": 0.6,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "UPDATE users SET email = 'alice@newcorp.com' WHERE name = 'Alice';"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 653,
+              "outputTokens": 97
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT * FROM users WHERE name = 'Alice';"
+                }
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "UPDATE users SET email = 'alice@newcorp.com' WHERE name = 'Alice';"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 2285,
+              "outputTokens": 225
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "UPDATE users SET email = 'alice@newcorp.com' WHERE name = 'Alice';"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1671,
+              "outputTokens": 172
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "UPDATE users SET email = 'alice@newcorp.com' WHERE name = 'Alice';"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 653,
+              "outputTokens": 107
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "UPDATE users SET email = 'alice@newcorp.com' WHERE name = 'Alice';"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 653,
+              "outputTokens": 105
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "delete-row",
+          "prompt": "Delete the order with id 2.",
+          "expected_tool": "write_query",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "delete-row",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 1,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "DELETE FROM orders WHERE id = 2;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1005,
+              "outputTokens": 136
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "DELETE FROM orders WHERE order_id = 2;"
+                }
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "orders"
+                }
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "DELETE FROM orders WHERE id = 2;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 2119,
+              "outputTokens": 213
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "DELETE FROM orders WHERE id = 2;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1005,
+              "outputTokens": 142
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "DELETE FROM orders WHERE id = 2;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1005,
+              "outputTokens": 107
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "write_query",
+                "args": {
+                  "query": "DELETE FROM orders WHERE id = 2;"
+                }
+              },
+              {
+                "name": "read_query",
+                "args": {
+                  "query": "SELECT * FROM orders;"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1465,
+              "outputTokens": 215
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "new-table",
+          "prompt": "Create a new table called products with columns id (integer primary key), name (text), and price (real).\n",
+          "expected_tool": "create_table",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "new-table",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0.2,
+          "successRate": 0.8,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "create_table",
+                "args": {
+                  "query": "CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, price REAL);"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 661,
+              "outputTokens": 133
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "create_table",
+                "args": {
+                  "query": "CREATE TABLE products (\n    id INTEGER PRIMARY KEY,\n    name TEXT,\n    price REAL\n);"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 668,
+              "outputTokens": 119
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "create_table",
+                "args": {
+                  "query": "CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, price REAL);"
+                }
+              },
+              {
+                "name": "list_tables",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1064,
+              "outputTokens": 154
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "create_table",
+                "args": {
+                  "query": "CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, price REAL);"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 661,
+              "outputTokens": 123
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "create_table",
+                "args": {
+                  "query": "CREATE TABLE products (id INTEGER PRIMARY KEY, name TEXT, price REAL);"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 661,
+              "outputTokens": 123
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "what-tables",
+          "prompt": "What tables exist in this database?",
+          "expected_tool": "list_tables",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "what-tables",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 622,
+              "outputTokens": 80
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 622,
+              "outputTokens": 79
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 622,
+              "outputTokens": 70
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 622,
+              "outputTokens": 82
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 622,
+              "outputTokens": 69
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "table-schema",
+          "prompt": "What columns does the users table have?",
+          "expected_tool": "describe_table",
+          "expected_args": {
+            "table_name": "users"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "table-schema",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 1,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1105,
+              "outputTokens": 147
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1105,
+              "outputTokens": 152
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1105,
+              "outputTokens": 122
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1105,
+              "outputTokens": 145
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "list_tables",
+                "args": {}
+              },
+              {
+                "name": "describe_table",
+                "args": {
+                  "table_name": "users"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 1105,
+              "outputTokens": 160
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "record-insight",
+          "prompt": "Note down this business insight for the memo: repeat customers spend three times more than new ones.\n",
+          "expected_tool": "append_insight",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "record-insight",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "append_insight",
+                "args": {
+                  "insight": "Repeat customers spend three times more than new ones."
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 652,
+              "outputTokens": 119
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "append_insight",
+                "args": {
+                  "insight": "Repeat customers spend three times more than new ones."
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 652,
+              "outputTokens": 100
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "append_insight",
+                "args": {
+                  "insight": "Repeat customers spend three times more than new ones."
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 652,
+              "outputTokens": 96
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "append_insight",
+                "args": {
+                  "insight": "Repeat customers spend three times more than new ones."
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 652,
+              "outputTokens": 133
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "append_insight",
+                "args": {
+                  "insight": "repeat customers spend three times more than new ones."
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 652,
+              "outputTokens": 108
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      }
+    ],
+    "aggregate": {
+      "scenarioCount": 10,
+      "hitRate": 1,
+      "argCorrectness": 1,
+      "extraCallRate": 0.66,
+      "successRate": 0.33999999999999997
+    },
+    "usage": {
+      "inputTokens": 65326,
+      "outputTokens": 7561
+    },
+    "estimatedCostUsd": 0.088009
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "round": 1,
+  "diagnosis": "show-latest-commit: The agent called git_log before git_show because git_show's description ('Shows the contents of a commit') omits that it defaults to HEAD when no revision is given, so the agent believes it must fetch a hash from git_log first. git_log's description ('Shows the commit logs') is too broad and doesn't disambiguate that it lists history rather than exposing commit contents.\n\nstage-one-file: The agent called git_add correctly but then invoked git_diff_staged or git_status because git_add's description doesn't state the operation is complete. git_status and git_diff_staged have overly broad descriptions that invite post-operation verification.\n\nunstage-everything: The agent called git_reset correctly but then invoked git_status because git_reset's description doesn't assert completion. git_status's broad description invites verification.\n\nswitch-branch: The agent called git_checkout, then git_status, git_add, git_commit, and git_checkout again because git_checkout's description ('Switches branches') is too vague and doesn't instruct direct use without first cleaning the working tree. git_status, git_add, and git_diff_staged have broad descriptions that the agent misreads as requiring intermediate verification or cleanup.",
+  "rationales": {
+    "git_show": "Prevents the agent from calling git_log first by clarifying that git_show defaults to HEAD when no revision is provided.",
+    "git_log": "Disambiguates git_log from git_show so the agent doesn't use it to fetch a hash before inspecting commit contents.",
+    "git_checkout": "Stops the agent from running git_status, git_add, and git_commit before switching by instructing direct use of git_checkout.",
+    "git_add": "Prevents unnecessary verification calls after staging by asserting that git_add completes the operation on its own.",
+    "git_reset": "Prevents unnecessary verification calls after unstaging by asserting that git_reset completes the operation on its own.",
+    "git_status": "Stops the agent from using git_status as a verification step after git_add, git_reset, or git_checkout.",
+    "git_diff_staged": "Stops the agent from using git_diff_staged as a verification step after staging files with git_add."
+  },
+  "overrides": {
+    "git_show": "Shows the contents and file changes of a commit. Use without a revision parameter to view the most recent commit (HEAD). Use this directly when asked what the latest commit changed; do not call git_log first to obtain a hash.",
+    "git_log": "Lists the commit history with author, date, and message. Use this when the user wants a list of commits; use git_show instead when asked to inspect the contents or changes of the most recent or a specific commit.",
+    "git_checkout": "Switches the working tree to the specified branch_name. Use this directly when the user asks to switch branches; do not stage or commit pending changes first unless the user explicitly requests it.",
+    "git_add": "Stages the specified files for the next commit. Use this when the user asks to stage files; the operation is complete and does not require calling git_status or git_diff_staged to verify.",
+    "git_reset": "Unstages all staged changes, returning them to the working directory. Use this when the user asks to unstage everything; the operation is complete and does not require calling git_status to verify.",
+    "git_status": "Shows the current working tree and staged changes status. Use this only when the user explicitly asks for the repository status; do not use to verify the results of git_add, git_reset, or git_checkout.",
+    "git_diff_staged": "Shows the diff of changes currently staged for commit. Use this only when the user explicitly asks to see staged differences; do not use after git_add to verify that files were staged."
+  }
+}

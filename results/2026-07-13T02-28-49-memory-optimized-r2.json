@@ -1,0 +1,2066 @@
+{
+  "savedAt": "2026-07-13T02:28:49.653Z",
+  "gitSha": "fdc6bd7",
+  "label": "optimized-r2",
+  "result": {
+    "suite": "memory",
+    "model": "accounts/fireworks/models/gpt-oss-120b",
+    "runsPerScenario": 5,
+    "scenarios": [
+      {
+        "scenario": {
+          "id": "remember-new-person",
+          "prompt": "Remember that Carol is a designer.",
+          "expected_tool": "create_entities",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "remember-new-person",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "create_entities",
+                "args": {
+                  "entities": [
+                    {
+                      "name": "Carol",
+                      "entityType": "Person",
+                      "observations": [
+                        "Carol is a designer"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1748,
+              "outputTokens": 151
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "create_entities",
+                "args": {
+                  "entities": [
+                    {
+                      "name": "Carol",
+                      "entityType": "Person",
+                      "observations": [
+                        "Carol is a designer."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1749,
+              "outputTokens": 128
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "create_entities",
+                "args": {
+                  "entities": [
+                    {
+                      "name": "Carol",
+                      "entityType": "person",
+                      "observations": [
+                        "Carol is a designer."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1749,
+              "outputTokens": 122
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "create_entities",
+                "args": {
+                  "entities": [
+                    {
+                      "name": "Carol",
+                      "entityType": "designer",
+                      "observations": [
+                        "Carol is a designer."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1749,
+              "outputTokens": 105
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "create_entities",
+                "args": {
+                  "entities": [
+                    {
+                      "name": "Carol",
+                      "entityType": "person",
+                      "observations": [
+                        "Carol is a designer."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1749,
+              "outputTokens": 192
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "add-fact-to-existing",
+          "prompt": "You already know Alice. Add to your memory that she recently got promoted to staff engineer.\n",
+          "expected_tool": "add_observations",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "add-fact-to-existing",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "add_observations",
+                "args": {
+                  "observations": [
+                    {
+                      "entityName": "Alice",
+                      "contents": [
+                        "Recently got promoted to staff engineer."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1769,
+              "outputTokens": 131
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "add_observations",
+                "args": {
+                  "observations": [
+                    {
+                      "entityName": "Alice",
+                      "contents": [
+                        "She recently got promoted to staff engineer."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1771,
+              "outputTokens": 85
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "add_observations",
+                "args": {
+                  "observations": [
+                    {
+                      "entityName": "Alice",
+                      "contents": [
+                        "Recently got promoted to staff engineer."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1769,
+              "outputTokens": 99
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "add_observations",
+                "args": {
+                  "observations": [
+                    {
+                      "entityName": "Alice",
+                      "contents": [
+                        "Recently got promoted to staff engineer"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1768,
+              "outputTokens": 106
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "add_observations",
+                "args": {
+                  "observations": [
+                    {
+                      "entityName": "Alice",
+                      "contents": [
+                        "Alice was recently promoted to staff engineer."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1771,
+              "outputTokens": 98
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "link-two-entities",
+          "prompt": "Record that Bob works on Project Phoenix.",
+          "expected_tool": "create_relations",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "link-two-entities",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0.2,
+          "successRate": 0.8,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "create_entities",
+                "args": {
+                  "entities": [
+                    {
+                      "name": "Bob",
+                      "entityType": "Person",
+                      "observations": []
+                    },
+                    {
+                      "name": "Project Phoenix",
+                      "entityType": "Project",
+                      "observations": []
+                    }
+                  ]
+                }
+              },
+              {
+                "name": "create_relations",
+                "args": {
+                  "relations": [
+                    {
+                      "from": "Bob",
+                      "to": "Project Phoenix",
+                      "relationType": "works on"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 2695,
+              "outputTokens": 311
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "create_relations",
+                "args": {
+                  "relations": [
+                    {
+                      "from": "Bob",
+                      "to": "Project Phoenix",
+                      "relationType": "works on"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1743,
+              "outputTokens": 203
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "create_relations",
+                "args": {
+                  "relations": [
+                    {
+                      "from": "Bob",
+                      "to": "Project Phoenix",
+                      "relationType": "works on"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1743,
+              "outputTokens": 204
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "create_relations",
+                "args": {
+                  "relations": [
+                    {
+                      "from": "Bob",
+                      "to": "Project Phoenix",
+                      "relationType": "works on"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1743,
+              "outputTokens": 151
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "create_relations",
+                "args": {
+                  "relations": [
+                    {
+                      "from": "Bob",
+                      "to": "Project Phoenix",
+                      "relationType": "works on"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1743,
+              "outputTokens": 175
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "track-new-project",
+          "prompt": "Start tracking a new project called Atlas — it's a mobile app rewrite.",
+          "expected_tool": "create_entities",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "track-new-project",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "create_entities",
+                "args": {
+                  "entities": [
+                    {
+                      "name": "Atlas",
+                      "entityType": "Project",
+                      "observations": [
+                        "mobile app rewrite"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1760,
+              "outputTokens": 183
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "create_entities",
+                "args": {
+                  "entities": [
+                    {
+                      "name": "Atlas",
+                      "entityType": "Project",
+                      "observations": [
+                        "Mobile app rewrite"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1760,
+              "outputTokens": 182
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "create_entities",
+                "args": {
+                  "entities": [
+                    {
+                      "name": "Atlas",
+                      "entityType": "Project",
+                      "observations": [
+                        "mobile app rewrite"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1760,
+              "outputTokens": 174
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "create_entities",
+                "args": {
+                  "entities": [
+                    {
+                      "name": "Atlas",
+                      "entityType": "Project",
+                      "observations": [
+                        "mobile app rewrite"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1760,
+              "outputTokens": 152
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "create_entities",
+                "args": {
+                  "entities": [
+                    {
+                      "name": "Atlas",
+                      "entityType": "Project",
+                      "observations": [
+                        "It is a mobile app rewrite."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1767,
+              "outputTokens": 183
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "search-by-topic",
+          "prompt": "Search your memory for anything related to engineers.",
+          "expected_tool": "search_nodes",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "search-by-topic",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "search_nodes",
+                "args": {
+                  "query": "engineer"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1811,
+              "outputTokens": 194
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "search_nodes",
+                "args": {
+                  "query": "engineer"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1811,
+              "outputTokens": 175
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "search_nodes",
+                "args": {
+                  "query": "engineer"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1811,
+              "outputTokens": 147
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "search_nodes",
+                "args": {
+                  "query": "engineer"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1811,
+              "outputTokens": 167
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "search_nodes",
+                "args": {
+                  "query": "engineer"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1811,
+              "outputTokens": 161
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "lookup-named-entities",
+          "prompt": "Tell me everything you have stored about Alice and Bob.",
+          "expected_tool": "open_nodes",
+          "expected_args": {
+            "names": [
+              "Alice",
+              "Bob"
+            ]
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "lookup-named-entities",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "open_nodes",
+                "args": {
+                  "names": [
+                    "Alice",
+                    "Bob"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1881,
+              "outputTokens": 211
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "open_nodes",
+                "args": {
+                  "names": [
+                    "Alice",
+                    "Bob"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1881,
+              "outputTokens": 178
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "open_nodes",
+                "args": {
+                  "names": [
+                    "Alice",
+                    "Bob"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1881,
+              "outputTokens": 180
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "open_nodes",
+                "args": {
+                  "names": [
+                    "Alice",
+                    "Bob"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1881,
+              "outputTokens": 177
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "open_nodes",
+                "args": {
+                  "names": [
+                    "Alice",
+                    "Bob"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1881,
+              "outputTokens": 203
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "lookup-one-entity",
+          "prompt": "What do you know about Acme Corp?",
+          "expected_tool": "open_nodes",
+          "expected_args": {
+            "names": [
+              "Acme Corp"
+            ]
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "lookup-one-entity",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "open_nodes",
+                "args": {
+                  "names": [
+                    "Acme Corp"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1819,
+              "outputTokens": 144
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "open_nodes",
+                "args": {
+                  "names": [
+                    "Acme Corp"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1819,
+              "outputTokens": 143
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "open_nodes",
+                "args": {
+                  "names": [
+                    "Acme Corp"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1819,
+              "outputTokens": 112
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "open_nodes",
+                "args": {
+                  "names": [
+                    "Acme Corp"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1819,
+              "outputTokens": 155
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "open_nodes",
+                "args": {
+                  "names": [
+                    "Acme Corp"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1819,
+              "outputTokens": 145
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "dump-whole-graph",
+          "prompt": "Show me your entire memory graph — everything you know.",
+          "expected_tool": "read_graph",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "dump-whole-graph",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "read_graph",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1954,
+              "outputTokens": 231
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "read_graph",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1954,
+              "outputTokens": 282
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "read_graph",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1954,
+              "outputTokens": 322
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "read_graph",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1954,
+              "outputTokens": 168
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "read_graph",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1954,
+              "outputTokens": 366
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "forget-entity-entirely",
+          "prompt": "Forget everything about Bob — remove him from your memory completely.",
+          "expected_tool": "delete_entities",
+          "expected_args": {
+            "entityNames": [
+              "Bob"
+            ]
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "forget-entity-entirely",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "delete_entities",
+                "args": {
+                  "entityNames": [
+                    "Bob"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1709,
+              "outputTokens": 110
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "delete_entities",
+                "args": {
+                  "entityNames": [
+                    "Bob"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1709,
+              "outputTokens": 90
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "delete_entities",
+                "args": {
+                  "entityNames": [
+                    "Bob"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1709,
+              "outputTokens": 135
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "delete_entities",
+                "args": {
+                  "entityNames": [
+                    "Bob"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1709,
+              "outputTokens": 104
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "delete_entities",
+                "args": {
+                  "entityNames": [
+                    "Bob"
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1709,
+              "outputTokens": 84
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "remove-single-fact",
+          "prompt": "Alice no longer likes coffee. Remove just that one observation about her, keep the rest.\n",
+          "expected_tool": "delete_observations",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "remove-single-fact",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0.2,
+          "successRate": 0.8,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "delete_observations",
+                "args": {
+                  "deletions": [
+                    {
+                      "entityName": "Alice",
+                      "observations": [
+                        "Alice no longer likes coffee."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1742,
+              "outputTokens": 299
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "search_nodes",
+                "args": {
+                  "query": "coffee"
+                }
+              },
+              {
+                "name": "delete_observations",
+                "args": {
+                  "deletions": [
+                    {
+                      "entityName": "Alice",
+                      "observations": [
+                        "likes coffee"
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 2868,
+              "outputTokens": 251
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "delete_observations",
+                "args": {
+                  "deletions": [
+                    {
+                      "entityName": "Alice",
+                      "observations": [
+                        "Alice no longer likes coffee."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1742,
+              "outputTokens": 185
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "delete_observations",
+                "args": {
+                  "deletions": [
+                    {
+                      "entityName": "Alice",
+                      "observations": [
+                        "Alice no longer likes coffee."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1742,
+              "outputTokens": 210
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "delete_observations",
+                "args": {
+                  "deletions": [
+                    {
+                      "entityName": "Alice",
+                      "observations": [
+                        "Alice no longer likes coffee."
+                      ]
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1742,
+              "outputTokens": 191
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "remove-relationship",
+          "prompt": "Alice no longer leads Project Phoenix. Remove that relationship but keep both Alice and the project in memory.\n",
+          "expected_tool": "delete_relations",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "remove-relationship",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "delete_relations",
+                "args": {
+                  "relations": [
+                    {
+                      "from": "Alice",
+                      "to": "Project Phoenix",
+                      "relationType": "leads"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1740,
+              "outputTokens": 166
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "delete_relations",
+                "args": {
+                  "relations": [
+                    {
+                      "from": "Alice",
+                      "to": "Project Phoenix",
+                      "relationType": "leads"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1740,
+              "outputTokens": 162
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "delete_relations",
+                "args": {
+                  "relations": [
+                    {
+                      "from": "Alice",
+                      "to": "Project Phoenix",
+                      "relationType": "leads"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1740,
+              "outputTokens": 184
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "delete_relations",
+                "args": {
+                  "relations": [
+                    {
+                      "from": "Alice",
+                      "to": "Project Phoenix",
+                      "relationType": "leads"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1740,
+              "outputTokens": 195
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "delete_relations",
+                "args": {
+                  "relations": [
+                    {
+                      "from": "Alice",
+                      "to": "Project Phoenix",
+                      "relationType": "leads"
+                    }
+                  ]
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 1740,
+              "outputTokens": 177
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      }
+    ],
+    "aggregate": {
+      "scenarioCount": 11,
+      "hitRate": 1,
+      "argCorrectness": 1,
+      "extraCallRate": 0.03636363636363637,
+      "successRate": 0.9636363636363637
+    },
+    "usage": {
+      "inputTokens": 100472,
+      "outputTokens": 9539
+    },
+    "estimatedCostUsd": 0.129089,
+    "descriptionOverrides": {
+      "open_nodes": "Retrieve the complete information for specific entities by their exact names. Use this when the user asks about known entities by name (e.g., 'What do you know about Alice?'). Do not use this solely to look up observations before deleting them; use delete_observations directly instead. Use search_nodes instead for fuzzy or keyword searches.",
+      "search_nodes": "Search for nodes using a fuzzy keyword or text query. Use this when the user provides partial descriptions or keywords rather than exact names. Use open_nodes instead when you already know the exact entity names.",
+      "create_entities": "Create new entities in the knowledge graph. Use this when the user asks you to remember, record, or store information about new subjects (e.g., 'Carol is a designer'). Call this directly without searching first. Use add_observations instead to add facts to existing entities.",
+      "create_relations": "Create relations between entities in the knowledge graph. Use this when the user asks to record a connection between two entities (e.g., 'Bob works on Project Phoenix'). Call this directly without first calling create_entities. Relations should be in active voice.",
+      "read_graph": "Read the entire knowledge graph. Use this only when the user explicitly asks for everything or the whole graph. Use open_nodes instead to look up specific entities by name.",
+      "delete_observations": "Use this when the user asks to remove one or more observations from an entity. Provide the exact observation strings in the observations parameter. Call this directly without first reading the entity; do not use open_nodes merely to look up observations before deleting."
+    }
+  }
+}

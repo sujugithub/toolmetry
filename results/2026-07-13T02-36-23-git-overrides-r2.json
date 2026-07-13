@@ -1,0 +1,10 @@
+{
+  "round": 2,
+  "diagnosis": "The agent correctly selects git_show but misuses the optional revision parameter when asking for the most recent commit. The current description says \"Use without a revision parameter to view the most recent commit (HEAD),\" which the agent sometimes interprets as permission to pass an empty string for revision (run 3 and 5: revision=\"\"), producing a bad result that triggers a second corrective call with revision=\"HEAD\". Those extra calls violate the max-1-call expectation and cause the 40% failure rate. The description needs to explicitly instruct the agent to omit the revision parameter entirely, not to pass it as empty or \"HEAD\".\n",
+  "rationales": {
+    "git_show": "Explicitly telling the agent to omit the revision parameter entirely prevents empty-string attempts and the extra retry calls that cause failures."
+  },
+  "overrides": {
+    "git_show": "Shows the contents and file changes of a commit. Use this directly when asked to inspect the most recent or a specific commit; for the latest commit, omit the revision parameter entirely so it defaults to HEAD. Do not call git_log first to obtain a hash."
+  }
+}
