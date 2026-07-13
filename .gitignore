@@ -9,3 +9,7 @@ dist/
 
 # OS noise
 .DS_Store
+
+# internal project management + session tooling (local only)
+CLAUDE.md
+.claude/
