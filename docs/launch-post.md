@@ -4,7 +4,7 @@
 
 Agents don't read your server's code. They pick tools using three strings: the tool's **name**, its **description**, and its **parameter schema**. That's the entire interface. If two descriptions overlap, the agent guesses. If a description doesn't say "this creates parent directories too," the agent calls it four times. Every one of those mistakes looks like *your server being flaky*.
 
-I built [Toolmetry](https://github.com/sujugithub/toolmetry) to answer a simple question: **if you change nothing but the descriptions, how much better do agents get?**
+I built [Toolmetry](https://toolmetry-one.vercel.app) to answer a simple question: **if you change nothing but the descriptions, how much better do agents get?**
 
 ## The method
 
@@ -58,4 +58,4 @@ Point your MCP client at that instead of the server. No fork, no patch, reversib
 - Deltas are agent-specific (see the Haiku result). Measure with the agent tier you actually serve.
 - Some failures are tool-*design* problems no description can fix. The per-scenario report shows you which.
 
-All code, scenarios, per-run results, and the winning description diffs: [github.com/sujugithub/toolmetry](https://github.com/sujugithub/toolmetry). I'd love PRs with scenario suites for your favorite server — and if you maintain one of the measured servers, the description diffs are yours for the taking.
+All code, scenarios, per-run results, and the winning description diffs: [github.com/sujugithub/toolmetry](https://github.com/sujugithub/toolmetry) — or start at [toolmetry-one.vercel.app](https://toolmetry-one.vercel.app). I'd love PRs with scenario suites for your favorite server — and if you maintain one of the measured servers, the description diffs are yours for the taking.
