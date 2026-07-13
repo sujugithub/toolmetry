@@ -31,13 +31,13 @@ npm install && npm run build
 
 # 2. Measure the baseline (N=5 runs per scenario)
 export ANTHROPIC_API_KEY=...
-npx toolmetry measure scenarios/sqlite/sqlite.yaml
+npx mcp-toolmetry measure scenarios/sqlite/sqlite.yaml
 
 # 3. Optimize: diagnose failures → rewrite descriptions → re-measure → report
-npx toolmetry optimize scenarios/sqlite/sqlite.yaml --rounds 2
+npx mcp-toolmetry optimize scenarios/sqlite/sqlite.yaml --rounds 2
 
 # 4. Ship the winning descriptions WITHOUT forking the server:
-npx toolmetry proxy --overrides results/<timestamp>-overrides-r1.json \
+npx mcp-toolmetry proxy --overrides results/<timestamp>-overrides-r1.json \
   -- uvx mcp-server-sqlite --db-path ./my.db
 # point your MCP client config at that command instead of the server itself
 ```

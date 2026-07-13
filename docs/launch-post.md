@@ -46,7 +46,7 @@ The other honest finding: **LLM rewrites are high-variance.** Two independent re
 The rewritten descriptions live in a JSON file. `toolmetry proxy` wraps any MCP server and rewrites its `tools/list` responses on the fly:
 
 ```bash
-npx toolmetry proxy --overrides best.json -- uvx mcp-server-sqlite --db-path ./my.db
+npx mcp-toolmetry proxy --overrides best.json -- uvx mcp-server-sqlite --db-path ./my.db
 ```
 
 Point your MCP client at that instead of the server. No fork, no patch, reversible in one line.

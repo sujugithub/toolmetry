@@ -1,5 +1,5 @@
 {
-  "name": "toolmetry",
+  "name": "mcp-toolmetry",
   "version": "0.1.0",
   "description": "Measure how well AI agents actually use your MCP server's tools — then rewrite the tool descriptions and prove the improvement with before/after data.",
   "type": "module",
@@ -15,7 +15,8 @@
     "dev": "tsx src/cli.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run typecheck && npm run build"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.111.0",
@@ -29,5 +30,26 @@
     "tsx": "^4.23.0",
     "typescript": "^7.0.2",
     "vitest": "^4.1.10"
-  }
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sujugithub/toolmetry.git"
+  },
+  "homepage": "https://github.com/sujugithub/toolmetry#readme",
+  "bugs": {
+    "url": "https://github.com/sujugithub/toolmetry/issues"
+  },
+  "author": "Sujay",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "agents",
+    "tool-use",
+    "evals",
+    "tool-descriptions",
+    "llm"
+  ]
 }
