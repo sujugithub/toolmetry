@@ -1,5 +1,23 @@
 #!/usr/bin/env node
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  statSync,
+  writeFileSync,
+} from 'node:fs';
+import { dirname, join } from 'node:path';
+import {
+  badRate,
+  bold,
+  cyan,
+  dim,
+  goodRate,
+  green,
+  red,
+  yellow,
+} from './report/ansi.js';
 import Anthropic from '@anthropic-ai/sdk';
 import { Command } from 'commander';
 import { loadSuite } from './scenarios/loader.js';
@@ -74,25 +92,72 @@ function pct(v: number | null): string {
 }
 
 function printSummary(result: MeasureResult): void {
-  const rows = result.scenarios.map((s) => ({
-    scenario: s.aggregate.scenarioId,
-    'hit rate': pct(s.aggregate.hitRate),
-    args: pct(s.aggregate.argCorrectness),
-    'extra calls': pct(s.aggregate.extraCallRate),
-    success: pct(s.aggregate.successRate),
-  }));
-  console.table(rows);
+  const header = ['scenario', 'hit rate', 'args', 'extra calls', 'success'];
+  const idWidth = Math.max(
+    header[0]!.length,
+    ...result.scenarios.map((s) => s.aggregate.scenarioId.length),
+  );
+  console.log();
+  console.log(
+    `  ${bold(header[0]!.padEnd(idWidth))}  ${header.slice(1).map((h) => bold(h.padStart(13))).join('')}`,
+  );
+  for (const s of result.scenarios) {
+    const a = s.aggregate;
+    console.log(
+      `  ${a.scenarioId.padEnd(idWidth)}  ` +
+        goodRate(a.hitRate, pct(a.hitRate).padStart(13)) +
+        goodRate(a.argCorrectness, pct(a.argCorrectness).padStart(13)) +
+        badRate(a.extraCallRate, pct(a.extraCallRate).padStart(13)) +
+        goodRate(a.successRate, pct(a.successRate).padStart(13)),
+    );
+  }
   const a = result.aggregate;
   console.log(
-    `\n${result.suite} — ${result.scenarios.length} scenarios × ${result.runsPerScenario} runs on ${result.model}`,
+    `\n${bold(result.suite)} — ${result.scenarios.length} scenarios × ${result.runsPerScenario} runs on ${cyan(result.model)}`,
   );
   console.log(
-    `  hit rate ${pct(a.hitRate)} | arg correctness ${pct(a.argCorrectness)} | extra-call rate ${pct(a.extraCallRate)} | strict success ${pct(a.successRate)}`,
+    `  hit rate ${goodRate(a.hitRate, pct(a.hitRate))} | arg correctness ${goodRate(a.argCorrectness, pct(a.argCorrectness))} | extra-call rate ${badRate(a.extraCallRate, pct(a.extraCallRate))} | strict success ${bold(goodRate(a.successRate, pct(a.successRate)))}`,
   );
   console.log(
-    `  tokens: ${result.usage.inputTokens} in / ${result.usage.outputTokens} out — estimated cost ${formatUsd(result.estimatedCostUsd)}`,
+    dim(
+      `  tokens: ${result.usage.inputTokens} in / ${result.usage.outputTokens} out — estimated cost ${formatUsd(result.estimatedCostUsd)}`,
+    ),
   );
-  if (result.aborted) console.error(`  ⚠ ABORTED: ${result.aborted}`);
+  if (result.aborted) console.error(red(`  ⚠ ABORTED: ${result.aborted}`));
+}
+
+function colorProgress(msg: string): string {
+  if (msg.includes(': ok ')) return msg.replace(': ok ', `: ${green('ok')} `);
+  if (msg.includes(': partial '))
+    return msg.replace(': partial ', `: ${yellow('partial')} `);
+  if (msg.includes(': miss ')) return msg.replace(': miss ', `: ${red('miss')} `);
+  if (msg.includes(': ERROR ')) return msg.replace(': ERROR ', `: ${red('ERROR')} `);
+  return msg;
+}
+
+/** Suite files for a path: a YAML file itself, or every suite in a directory. */
+function suiteFilesFor(path: string): string[] {
+  if (!statSync(path).isDirectory()) return [path];
+  // scenarios/<name>/<name>.yaml layout first, then any *.yaml directly inside
+  const files: string[] = [];
+  for (const entry of readdirSync(path, { withFileTypes: true })) {
+    if (entry.isDirectory()) {
+      const inner = readdirSync(join(path, entry.name)).filter((f) =>
+        /\.ya?ml$/.test(f),
+      );
+      files.push(...inner.map((f) => join(path, entry.name, f)));
+    } else if (/\.ya?ml$/.test(entry.name)) {
+      files.push(join(path, entry.name));
+    }
+  }
+  if (!files.length) throw new Error(`no suite YAML files found under ${path}`);
+  return files.sort();
+}
+
+/** --setup default: a setup-sandbox.sh sitting next to the suite YAML. */
+function defaultSetupFor(suiteFile: string): string | undefined {
+  const candidate = join(dirname(suiteFile), 'setup-sandbox.sh');
+  return existsSync(candidate) ? `sh ${candidate}` : undefined;
 }
 
 const program = new Command();
@@ -101,12 +166,27 @@ program
   .name('hitrate')
   .description(
     "Measure how well AI agents use your MCP server's tools — then fix the descriptions and prove it.",
+  )
+  .addHelpText(
+    'after',
+    `
+Examples:
+  $ hitrate measure ./scenarios                        measure every suite, N=5 each
+  $ hitrate measure scenarios/sqlite/sqlite.yaml -n 1  quick smoke run (not reportable)
+  $ hitrate optimize scenarios/sqlite/sqlite.yaml --rounds 2
+                                                       baseline → rewrite → re-measure
+  $ hitrate report results/a.json results/b.json -o diff.md
+  $ hitrate proxy --overrides best.json -- npx -y @modelcontextprotocol/server-filesystem /data
+                                                       serve rewritten descriptions live
+
+  A setup-sandbox.sh next to a suite YAML is run automatically before every run.
+  Models: Anthropic ids use ANTHROPIC_API_KEY; accounts/fireworks/... ids use FIREWORKS_API_KEY.`,
   );
 
 program
   .command('measure')
-  .description('Run a scenario suite against its target MCP server, N runs each')
-  .argument('<suite>', 'path to a scenario suite YAML file')
+  .description('Run scenario suite(s) against their target MCP servers, N runs each')
+  .argument('<suite>', 'suite YAML file, or a directory of suites (e.g. ./scenarios)')
   .option('-n, --runs <n>', 'runs per scenario (report floor is 5)', '5')
   .option('-m, --model <id>', 'agent model', DEFAULT_AGENT_MODEL)
   .option('-s, --setup <cmd>', 'shell command run before every run (sandbox reset)')
@@ -120,34 +200,42 @@ program
   .option('--price-in <usd>', 'USD per MTok input for unpriced models (activates budget guard)')
   .option('--price-out <usd>', 'USD per MTok output for unpriced models')
   .action(async (suitePath: string, opts) => {
-    const suite = loadSuite(suitePath);
     applyCustomPricing(opts.model, opts.priceIn, opts.priceOut);
     const runs = Number(opts.runs);
     if (runs < 5) {
       console.warn(
-        `⚠ runs=${runs} is below the N=5 reporting floor — fine for smoke tests, do not record these numbers.`,
+        yellow(
+          `⚠ runs=${runs} is below the N=5 reporting floor — fine for smoke tests, do not record these numbers.`,
+        ),
       );
     }
     const overrides = opts.overrides
       ? (JSON.parse(readFileSync(opts.overrides, 'utf8')) as Record<string, string>)
       : undefined;
-
     warnIfUnpriced(opts.model);
-    const result = await measureSuite(suite, {
-      client: makeClient(opts.model),
-      model: opts.model,
-      runs,
-      ...(opts.setup ? { setupCommand: opts.setup } : {}),
-      budgetUsd: Number(opts.budget),
-      ...(overrides ? { descriptionOverrides: overrides } : {}),
-      maxIterations: Number(opts.maxIterations),
-      onProgress: (m) => console.log(`  ${m}`),
-    });
 
-    printSummary(result);
-    const file = saveResult(result, opts.label);
-    console.log(`\nsaved: ${file}`);
-    if (result.aborted) process.exitCode = 2;
+    const files = suiteFilesFor(suitePath);
+    for (const file of files) {
+      const suite = loadSuite(file);
+      const setup = opts.setup ?? defaultSetupFor(file);
+      if (files.length > 1) console.log(bold(`\n━━ ${suite.suite} (${file}) ━━`));
+      if (!opts.setup && setup) console.log(dim(`  setup: ${setup}`));
+
+      const result = await measureSuite(suite, {
+        client: makeClient(opts.model),
+        model: opts.model,
+        runs,
+        ...(setup ? { setupCommand: setup } : {}),
+        budgetUsd: Number(opts.budget),
+        ...(overrides ? { descriptionOverrides: overrides } : {}),
+        maxIterations: Number(opts.maxIterations),
+        onProgress: (m) => console.log(`  ${colorProgress(m)}`),
+      });
+
+      printSummary(result);
+      console.log(`\nsaved: ${saveResult(result, opts.label)}`);
+      if (result.aborted) process.exitCode = 2;
+    }
   });
 
 program
@@ -173,13 +261,15 @@ program
     const budgetUsd = Number(opts.budget);
     warnIfUnpriced(opts.model);
     warnIfUnpriced(opts.rewriter);
+    const setup = opts.setup ?? defaultSetupFor(suitePath);
+    if (!opts.setup && setup) console.log(dim(`setup: ${setup}`));
     const common = {
       client: makeClient(opts.model),
       model: opts.model as string,
       runs,
-      ...(opts.setup ? { setupCommand: opts.setup } : {}),
+      ...(setup ? { setupCommand: setup } : {}),
       maxIterations: Number(opts.maxIterations),
-      onProgress: (m: string) => console.log(`  ${m}`),
+      onProgress: (m: string) => console.log(`  ${colorProgress(m)}`),
     };
 
     // 1. baseline
