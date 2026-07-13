@@ -41,3 +41,16 @@ describe('formatUsd', () => {
     expect(formatUsd(null)).toBe('unknown (no pricing data)');
   });
 });
+
+describe('registerPricing', () => {
+  it('activates estimates for otherwise-unpriced models', async () => {
+    const { registerPricing, estimateCostUsd: est } = await import(
+      '../src/harness/cost.js'
+    );
+    expect(est('accounts/fireworks/models/x', { inputTokens: 1e6, outputTokens: 0 })).toBeNull();
+    registerPricing('accounts/fireworks/models/x', { input: 0.15, output: 0.6 });
+    expect(
+      est('accounts/fireworks/models/x', { inputTokens: 1_000_000, outputTokens: 1_000_000 }),
+    ).toBeCloseTo(0.75, 10);
+  });
+});

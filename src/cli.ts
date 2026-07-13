@@ -7,7 +7,7 @@ import { measureSuite, type MeasureResult } from './harness/runner.js';
 import { McpTarget } from './harness/target.js';
 import { FireworksClient } from './harness/fireworks.js';
 import type { MessageCreator } from './harness/agent.js';
-import { estimateCostUsd, formatUsd } from './harness/cost.js';
+import { estimateCostUsd, formatUsd, registerPricing } from './harness/cost.js';
 import { saveResult, type SavedResult } from './report/results.js';
 import { diffReport } from './report/diff.js';
 import {
@@ -34,9 +34,25 @@ function makeClient(model: string): MessageCreator {
 function warnIfUnpriced(model: string): void {
   if (estimateCostUsd(model, { inputTokens: 1, outputTokens: 1 }) === null) {
     console.warn(
-      `⚠ no pricing data for "${model}" — cost estimates unavailable and the USD budget guard is INACTIVE for this run.`,
+      `⚠ no pricing data for "${model}" — cost estimates unavailable and the USD budget guard is INACTIVE for this run. Pass --price-in/--price-out (USD per MTok) to activate it.`,
     );
   }
+}
+
+/** Wire --price-in/--price-out into the pricing registry for a model. */
+function applyCustomPricing(
+  model: string,
+  priceIn?: string,
+  priceOut?: string,
+): void {
+  if (priceIn === undefined && priceOut === undefined) return;
+  if (priceIn === undefined || priceOut === undefined) {
+    throw new Error('--price-in and --price-out must be given together');
+  }
+  registerPricing(model, {
+    input: Number(priceIn),
+    output: Number(priceOut),
+  });
 }
 
 const DEFAULT_AGENT_MODEL =
@@ -93,8 +109,11 @@ program
   )
   .option('--label <label>', 'label for the saved result file', 'baseline')
   .option('--max-iterations <n>', 'agent loop iteration cap', '6')
+  .option('--price-in <usd>', 'USD per MTok input for unpriced models (activates budget guard)')
+  .option('--price-out <usd>', 'USD per MTok output for unpriced models')
   .action(async (suitePath: string, opts) => {
     const suite = loadSuite(suitePath);
+    applyCustomPricing(opts.model, opts.priceIn, opts.priceOut);
     const runs = Number(opts.runs);
     if (runs < 5) {
       console.warn(
@@ -136,8 +155,11 @@ program
   .option('-b, --budget <usd>', 'hard cost ceiling in USD (whole loop)', DEFAULT_BUDGET_USD)
   .option('--baseline <file>', 'reuse a saved baseline result JSON instead of re-measuring')
   .option('--max-iterations <n>', 'agent loop iteration cap', '6')
+  .option('--price-in <usd>', 'USD per MTok input for unpriced agent models (activates budget guard)')
+  .option('--price-out <usd>', 'USD per MTok output for unpriced agent models')
   .action(async (suitePath: string, opts) => {
     const suite = loadSuite(suitePath);
+    applyCustomPricing(opts.model, opts.priceIn, opts.priceOut);
     const runs = Number(opts.runs);
     const budgetUsd = Number(opts.budget);
     warnIfUnpriced(opts.model);

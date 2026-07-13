@@ -13,7 +13,19 @@ const PRICING_PER_MTOK: Record<string, { input: number; output: number }> = {
   'claude-fable-5': { input: 10, output: 50 },
 };
 
+/** Runtime-registered pricing (e.g. --price-in/--price-out for open models
+ * whose rates we refuse to hardcode). Takes precedence over the built-ins. */
+const CUSTOM_PRICING: Record<string, { input: number; output: number }> = {};
+
+export function registerPricing(
+  model: string,
+  perMTok: { input: number; output: number },
+): void {
+  CUSTOM_PRICING[model] = perMTok;
+}
+
 function pricingFor(model: string): { input: number; output: number } | null {
+  if (CUSTOM_PRICING[model]) return CUSTOM_PRICING[model];
   if (PRICING_PER_MTOK[model]) return PRICING_PER_MTOK[model];
   // date-suffixed ids (claude-haiku-4-5-20251001) share the base model's pricing
   const base = Object.keys(PRICING_PER_MTOK).find((id) =>
