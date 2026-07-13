@@ -139,6 +139,9 @@ This file is the single source of truth for Claude Code sessions on this project
 | Date | Server | Scenarios | Baseline hit rate | Optimized hit rate | Δ | Cost |
 |------|--------|-----------|-------------------|--------------------|---|------|
 | 2026-07-13 | @modelcontextprotocol/server-filesystem | 18 × N=5 | 94.4% | 96.7% | +2.2 pts | ~$0 (Fireworks credits; pricing untracked) |
+| 2026-07-13 | @modelcontextprotocol/server-filesystem (Haiku 4.5 + Sonnet 5, canonical stack) | 18 × N=5 | 94.4% | 94.4% | +0.0 pts | ~$1.95 |
+
+**2026-07-13 Haiku 4.5 re-validation (canonical stack, streaming fix in place):** strict success 84.4% → 86.7% (**+2.2 pts**, round 1 kept; round 2 regressed and was discarded by the B3 loop). Hit rate flat at 94.4%. Cross-model insight: Haiku's *baseline* (84.4%) ≈ gpt-oss-120b's *optimized* score — more capable agents are less sensitive to bad descriptions, so the value of optimization scales inversely with agent quality. Both models improved, no regression ever shipped. Best Haiku overrides: `results/2026-07-13T01-55-41-filesystem-overrides-r1.json`.
 
 **2026-07-13 detail (agent: gpt-oss-120b on Fireworks — NOT Haiku, see caveat):** strict success 74.4% → 84.4% (**+10.0 pts**), extra-call rate 25.6% → 15.6% (−10.0 pts), arg correctness 100% → 100%. Hit rate was ceiling-limited: baseline already 94.4%, max possible Δ was +5.6 pts. The one wrong-tool scenario (compare-two-configs) went 0% → 40% hit. Caveat: run on an open model because both Anthropic accounts had no credit; re-validate on Haiku 4.5 before publishing. Full data: `results/2026-07-12T14-*`.
 
