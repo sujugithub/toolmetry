@@ -1,0 +1,59 @@
+# Scenario suite for mcp-server-sqlite (official, Python/uvx). Confusable
+# cluster (dumped live 2026-07-13): read_query / write_query / create_table all
+# take a single `query` param — the split is by SQL verb, which the agent must
+# infer from the descriptions. Plus list_tables vs describe_table.
+#
+# setup-sandbox.sh recreates /tmp/hitrate-sqlite.db before each run:
+# users(id,name,email) x3 rows, orders(id,user_id,total) x3 rows.
+suite: sqlite
+description: >
+  Tool-selection scenarios for the official sqlite MCP server, targeting the
+  SQL-verb tool split and the schema-inspection pair.
+server:
+  command: uvx
+  args: ["mcp-server-sqlite", "--db-path", "/tmp/hitrate-sqlite.db"]
+scenarios:
+  # --- read_query -----------------------------------------------------------
+  - id: count-rows
+    prompt: How many users are in the database?
+    expected_tool: read_query
+  - id: aggregate-query
+    prompt: What's the largest order total in the database?
+    expected_tool: read_query
+  - id: join-query
+    prompt: Which user placed the order with id 1? Give me their name.
+    expected_tool: read_query
+    max_calls: 2 # may inspect schema first
+  # --- write_query ----------------------------------------------------------
+  - id: insert-row
+    prompt: Add a new user named Dave with email dave@example.com.
+    expected_tool: write_query
+    max_calls: 2 # may inspect schema first
+  - id: update-row
+    prompt: Change Alice's email to alice@newcorp.com in the users table.
+    expected_tool: write_query
+    max_calls: 2
+  - id: delete-row
+    prompt: Delete the order with id 2.
+    expected_tool: write_query
+  # --- create_table ---------------------------------------------------------
+  - id: new-table
+    prompt: >
+      Create a new table called products with columns id (integer primary
+      key), name (text), and price (real).
+    expected_tool: create_table
+  # --- schema inspection ----------------------------------------------------
+  - id: what-tables
+    prompt: What tables exist in this database?
+    expected_tool: list_tables
+  - id: table-schema
+    prompt: What columns does the users table have?
+    expected_tool: describe_table
+    expected_args:
+      table_name: users
+  # --- memo -----------------------------------------------------------------
+  - id: record-insight
+    prompt: >
+      Note down this business insight for the memo: repeat customers spend
+      three times more than new ones.
+    expected_tool: append_insight

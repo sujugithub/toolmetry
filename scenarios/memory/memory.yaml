@@ -1,0 +1,66 @@
+# Scenario suite for @modelcontextprotocol/server-memory (official knowledge-graph
+# memory server). Confusable clusters (dumped live 2026-07-13 via
+# scripts/inspect-tools.mts):
+#   write:  create_entities / add_observations / create_relations
+#   read:   read_graph / search_nodes / open_nodes
+#   delete: delete_entities / delete_observations / delete_relations
+#
+# setup-sandbox.sh seeds /tmp/hitrate-memory.json before each run.
+suite: memory
+description: >
+  Tool-selection scenarios for the official memory MCP server, targeting the
+  create-vs-add, search-vs-open, and delete-granularity confusions.
+server:
+  command: npx
+  args: ["-y", "@modelcontextprotocol/server-memory"]
+  env:
+    MEMORY_FILE_PATH: /tmp/hitrate-memory.json
+scenarios:
+  # --- write cluster --------------------------------------------------------
+  - id: remember-new-person
+    prompt: Remember that Carol is a designer.
+    expected_tool: create_entities
+  - id: add-fact-to-existing
+    prompt: >
+      You already know Alice. Add to your memory that she recently got
+      promoted to staff engineer.
+    expected_tool: add_observations
+  - id: link-two-entities
+    prompt: Record that Bob works on Project Phoenix.
+    expected_tool: create_relations
+  - id: track-new-project
+    prompt: Start tracking a new project called Atlas — it's a mobile app rewrite.
+    expected_tool: create_entities
+  # --- read cluster ---------------------------------------------------------
+  - id: search-by-topic
+    prompt: Search your memory for anything related to engineers.
+    expected_tool: search_nodes
+  - id: lookup-named-entities
+    prompt: Tell me everything you have stored about Alice and Bob.
+    expected_tool: open_nodes
+    expected_args:
+      names: [Alice, Bob]
+  - id: lookup-one-entity
+    prompt: What do you know about Acme Corp?
+    expected_tool: open_nodes
+    expected_args:
+      names: [Acme Corp]
+  - id: dump-whole-graph
+    prompt: Show me your entire memory graph — everything you know.
+    expected_tool: read_graph
+  # --- delete cluster -------------------------------------------------------
+  - id: forget-entity-entirely
+    prompt: Forget everything about Bob — remove him from your memory completely.
+    expected_tool: delete_entities
+    expected_args:
+      entityNames: [Bob]
+  - id: remove-single-fact
+    prompt: >
+      Alice no longer likes coffee. Remove just that one observation about
+      her, keep the rest.
+    expected_tool: delete_observations
+  - id: remove-relationship
+    prompt: >
+      Alice no longer leads Project Phoenix. Remove that relationship but keep
+      both Alice and the project in memory.
+    expected_tool: delete_relations

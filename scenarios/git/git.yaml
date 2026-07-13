@@ -1,0 +1,98 @@
+# Scenario suite for mcp-server-git (official, Python/uvx). Confusable clusters
+# (dumped live 2026-07-13 via scripts/inspect-tools.mts):
+#   diff:    git_diff_unstaged / git_diff_staged / git_diff (branch/commit)
+#   inspect: git_status / git_log / git_show / git_branch
+#   mutate:  git_add / git_commit / git_reset
+#   branch:  git_branch / git_create_branch / git_checkout
+#
+# setup-sandbox.sh recreates /tmp/hitrate-git-sandbox before each run:
+# main (3 commits) + feature/login branch, one staged change (config.txt),
+# one unstaged change (app.txt), one untracked file (notes.txt).
+suite: git
+description: >
+  Tool-selection scenarios for the official git MCP server, targeting the
+  three-way diff confusion and the staging-area verbs.
+server:
+  command: uvx
+  args: ["mcp-server-git", "--repository", "/tmp/hitrate-git-sandbox"]
+scenarios:
+  - id: working-tree-status
+    prompt: What's the current status of the repo at /tmp/hitrate-git-sandbox?
+    expected_tool: git_status
+    expected_args:
+      repo_path: /tmp/hitrate-git-sandbox
+  # --- diff cluster ---------------------------------------------------------
+  - id: diff-unstaged
+    prompt: >
+      Show me the changes in /tmp/hitrate-git-sandbox that I haven't staged
+      yet.
+    expected_tool: git_diff_unstaged
+    expected_args:
+      repo_path: /tmp/hitrate-git-sandbox
+  - id: diff-staged
+    prompt: >
+      Show me the diff of exactly what's currently staged for the next commit
+      in /tmp/hitrate-git-sandbox.
+    expected_tool: git_diff_staged
+    expected_args:
+      repo_path: /tmp/hitrate-git-sandbox
+  - id: diff-against-branch
+    prompt: >
+      In /tmp/hitrate-git-sandbox, show how the current branch differs from
+      the feature/login branch.
+    expected_tool: git_diff
+    expected_args:
+      repo_path: /tmp/hitrate-git-sandbox
+      target: feature/login
+  # --- history cluster ------------------------------------------------------
+  - id: recent-history
+    prompt: Show me the last 3 commits in /tmp/hitrate-git-sandbox.
+    expected_tool: git_log
+    expected_args:
+      repo_path: /tmp/hitrate-git-sandbox
+      max_count: 3
+  - id: show-latest-commit
+    prompt: >
+      What exactly did the most recent commit in /tmp/hitrate-git-sandbox
+      change? Show its contents.
+    expected_tool: git_show
+    expected_args:
+      repo_path: /tmp/hitrate-git-sandbox
+  # --- staging cluster ------------------------------------------------------
+  - id: stage-one-file
+    prompt: Stage the file notes.txt in /tmp/hitrate-git-sandbox.
+    expected_tool: git_add
+    expected_args:
+      repo_path: /tmp/hitrate-git-sandbox
+      files: [notes.txt]
+  - id: commit-staged
+    prompt: >
+      Commit whatever is currently staged in /tmp/hitrate-git-sandbox with
+      the message "update config".
+    expected_tool: git_commit
+    expected_args:
+      repo_path: /tmp/hitrate-git-sandbox
+      message: update config
+  - id: unstage-everything
+    prompt: Unstage all the changes I've staged in /tmp/hitrate-git-sandbox.
+    expected_tool: git_reset
+    expected_args:
+      repo_path: /tmp/hitrate-git-sandbox
+  # --- branch cluster -------------------------------------------------------
+  - id: create-branch
+    prompt: Create a new branch called hotfix in /tmp/hitrate-git-sandbox.
+    expected_tool: git_create_branch
+    expected_args:
+      repo_path: /tmp/hitrate-git-sandbox
+      branch_name: hotfix
+  - id: switch-branch
+    prompt: Switch /tmp/hitrate-git-sandbox to the feature/login branch.
+    expected_tool: git_checkout
+    expected_args:
+      repo_path: /tmp/hitrate-git-sandbox
+      branch_name: feature/login
+  - id: list-branches
+    prompt: What branches exist in /tmp/hitrate-git-sandbox?
+    expected_tool: git_branch
+    expected_args:
+      repo_path: /tmp/hitrate-git-sandbox
