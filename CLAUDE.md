@@ -81,13 +81,13 @@ This file is the single source of truth for Claude Code sessions on this project
 
 ## 4. Product Backlog (ordered)
 
-### EPIC A — Proof of Concept *(Sprint 1 — decision gate)*
-- [ ] **A1 (3)** Scenario schema + loader: YAML with `prompt`, `expected_tool`, `expected_args` (partial match), `max_calls`; zod-validated with helpful errors
-- [ ] **A2 (5)** Measurement harness: spawn target MCP server, run agent loop via Anthropic API with server's tools, capture actual tool calls, N-run sampling
-- [ ] **A3 (2)** Metrics: hit rate, argument correctness, extra-call rate per scenario + aggregate
-- [ ] **A4 (5)** Optimizer v0: feed failing scenarios + current tool descriptions to Claude → diagnosis + rewritten descriptions → patch server tool list (in-memory override) → re-measure
-- [ ] **A5 (2)** Pick 1 popular open-source MCP server (overlapping/confusable tools preferred); write 15–20 scenarios for it
-- [ ] **A6 (1)** Baseline vs optimized report (markdown table, per-scenario diff)
+### EPIC A — Proof of Concept *(Sprint 1 — DONE, gate passed on strict success)*
+- [x] **A1 (3)** Scenario schema + loader: YAML with `prompt`, `expected_tool`, `expected_args` (partial match), `max_calls`; zod-validated with helpful errors
+- [x] **A2 (5)** Measurement harness: spawn target MCP server, run agent loop via Anthropic API with server's tools, capture actual tool calls, N-run sampling (+ Fireworks provider adapter, unplanned)
+- [x] **A3 (2)** Metrics: hit rate, argument correctness, extra-call rate per scenario + aggregate
+- [x] **A4 (5)** Optimizer v0: feed failing scenarios + current tool descriptions to Claude → diagnosis + rewritten descriptions → patch server tool list (in-memory override) → re-measure
+- [x] **A5 (2)** Pick 1 popular open-source MCP server (overlapping/confusable tools preferred); write 15–20 scenarios for it
+- [x] **A6 (1)** Baseline vs optimized report (markdown table, per-scenario diff)
 
 ### EPIC B — Repeatability & Dataset *(Sprints 2–3)*
 - [ ] **B1 (3)** Description override without forking target server (proxy layer that rewrites `tools/list` responses)
@@ -109,13 +109,11 @@ This file is the single source of truth for Claude Code sessions on this project
 
 ## 5. Current Sprint
 
-**Sprint 1 — Goal:** *Answer the kill question: can rewriting descriptions alone lift hit rate ≥10 points on one real MCP server?*
+**Sprint 2 — Goal:** *Make the optimizer repeatable and usable without our harness: proxy-based description overrides, multi-round convergence, real cost guard.*
 
-**Committed:** A5 → A1 → A2 → A3 → A4 → A6 (18 pts)
+**Committed:** B1 (3) → B4 (2) → B3 (3) = 8 pts. Stretch: start B2 (scenario suites for 2–3 more servers).
 
-**Decision gate at Sprint Review:**
-- Delta ≥ +10 pts → proceed to Epic B
-- Delta < +10 pts → retro, one pivot attempt on methodology, else kill and document findings publicly (the write-up still has portfolio value)
+**Sprint 1 outcome (gate PASSED, PO-ratified 2026-07-13):** strict success +10.0 pts (74.4% → 84.4%) on the filesystem server counts as passing the ≥10-pt gate; hit rate alone was ceiling-limited (94.4% baseline, +2.2 pts). PO decision: the headline metric going forward is **strict success**, with hit rate reported alongside. See §7 for data, §8 for retro.
 
 ---
 
@@ -123,18 +121,15 @@ This file is the single source of truth for Claude Code sessions on this project
 
 | ID | Story | Status | Notes |
 |----|-------|--------|-------|
-| A5 | Target server + scenarios | Done | `@modelcontextprotocol/server-filesystem`, 18 scenarios + `setup-sandbox.sh` fixture reset |
-| A1 | Scenario schema | Done | zod strict, kebab-case ids, partial-match args |
-| A2 | Harness | Done | `McpTarget` + manual tool-use loop + N-run runner + budget guard; integration-tested vs fixture server with a scripted model client |
-| A3 | Metrics | Done | hit rate / arg correctness / extra-call rate / strict success |
-| A4 | Optimizer v0 | Done (code) | Sonnet 5 rewriter, forced structured output, hallucinated tool names dropped; **live E2E not yet run — blocked on API key** |
-| A6 | Report | Done | markdown before/after diff, headline hit-rate delta; `hitrate report <a.json> <b.json>` |
+| B1 | tools/list rewrite proxy | Done | `hitrate proxy --overrides o.json -- <cmd…>`; integration-tested via nested MCP spawn |
+| B4 | Cost tracking + per-run budget guard | Done | `--price-in/--price-out` activates the guard for any model |
+| B3 | Multi-round optimization + convergence | Done (code) | keep-best loop, regression discard; live 2-round validation running |
+| B2 | 5–10 popular servers (stretch) | To Do | scenario suites are the time sink; graphify per server (§10) — **graphify CLI not installed on this machine** (`uv tool install graphifyy && graphify install` per §10) |
 
-**Blocked/decisions needed (PO calls for next session):**
-1. **Decision gate:** hit-rate Δ was +2.2 pts (< +10 gate) but ceiling-limited (baseline 94.4%); strict success Δ was exactly +10.0 pts. Does strict success count as passing → Epic B, or do we run the methodology pivot (harder scenarios / weaker agent) first?
-2. Anthropic key valid but $0 credit; run executed on Fireworks (gpt-oss-120b agent, kimi-k2p6 rewriter) via the provider adapter. Re-validate on Haiku 4.5 once credit exists (`-m claude-haiku-4-5`, same command).
-3. Ratify: sandbox reset as CLI flag (`--setup <cmd>`) rather than a scenario-schema field (working agreement #2).
-4. Both API keys were pasted in chat — rotate them (Anthropic console / fireworks.ai) before publishing anything.
+**Blocked/decisions needed:**
+- Re-validate Sprint 1 numbers on Haiku 4.5 once Anthropic credit exists (`-m claude-haiku-4-5`, same command).
+- Rotate both API keys (pasted in chat) before publishing anything.
+- PO to ratify (carried over): sandbox reset as CLI flag (`--setup <cmd>`) rather than a scenario-schema field.
 
 ---
 
