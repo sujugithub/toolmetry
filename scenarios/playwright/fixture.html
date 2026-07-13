@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Toolmetry Playwright Fixture</title>
+</head>
+<body>
+<h1>Welcome</h1>
+<p id="status">Loading complete</p>
+
+<input id="search" type="search" placeholder="Search products" aria-label="Search products">
+
+<form id="login">
+  <label>Username <input id="username" name="username" type="text"></label>
+  <label>Password <input id="password" name="password" type="password"></label>
+  <label>Country
+    <select id="country" name="country">
+      <option value="us">United States</option>
+      <option value="ca">Canada</option>
+      <option value="uk">United Kingdom</option>
+    </select>
+  </label>
+  <button id="submit" type="button">Sign in</button>
+</form>
+
+<input id="file" type="file" aria-label="Upload document">
+<span id="help" title="Help">?</span>
+<a id="about" href="about.html">About</a>
+
+<script>
+  // emit a console message + a network request so those scenarios have data
+  console.log("fixture ready");
+  fetch("data:application/json,{}").catch(() => {});
+</script>
+</body>
+</html>

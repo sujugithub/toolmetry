@@ -1,0 +1,133 @@
+# Scenario suite for @playwright/mcp (official Playwright MCP server). Confusable
+# clusters (dumped live 2026-07-13 via scripts/inspect-tools.mts — 24 tools):
+#   see-page: browser_snapshot (structure, for actions) / browser_take_screenshot
+#             (visual image, can't act on) / browser_find (locate one element cheaply)
+#   input:    browser_type (one field) / browser_fill_form (many fields) /
+#             browser_press_key (a keypress) / browser_select_option (dropdown)
+#   nav:      browser_navigate / browser_navigate_back
+#   network:  browser_network_requests (list) / browser_network_request (one, by index)
+#   code:     browser_evaluate (expression) / browser_run_code_unsafe (arbitrary snippet)
+#
+# setup-sandbox.sh writes the fixture to /tmp/toolmetry-playwright/fixture.html.
+# Browser state is in-memory; interaction scenarios re-navigate to reset the page.
+suite: playwright
+description: >
+  Tool-selection scenarios for the official Playwright MCP server, targeting the
+  see-page (snapshot/screenshot/find) and input (type/fill_form/select) clusters
+  where agents most often pick the wrong browser tool.
+server:
+  command: npx
+  args: ["@playwright/mcp@latest", "--headless", "--isolated"]
+scenarios:
+  # --- see-page cluster -----------------------------------------------------
+  - id: snapshot-for-actions
+    prompt: >
+      Open file:///tmp/toolmetry-playwright/fixture.html, then capture the page
+      so you have element references you can click and type into.
+    expected_tool: browser_snapshot
+    max_calls: 2
+  - id: screenshot-visual
+    prompt: >
+      Open file:///tmp/toolmetry-playwright/fixture.html and save a screenshot
+      image of it to home.png.
+    expected_tool: browser_take_screenshot
+    max_calls: 2
+  - id: find-one-element
+    prompt: >
+      On file:///tmp/toolmetry-playwright/fixture.html, locate the element
+      containing the text "Sign in" — I just need to find it, not dump the
+      whole page.
+    expected_tool: browser_find
+    max_calls: 2
+  # --- navigation cluster ---------------------------------------------------
+  - id: navigate-url
+    prompt: Open the page at file:///tmp/toolmetry-playwright/fixture.html
+    expected_tool: browser_navigate
+    expected_args:
+      url: file:///tmp/toolmetry-playwright/fixture.html
+    max_calls: 1
+  - id: navigate-back
+    prompt: Go back to the previous page in the browser history.
+    expected_tool: browser_navigate_back
+    max_calls: 1
+  # --- input cluster --------------------------------------------------------
+  - id: type-single-field
+    prompt: >
+      On file:///tmp/toolmetry-playwright/fixture.html, type "laptop" into the
+      search box.
+    expected_tool: browser_type
+    expected_args:
+      text: laptop
+    max_calls: 3
+  - id: fill-login-form
+    prompt: >
+      On file:///tmp/toolmetry-playwright/fixture.html, fill in the login form:
+      username "alice" and password "hunter2".
+    expected_tool: browser_fill_form
+    max_calls: 3
+  - id: select-dropdown
+    prompt: >
+      On file:///tmp/toolmetry-playwright/fixture.html, choose "Canada" in the
+      country dropdown.
+    expected_tool: browser_select_option
+    max_calls: 3
+  - id: press-enter
+    prompt: >
+      On file:///tmp/toolmetry-playwright/fixture.html, press the Enter key.
+    expected_tool: browser_press_key
+    max_calls: 3
+  - id: click-button
+    prompt: >
+      On file:///tmp/toolmetry-playwright/fixture.html, click the "Sign in"
+      button.
+    expected_tool: browser_click
+    max_calls: 3
+  - id: hover-element
+    prompt: >
+      On file:///tmp/toolmetry-playwright/fixture.html, hover over the help "?"
+      icon.
+    expected_tool: browser_hover
+    max_calls: 3
+  # --- network cluster ------------------------------------------------------
+  - id: network-list
+    prompt: Show me all the network requests this page has made.
+    expected_tool: browser_network_requests
+    max_calls: 2
+  - id: network-detail
+    prompt: >
+      Get the full headers and body of network request number 2.
+    expected_tool: browser_network_request
+    expected_args:
+      index: 2
+    max_calls: 2
+  # --- diagnostics ----------------------------------------------------------
+  - id: console-messages
+    prompt: Show me the browser console log messages for this page.
+    expected_tool: browser_console_messages
+    max_calls: 2
+  - id: wait-for-text
+    prompt: >
+      On file:///tmp/toolmetry-playwright/fixture.html, wait until the text
+      "Loading complete" appears.
+    expected_tool: browser_wait_for
+    expected_args:
+      text: Loading complete
+    max_calls: 2
+  # --- misc -----------------------------------------------------------------
+  - id: resize-window
+    prompt: Resize the browser window to 1024 by 768.
+    expected_tool: browser_resize
+    expected_args:
+      width: 1024
+      height: 768
+    max_calls: 1
+  - id: evaluate-expression
+    prompt: >
+      Evaluate the JavaScript expression document.title on the current page and
+      tell me the result.
+    expected_tool: browser_evaluate
+    max_calls: 2
+  - id: list-tabs
+    prompt: List the browser tabs that are currently open.
+    expected_tool: browser_tabs
+    max_calls: 1
