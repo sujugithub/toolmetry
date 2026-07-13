@@ -8,7 +8,7 @@
     "node": ">=20"
   },
   "bin": {
-    "toolmetry": "./dist/cli.js"
+    "toolmetry": "dist/cli.js"
   },
   "scripts": {
     "build": "tsc",
