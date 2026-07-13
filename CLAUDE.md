@@ -29,8 +29,8 @@ This file is the single source of truth for Claude Code sessions on this project
 
 | Scrum element | How we run it |
 |---|---|
-| **Product Owner** | Aryan — owns backlog priority, accepts/rejects stories |
-| **Developers** | Aryan + Claude Code (pair) |
+| **Product Owner** | Sujay — owns backlog priority, accepts/rejects stories |
+| **Developers** | Sujay + Claude Code (pair) |
 | **Sprint length** | 1 week (Mon–Sun), ~20 hrs capacity |
 | **Sprint Planning** | First Claude Code session of the week: pick Sprint Goal + backlog items into the Sprint Backlog (§6) |
 | **Daily Scrum** | Start of every session: Claude reads §6, states what's done / next / blocked in one short summary before coding |

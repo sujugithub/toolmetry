@@ -9,7 +9,7 @@ mkdir -p "$SB/mystery" "$SB/archive" "$SB/logs" "$SB/assets" "$SB/config" "$SB/s
 
 cat > "$SB/notes.txt" <<'EOF'
 # Meeting notes
-author: aryan
+author: sujay
 status: draft
 Discussed the Q3 roadmap and the launch checklist.
 Next step is to finalize the copy.
