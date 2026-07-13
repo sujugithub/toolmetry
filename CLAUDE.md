@@ -97,10 +97,10 @@ This file is the single source of truth for Claude Code sessions on this project
 - [x] **B4 (2)** Cost tracking + budget guard per optimization run
 
 ### EPIC C — Public Release *(Sprint 4)*
-- [ ] **C1 (3)** Polish CLI: `npx hitrate measure ./scenarios`, `npx hitrate optimize`, good `--help`, pretty terminal output
-- [ ] **C2 (2)** README with quickstart GIF, results table, honest limitations
-- [ ] **C3 (3)** Landing page (your design skills = our unfair advantage)
-- [ ] **C4 (2)** Launch post draft: "I rewrote the tool descriptions of 10 popular MCP servers — before/after hit rates"
+- [x] **C1 (3)** Polish CLI: `npx hitrate measure ./scenarios`, `npx hitrate optimize`, good `--help`, pretty terminal output
+- [x] **C2 (2)** README with quickstart GIF, results table, honest limitations
+- [x] **C3 (3)** Landing page (your design skills = our unfair advantage)
+- [x] **C4 (2)** Launch post draft: "I rewrote the tool descriptions of 10 popular MCP servers — before/after hit rates"
 - [ ] **C5 (2)** PRs to 2–3 measured servers with eval data attached
 
 ### EPIC D — Post-signal (do NOT start before real users)

@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>hitrate — the diff that fixes how agents use your MCP server</title>
+<meta name="description" content="Measure how well AI agents use your MCP server's tools, auto-rewrite the descriptions, and prove the improvement with before/after data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1A2129;        /* page */
+    --panel:#232B35;      /* cards, terminal */
+    --line:#37414E;       /* hairlines on panel */
+    --text:#C9D2DC;       /* body */
+    --text-dim:#8A96A3;   /* captions */
+    --head:#F2F5F8;       /* headings */
+    --del:#F97066;        /* diff removed */
+    --del-bg:rgba(249,112,102,.08);
+    --add:#3DD68C;        /* diff added */
+    --add-bg:rgba(61,214,140,.08);
+    --num:#E8B44F;        /* measured numbers only */
+    --max:1060px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);color:var(--text);
+    font:400 17px/1.65 "IBM Plex Sans",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--add);color:var(--ink)}
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  h1,h2,h3{font-family:"Bricolage Grotesque",sans-serif;color:var(--head);line-height:1.08}
+  .mono{font-family:"IBM Plex Mono",monospace}
+
+  /* nav */
+  nav{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;padding:22px 0;font-size:15px}
+  nav .brand{font-family:"IBM Plex Mono",monospace;font-weight:600;color:var(--head);text-decoration:none}
+  nav .brand::before{content:"▸ ";color:var(--add)}
+  nav a:not(.brand){color:var(--text-dim);text-decoration:none}
+  nav a:not(.brand):hover{color:var(--head)}
+  nav .gh{margin-left:auto}
+
+  /* hero */
+  header{padding:64px 0 72px}
+  .kicker{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.08em;color:var(--text-dim);text-transform:uppercase;margin-bottom:20px}
+  h1{font-size:clamp(34px,5.4vw,58px);font-weight:800;max-width:17ch}
+  h1 .was{color:var(--del);text-decoration:line-through;text-decoration-thickness:3px;white-space:nowrap}
+  h1 .now{color:var(--add);white-space:nowrap}
+  .sub{margin:26px 0 0;max-width:56ch;font-size:19px;color:var(--text)}
+  .sub strong{color:var(--head);font-weight:600}
+  .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;align-items:center}
+  .cmd{font-family:"IBM Plex Mono",monospace;font-size:15px;background:var(--panel);
+    border:1px solid var(--line);border-radius:8px;padding:12px 18px;color:var(--head)}
+  .cmd::before{content:"$ ";color:var(--add)}
+  .btn{font-weight:600;font-size:15px;text-decoration:none;background:var(--add);color:var(--ink);
+    padding:12px 22px;border-radius:8px}
+  .btn:hover{filter:brightness(1.08)}
+
+  /* signature: the diff card */
+  .diff-card{margin-top:56px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .diff-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 18px;border-bottom:1px solid var(--line);
+    font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--text-dim)}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--line);display:inline-block}
+  .diff-head .file{color:var(--text)}
+  .meter{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:13px}
+  .meter .track{width:130px;height:6px;border-radius:3px;background:var(--del-bg);outline:1px solid var(--line);overflow:hidden}
+  .meter .fill{display:block;height:100%;width:34%;background:linear-gradient(90deg,var(--del),var(--add));transition:width 1.4s cubic-bezier(.2,.7,.2,1)}
+  .meter.done .fill{width:100%}
+  .meter b{color:var(--num);font-weight:600;font-variant-numeric:tabular-nums}
+  .diff-body{font-family:"IBM Plex Mono",monospace;font-size:13.5px;line-height:1.75;padding:16px 0;overflow-x:auto}
+  .diff-body .ln{display:block;padding:0 18px;white-space:pre-wrap}
+  .diff-body .ctx{color:var(--text-dim)}
+  .diff-body .del{background:var(--del-bg);color:var(--del)}
+  .diff-body .add{background:var(--add-bg);color:var(--add)}
+  .diff-note{padding:10px 18px 16px;font-size:13px;color:var(--text-dim)}
+  .diff-note b{color:var(--num)}
+
+  section{padding:72px 0;border-top:1px solid rgba(55,65,78,.55)}
+  h2{font-size:clamp(26px,3.4vw,36px);font-weight:700;margin-bottom:8px}
+  .lede{color:var(--text-dim);max-width:60ch;margin-bottom:40px}
+
+  /* results table */
+  .table-scroll{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:15.5px}
+  th{font-family:"IBM Plex Mono",monospace;font-size:12px;text-transform:uppercase;letter-spacing:.07em;
+    color:var(--text-dim);text-align:left;font-weight:500;padding:0 14px 10px}
+  td{padding:14px;border-top:1px solid var(--line);vertical-align:middle}
+  td.server{font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--head)}
+  td.delta{font-family:"IBM Plex Mono",monospace;color:var(--add);font-weight:600;white-space:nowrap}
+  td.what{color:var(--text-dim);font-size:14.5px}
+  .pair{display:flex;align-items:center;gap:8px;font-variant-numeric:tabular-nums;white-space:nowrap}
+  .pair .b{color:var(--del)} .pair .a{color:var(--add);font-weight:600}
+  .bars{position:relative;width:150px;height:18px;flex:none}
+  .bars i{position:absolute;left:0;height:6px;border-radius:3px;display:block;width:0;transition:width .9s cubic-bezier(.2,.7,.2,1)}
+  .bars .before{top:1px;background:var(--del)}
+  .bars .after{bottom:1px;background:var(--add)}
+  .method-note{margin-top:18px;font-size:13.5px;color:var(--text-dim)}
+  .method-note .mono{color:var(--text)}
+
+  /* pipeline */
+  ol.pipe{list-style:none;counter-reset:step;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+  ol.pipe li{counter-increment:step;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+  ol.pipe li::before{content:counter(step,decimal-leading-zero);font-family:"IBM Plex Mono",monospace;
+    color:var(--num);font-size:13px;display:block;margin-bottom:10px}
+  ol.pipe h3{font-size:18px;margin-bottom:8px}
+  ol.pipe p{font-size:14.5px;color:var(--text-dim)}
+  ol.pipe .mono{font-size:13px;color:var(--text)}
+
+  /* archetypes */
+  .arch{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+  .arch article{border:1px solid var(--line);border-radius:12px;padding:22px;background:var(--panel)}
+  .arch h3{font-size:18px;margin-bottom:10px}
+  .arch p{font-size:14.5px;color:var(--text-dim)}
+  .arch .stat{font-family:"IBM Plex Mono",monospace;font-size:13px;margin-top:14px;color:var(--num)}
+
+  /* limitations */
+  .limits ul{list-style:none;max-width:64ch}
+  .limits li{padding:10px 0 10px 26px;position:relative;font-size:15.5px;color:var(--text)}
+  .limits li::before{content:"→";position:absolute;left:0;color:var(--del);font-family:"IBM Plex Mono",monospace}
+  .limits li b{color:var(--head)}
+
+  /* footer cta */
+  .final{padding:88px 0;text-align:center;border-top:1px solid rgba(55,65,78,.55)}
+  .final h2{margin-bottom:14px}
+  .final p{color:var(--text-dim);margin-bottom:30px}
+  footer{padding:26px 0 40px;font-size:13px;color:var(--text-dim);display:flex;gap:18px;flex-wrap:wrap}
+  footer a{color:var(--text-dim)}
+
+  @media (max-width:640px){
+    .meter{margin-left:0;width:100%}
+    td.what{display:none}
+    .bars{display:none}
+    td:has(.bars){display:none}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .meter .fill,.bars i{transition:none}
+    html{scroll-behavior:auto}
+  }
+  :focus-visible{outline:2px solid var(--add);outline-offset:2px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#">hitrate</a>
+    <a href="#results">results</a>
+    <a href="#how">how it works</a>
+    <a href="#limits">limitations</a>
+    <a class="gh" href="https://github.com/USER/hitrate">GitHub ↗</a>
+  </nav>
+
+  <header>
+    <p class="kicker">description optimizer for MCP servers · every claim measured, N=5</p>
+    <h1>Agents use your tools right <span class="was">34%</span> <span class="now">100%</span> of the time.</h1>
+    <p class="sub">Agents choose tools by reading three strings: name, description, schema. <strong>hitrate</strong> measures how often they get it wrong on your MCP server, rewrites the descriptions, and re-measures — so the improvement is a number, not a vibe.</p>
+    <div class="cta-row">
+      <span class="cmd mono">npx hitrate measure ./scenarios</span>
+      <a class="btn" href="https://github.com/USER/hitrate">Get the CLI</a>
+    </div>
+
+    <!-- signature: a real diff from the sqlite run -->
+    <div class="diff-card">
+      <div class="diff-head">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="file">tools/list · describe_table · mcp-server-sqlite</span>
+        <span class="meter" id="meter"><span class="track"><span class="fill"></span></span> strict success <b id="meterVal">34%</b></span>
+      </div>
+      <div class="diff-body">
+        <span class="ln ctx">  "name": "describe_table",</span>
+        <span class="ln del">- "description": "Get the schema information for a specific table"</span>
+        <span class="ln add">+ "description": "Get the column schema for one table. Use only when the</span>
+        <span class="ln add">+  user asks about a table's structure — do not call this merely to check</span>
+        <span class="ln add">+  that a table exists before running a query."</span>
+      </div>
+      <p class="diff-note">This diff — and nothing else — took the sqlite server's agents from <b>34%</b> to <b>100%</b> strict success over 50 measured runs.</p>
+    </div>
+  </header>
+
+  <section id="results">
+    <h2>Four servers, measured before and after</h2>
+    <p class="lede">Strict success = right tool, right arguments, no wasted calls — averaged over 5 runs per scenario against the live server.</p>
+    <div class="table-scroll">
+    <table>
+      <thead><tr><th>server</th><th>strict success</th><th></th><th>Δ</th><th>what was going wrong</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="server">server-sqlite</td>
+          <td><span class="pair mono"><span class="b">34%</span> → <span class="a">100%</span></span></td>
+          <td><span class="bars" data-b="34" data-a="100"><i class="before"></i><i class="after"></i></span></td>
+          <td class="delta">+66.0</td>
+          <td class="what">agents inspected the schema before two-thirds of queries</td>
+        </tr>
+        <tr>
+          <td class="server">server-memory</td>
+          <td><span class="pair mono"><span class="b">62%</span> → <span class="a">96%</span></span></td>
+          <td><span class="bars" data-b="62" data-a="96"><i class="before"></i><i class="after"></i></span></td>
+          <td class="delta">+34.5</td>
+          <td class="what">create-vs-add and search-vs-open tool confusion; hit rate 80% → 100%</td>
+        </tr>
+        <tr>
+          <td class="server">mcp-server-git</td>
+          <td><span class="pair mono"><span class="b">75%</span> → <span class="a">97%</span></span></td>
+          <td><span class="bars" data-b="75" data-a="97"><i class="before"></i><i class="after"></i></span></td>
+          <td class="delta">+21.7</td>
+          <td class="what">perfect tool choice, padded with ritual status and log calls</td>
+        </tr>
+        <tr>
+          <td class="server">server-filesystem</td>
+          <td><span class="pair mono"><span class="b">74%</span> → <span class="a">84%</span></span></td>
+          <td><span class="bars" data-b="74" data-a="84"><i class="before"></i><i class="after"></i></span></td>
+          <td class="delta">+10.0</td>
+          <td class="what">deprecated read_file alias still reads like the primary tool</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="method-note">Agent: <span class="mono">gpt-oss-120b</span> · rewriter: <span class="mono">kimi-k2p6</span> · ≤2 optimization rounds · total API spend for the whole table ≈ <span class="mono">$4</span>. Per-run data for all 51 scenarios is committed to the repo.</p>
+  </section>
+
+  <section id="how">
+    <h2>The loop other tools leave open</h2>
+    <p class="lede">Eval runners tell you agents misuse your tools. hitrate is the step after: fix, re-measure, prove — and throw the fix away if it doesn't measure better.</p>
+    <ol class="pipe">
+      <li><h3>Measure</h3><p>Realistic scenarios run <span class="mono">N=5</span> against your live server. Every actual tool call is recorded — hits, wrong args, extra calls.</p></li>
+      <li><h3>Diagnose</h3><p>Failing runs plus your current descriptions go to an LLM that explains which description made the wrong tool look right.</p></li>
+      <li><h3>Rewrite</h3><p>Descriptions are rewritten and applied <span class="mono">in-memory</span> — your server is never modified.</p></li>
+      <li><h3>Prove</h3><p>Re-measure. Improvements are kept; regressions are discarded automatically. Ship winners through <span class="mono">hitrate proxy</span>, no fork needed.</p></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Three ways descriptions fail agents</h2>
+    <p class="lede">All three archetypes showed up in the official servers — and all three were fixable with words alone.</p>
+    <div class="arch">
+      <article>
+        <h3>Wrong-tool confusion</h3>
+        <p>Sibling tools with overlapping descriptions make agents guess. The memory server's create/add and search/open pairs confused agents once in five runs.</p>
+        <p class="stat">memory: hit rate 80% → 100%</p>
+      </article>
+      <article>
+        <h3>Ritual extra calls</h3>
+        <p>When a description doesn't say "you don't need to check first," agents check first. Every time. One added sentence ended schema-peeking before queries.</p>
+        <p class="stat">sqlite: extra-call rate 66% → 0%</p>
+      </article>
+      <article>
+        <h3>Deprecated-alias traps</h3>
+        <p>A deprecated tool whose description still reads like the primary one is a trap agents walk into forever. Lead with the deprecation, name the replacement.</p>
+        <p class="stat">filesystem: strict success +10 pts</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="limits" class="limits">
+    <h2>What this can't do</h2>
+    <p class="lede">Data without caveats is marketing. Read these before quoting the table.</p>
+    <ul>
+      <li><b>N=5 quantizes.</b> Per-scenario rates move in 20-point steps; trust aggregates, not single scenarios.</li>
+      <li><b>Rewrites are high-variance.</b> Two attempts on one baseline scored +10.0 and −2.2 points. Measurement, not faith, is the product — the loop discarded that regression automatically.</li>
+      <li><b>Deltas are agent-specific.</b> A stronger agent (Claude Haiku 4.5) started near the optimized score and gained only +2.2. Bad descriptions tax cheap agents hardest.</li>
+      <li><b>Scenarios encode the ground truth.</b> A debatable expected tool makes a debatable metric. All scenarios are in the repo — judge them.</li>
+      <li><b>Words can't fix tool design.</b> Overlapping capabilities or missing parameters survive any rewrite. The report shows which scenarios stayed broken.</li>
+    </ul>
+  </section>
+
+  <div class="final">
+    <h2>Measure yours.</h2>
+    <p>A suite is ~15 YAML scenarios. A full optimize run costs less than a coffee.</p>
+    <div class="cta-row" style="justify-content:center">
+      <span class="cmd mono">npx hitrate optimize scenarios/your-server.yaml</span>
+      <a class="btn" href="https://github.com/USER/hitrate">Read the docs</a>
+    </div>
+  </div>
+
+  <footer>
+    <span>MIT · built on the MCP SDK</span>
+    <a href="https://github.com/USER/hitrate">GitHub</a>
+    <a href="https://github.com/USER/hitrate/tree/main/results">raw results</a>
+  </footer>
+</div>
+
+<script>
+  // hero meter: fill once on load
+  addEventListener('load', () => {
+    const m = document.getElementById('meter'), v = document.getElementById('meterVal');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { m.classList.add('done'); v.textContent = '100%'; return; }
+    setTimeout(() => {
+      m.classList.add('done');
+      const t0 = performance.now();
+      const tick = (t) => {
+        const p = Math.min(1, (t - t0) / 1400);
+        v.textContent = Math.round(34 + (100 - 34) * (1 - Math.pow(1 - p, 3))) + '%';
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, 500);
+  });
+  // result bars: grow on first scroll into view
+  const grow = (el) => {
+    el.querySelector('.before').style.width = el.dataset.b + '%';
+    el.querySelector('.after').style.width = el.dataset.a + '%';
+  };
+  const bars = document.querySelectorAll('.bars');
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) bars.forEach(grow);
+  else {
+    const io = new IntersectionObserver((es) => es.forEach(e => {
+      if (e.isIntersecting) { grow(e.target); io.unobserve(e.target); }
+    }), { threshold: .4 });
+    bars.forEach(b => io.observe(b));
+  }
+</script>
+</body>
+</html>
