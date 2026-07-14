@@ -17,7 +17,17 @@ description: >
   where agents most often pick the wrong browser tool.
 server:
   command: npx
-  args: ["@playwright/mcp@latest", "--headless", "--isolated"]
+  # --output-dir sends default-named artifacts (snapshots, network dumps) to
+  # /tmp instead of the CWD. Verified 2026-07-14: it is NOT honored when the
+  # agent passes an explicit relative filename (e.g. `home.png` from the
+  # screenshot-visual prompt) — those still land in the CWD, so .gitignore
+  # carries a safety net for them. Neither affects tool selection.
+  args:
+    - "@playwright/mcp@latest"
+    - "--headless"
+    - "--isolated"
+    - "--output-dir"
+    - /tmp/toolmetry-playwright/output
 scenarios:
   # --- see-page cluster -----------------------------------------------------
   - id: snapshot-for-actions

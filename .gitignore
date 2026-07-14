@@ -12,6 +12,13 @@ dist/
 # playwright-mcp session artifacts (inspection scratch)
 .playwright-mcp/
 
+# safety net: agent-written run artifacts if a suite runs without --output-dir
+home.png
+snap.md
+snapshot.md
+requests.txt
+prev_page_snapshot.yml
+
 # internal project management + session tooling (local only)
 CLAUDE.md
 .claude/
