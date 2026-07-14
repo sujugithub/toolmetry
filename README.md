@@ -15,13 +15,15 @@ Every number below is committed to [`results/`](results/) with per-run detail (N
 | [server-sqlite](https://github.com/modelcontextprotocol/servers-archived/tree/main/src/sqlite) | 34.0% → **100%** | **+66.0 pts** | agents ritually inspected schema before every query |
 | [server-memory](https://github.com/modelcontextprotocol/servers/tree/main/src/memory) | 61.8% → **96.4%** | **+34.5 pts** | `create_entities` vs `add_observations` confusion; hit rate 80% → 100% |
 | [mcp-server-git](https://github.com/modelcontextprotocol/servers/tree/main/src/git) | 75.0% → **96.7%** | **+21.7 pts** | perfect tool choice, but constant extra `git_status`/`git_log` padding |
-| [server-filesystem](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) | 74.4% → **84.4%** | **+10.0 pts** | deprecated `read_file` alias trap + `list_allowed_directories` ritual |
+| [server-filesystem](https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem) | 74.4% → **91.1%** | **+16.7 pts** | deprecated `read_file` alias trap + `list_allowed_directories` ritual; best result via `--candidates 3 --seed` |
 
 † *strict success* = right tool **and** right arguments **and** no extra calls, averaged over N=5 runs per scenario.
 
 The same optimization on a stronger agent (Claude Haiku 4.5) moved filesystem from 84.4% → 86.7%: **more capable agents are less hurt by bad descriptions — description quality matters most for the cheap, fast agents people actually deploy at scale.**
 
 ## Quickstart
+
+![toolmetry measuring the official sqlite MCP server — per-scenario hit rate, extra calls, and strict success, with estimated cost](docs/quickstart.svg)
 
 ```bash
 npm install && npm run build
