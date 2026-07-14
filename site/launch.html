@@ -120,9 +120,9 @@
     <h2>Caveats, because data without caveats is marketing</h2>
     <ul>
       <li>N=5 per scenario quantizes rates to 20-pt steps; trust the aggregates, not individual scenario deltas.</li>
-      <li>Scenarios encode ground truth; a debatable <code>expected_tool</code> makes a debatable metric. All 51 scenarios are in the repo — judge them yourself.</li>
+      <li>Scenarios encode ground truth; a debatable <code>expected_tool</code> makes a debatable metric. All 69 scenarios are in the repo — judge them yourself.</li>
       <li>Deltas are agent-specific (see the Haiku result). Measure with the agent tier you actually serve.</li>
-      <li>Some failures are tool-<em>design</em> problems no description can fix. The per-scenario report shows you which.</li>
+      <li>Some failures are tool-<em>design</em> problems no description can fix — and I have a measured case now. I ran the full pipeline (including candidate sampling) against <strong>Playwright MCP</strong>, the hardest server yet: stateful, multi-step, real headless browser. Re-measuring an <em>identical</em> config twice differed by 3.3 pts, so every strict-success "gain" there sits inside the suite's own noise. One thing still moved decisively: extra-call rate fell <span class="before">44%</span> → <span class="after">26%</span>. Rewrites reliably stop wasteful padding, but they could not teach the agent multi-step interaction flows — those scenarios stayed at 0% under every rewrite tried. Full negative result committed in the repo like everything else.</li>
     </ul>
 
     <hr class="cut">
