@@ -1,0 +1,20 @@
+{
+  "round": 3,
+  "diagnosis": "- browser_navigate was called in URL-rewriting loops (file:/// → file:/ → http://localhost...) because it did not explicitly state that file URLs must be passed exactly as given and that the page is immediately ready for interaction. The agent interpreted the lack of returned page content as a failed load and kept retrying with alternative URLs instead of proceeding to the correct action tool.\n- browser_run_code_unsafe was used as a fallback for navigation, page loading, screenshots, and inspection because its \"last resort\" framing allowed the agent to treat it as a workaround when navigation seemed stuck, despite the long \"Never use\" list.\n- browser_network_requests and browser_network_request were confused: the agent sometimes called the listing tool with a hallucinated static filter or called it before/after the detail tool because the disambiguation between listing and direct detail lookup was not strong enough.",
+  "rationales": {
+    "browser_navigate": "Stops the agent from looping through mutated URL formats and makes it clear that the next step should be a dedicated interaction tool, not another navigation attempt.",
+    "browser_run_code_unsafe": "Removes the inviting \"last resort\" framing that made the agent treat it as a workaround during navigation failures, and explicitly forbids using it as a substitute for standard browser operations.",
+    "browser_snapshot": "Clarifies that this is the direct post-navigation inspection tool so the agent reaches for it instead of looping on navigation or resorting to unsafe code.",
+    "browser_take_screenshot": "Reinforces that this is the correct post-navigation screenshot tool, preventing the agent from using unsafe code to capture images after loading a file URL.",
+    "browser_network_requests": "Prevents the agent from inventing a static filter and makes it unambiguous that listing is only for discovery, not for detail retrieval.",
+    "browser_network_request": "Stops the agent from calling the listing tool before or after this detail tool when the request number is already provided in the prompt."
+  },
+  "overrides": {
+    "browser_navigate": "Navigate to a URL and load it as the current page. Supports all URLs, including local file:/// paths passed exactly as given; do not rewrite them to http://localhost or other forms. This tool loads the page internally and does not return page content, so use browser_snapshot or another dedicated tool to inspect the page after loading. Do not retry with alternative URLs or use browser_run_code_unsafe to reload or set HTML content.",
+    "browser_run_code_unsafe": "Execute arbitrary JavaScript in the Playwright server process. Never use for navigation, page loading, clicking, typing, form filling, dropdown selection, hovering, screenshots, snapshots, finding elements, waiting, or network inspection. This is not a fallback for failed navigation; only use when absolutely no other browser tool exists for the task. RCE-equivalent.",
+    "browser_snapshot": "Return the accessibility tree of the current page with element references for clicking, typing, and other actions. Use this after browser_navigate to inspect the loaded page. Do not use browser_run_code_unsafe to inspect page content.",
+    "browser_take_screenshot": "Save a screenshot image of the current page. Use this after browser_navigate to capture the loaded page. Do not use browser_run_code_unsafe for screenshots.",
+    "browser_network_requests": "Return a numbered list of every network request made by the current page, including static assets, API calls, and navigation requests. Use this only to discover request numbers; for a known request number, use browser_network_request directly.",
+    "browser_network_request": "Return the full headers and body of a single network request by its index. Call this directly when you already know the request number; do not call browser_network_requests first."
+  }
+}

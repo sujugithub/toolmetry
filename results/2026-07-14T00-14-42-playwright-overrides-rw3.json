@@ -1,0 +1,20 @@
+{
+  "round": 3,
+  "diagnosis": "In every file-based scenario (snapshot-for-actions, screenshot-visual, find-one-element, type-single-field, fill-login-form, select-dropdown, press-enter, click-button, hover-element, wait-for-text) the agent either looped on browser_navigate with mutated URLs or invoked browser_run_code_unsafe to read local files and inject HTML, instead of proceeding to the correct dedicated tool. This happened because browser_navigate did not explicitly state that file:// URLs load directly and that the page is ready without retries, and its mention of browser_run_code_unsafe primed the agent to use that tool as a fallback. browser_run_code_unsafe’s description did not explicitly forbid loading or setting page content, so the agent treated file injection as a valid last resort. In navigate-back, the agent repeated browser_navigate_back or called browser_tabs because those descriptions were too terse and did not state that a single call suffices. In network-list, the agent sometimes skipped browser_network_requests or called it with extra parameters; in network-detail, it called browser_network_requests after browser_network_request because the two descriptions cross-referenced ambiguously without clarifying that browser_network_requests should not be used when the request number is already known.",
+  "rationales": {
+    "browser_navigate": "Prevents the agent from looping on navigation or using browser_run_code_unsafe to inject HTML by making file:// support explicit and prohibiting workarounds.",
+    "browser_run_code_unsafe": "Stops the agent from using this tool to read local files and inject page content as a fallback for browser_navigate.",
+    "browser_navigate_back": "Prevents repeated back-navigation and spurious browser_tabs calls after going back.",
+    "browser_tabs": "Eliminates spurious browser_tabs calls after navigation or going back.",
+    "browser_network_requests": "Encourages the agent to call this directly for listing requests and discourages unnecessary follow-up calls.",
+    "browser_network_request": "Prevents the agent from calling browser_network_requests before or after when the request number is already known."
+  },
+  "overrides": {
+    "browser_navigate": "Navigate to a URL and load the page. Accepts http://, https://, and file:// URLs. The page is fully loaded and ready for interaction when the call returns; do not retry with alternate URLs or use other tools to set or reload page content.",
+    "browser_run_code_unsafe": "Use only as a last resort when no dedicated browser tool exists. Never use for navigation, clicking, typing, filling forms, selecting options, hovering, screenshots, snapshots, finding elements, waiting, or loading and setting page content. Do not read local files or inject HTML; use browser_navigate for all page loading, including local files. Unsafe: executes arbitrary JavaScript in the Playwright server process and is RCE-equivalent.",
+    "browser_navigate_back": "Go back one step in the browser history. Call once for each step back required; do not repeat the call or use browser_tabs to verify the result.",
+    "browser_tabs": "List, create, close, or select a browser tab. Use only when the task explicitly requires managing or switching tabs; do not use to check the current page after navigation or other actions.",
+    "browser_network_requests": "Return a numbered list of all network requests made by the current page. Call this directly to view the full list; use browser_network_request only when you need detailed headers and body of a specific request by its number.",
+    "browser_network_request": "Return the full details (headers and body) of a single network request by its index. Call this directly when you already know the request number; do not call browser_network_requests before or after unless you need to discover the number."
+  }
+}

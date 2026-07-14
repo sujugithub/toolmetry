@@ -1,0 +1,3557 @@
+{
+  "savedAt": "2026-07-14T00:11:48.619Z",
+  "gitSha": "9b27aab",
+  "label": "optimized-m0",
+  "result": {
+    "suite": "playwright",
+    "model": "accounts/fireworks/models/gpt-oss-120b",
+    "runsPerScenario": 5,
+    "scenarios": [
+      {
+        "scenario": {
+          "id": "snapshot-for-actions",
+          "prompt": "Open file:///tmp/toolmetry-playwright/fixture.html, then capture the page so you have element references you can click and type into.\n",
+          "expected_tool": "browser_snapshot",
+          "max_calls": 2
+        },
+        "aggregate": {
+          "scenarioId": "snapshot-for-actions",
+          "n": 5,
+          "hitRate": 0.2,
+          "argCorrectness": 1,
+          "extraCallRate": 0.4,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/"
+                }
+              },
+              {
+                "name": "browser_run_code_unsafe",
+                "args": {
+                  "code": "async (page) => { const fs = require('fs'); const path = '/tmp/toolmetry-playwright/fixture.html'; const content = fs.readFileSync(path, 'utf-8'); return content; }"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17929,
+              "outputTokens": 1406
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:/tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 8274,
+              "outputTokens": 662
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_tabs",
+                "args": {
+                  "action": "list"
+                }
+              },
+              {
+                "name": "browser_snapshot",
+                "args": {
+                  "filename": "snapshot.md"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_console_messages",
+                "args": {
+                  "level": "error",
+                  "all": true
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17566,
+              "outputTokens": 972
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5443,
+              "outputTokens": 395
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5443,
+              "outputTokens": 345
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "screenshot-visual",
+          "prompt": "Open file:///tmp/toolmetry-playwright/fixture.html and save a screenshot image of it to home.png.\n",
+          "expected_tool": "browser_take_screenshot",
+          "max_calls": 2
+        },
+        "aggregate": {
+          "scenarioId": "screenshot-visual",
+          "n": 5,
+          "hitRate": 0.2,
+          "argCorrectness": 1,
+          "extraCallRate": 0.8,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file://tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_run_code_unsafe",
+                "args": {
+                  "code": "const fs = require('fs');\nconst path = '/tmp/toolmetry-playwright/fixture.html';\nconst html = fs.readFileSync(path, 'utf8');\nawait page.setContent(html, {waitUntil: 'load'});\nreturn 'content set';"
+                }
+              },
+              {
+                "name": "browser_run_code_unsafe",
+                "args": {
+                  "code": "async (page) => { const fs = require('fs'); const html = fs.readFileSync('/tmp/toolmetry-playwright/fixture.html', 'utf8'); await page.setContent(html, { waitUntil: 'load' }); return 'content set'; }"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 14221,
+              "outputTokens": 1304
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5431,
+              "outputTokens": 285
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_run_code_unsafe",
+                "args": {
+                  "code": "async (page) => {\n const fs = require('fs');\n const path = '/tmp/toolmetry-playwright/fixture.html';\n const html = fs.readFileSync(path, 'utf8');\n await page.setContent(html, {waitUntil: 'load'});\n return 'content set';\n}"
+                }
+              },
+              {
+                "name": "browser_run_code_unsafe",
+                "args": {
+                  "code": "async (page) => {\n  try {\n    const response = await page.goto('file:///tmp/toolmetry-playwright/fixture.html');\n    return 'navigated';\n  } catch(e) {return e.toString();}\n}"
+                }
+              },
+              {
+                "name": "browser_take_screenshot",
+                "args": {
+                  "type": "png",
+                  "scale": "css",
+                  "filename": "home.png"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 14589,
+              "outputTokens": 1236
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_run_code_unsafe",
+                "args": {
+                  "code": "async (page) => {\n  const fs = require('fs');\n  const path = '/tmp/toolmetry-playwright/fixture.html';\n  const html = fs.readFileSync(path, 'utf8');\n  await page.setContent(html, { waitUntil: 'load' });\n  // Return success\n  return 'loaded';\n}"
+                }
+              },
+              {
+                "name": "browser_run_code_unsafe",
+                "args": {
+                  "code": "async (page) => {\n  const fs = await import('fs');\n  const path = '/tmp/toolmetry-playwright/fixture.html';\n  const html = fs.readFileSync(path, 'utf8');\n  await page.setContent(html, {waitUntil: 'load'});\n  return 'loaded';\n}"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "data:text/html,<html><body><h1>Test</h1></body></html>"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 14477,
+              "outputTokens": 1857
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_run_code_unsafe",
+                "args": {
+                  "code": "async (page) => {\n  const fs = require('fs');\n  const path = '/tmp/toolmetry-playwright/fixture.html';\n  const html = fs.readFileSync(path, 'utf8');\n  await page.setContent(html, { waitUntil: 'load' });\n  return await page.title();\n}"
+                }
+              },
+              {
+                "name": "browser_run_code_unsafe",
+                "args": {
+                  "code": "async (page) => {\n  const fs = await import('fs');\n  const path = '/tmp/toolmetry-playwright/fixture.html';\n  const html = fs.readFileSync(path, 'utf8');\n  await page.setContent(html, { waitUntil: 'load' });\n  // take screenshot\n  const screenshot = await page.screenshot({ path: 'home.png', fullPage: true });\n  return 'done';\n}"
+                }
+              },
+              {
+                "name": "browser_run_code_unsafe",
+                "args": {
+                  "code": "async (page) => {\n  const fs = await import('node:fs/promises');\n  const html = await fs.readFile('/tmp/toolmetry-playwright/fixture.html', 'utf8');\n  await page.setContent(html);\n  await page.screenshot({ path: 'home.png', fullPage: true });\n  return 'screenshot saved';\n}"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17794,
+              "outputTokens": 2767
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "find-one-element",
+          "prompt": "On file:///tmp/toolmetry-playwright/fixture.html, locate the element containing the text \"Sign in\" — I just need to find it, not dump the whole page.\n",
+          "expected_tool": "browser_find",
+          "max_calls": 2
+        },
+        "aggregate": {
+          "scenarioId": "find-one-element",
+          "n": 5,
+          "hitRate": 0,
+          "argCorrectness": null,
+          "extraCallRate": 0.2,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5459,
+              "outputTokens": 339
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5459,
+              "outputTokens": 385
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5459,
+              "outputTokens": 526
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5459,
+              "outputTokens": 440
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 11270,
+              "outputTokens": 839
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "navigate-url",
+          "prompt": "Open the page at file:///tmp/toolmetry-playwright/fixture.html",
+          "expected_tool": "browser_navigate",
+          "expected_args": {
+            "url": "file:///tmp/toolmetry-playwright/fixture.html"
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "navigate-url",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5415,
+              "outputTokens": 299
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5415,
+              "outputTokens": 262
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5415,
+              "outputTokens": 188
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5415,
+              "outputTokens": 295
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5415,
+              "outputTokens": 136
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "navigate-back",
+          "prompt": "Go back to the previous page in the browser history.",
+          "expected_tool": "browser_navigate_back",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "navigate-back",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0.4,
+          "successRate": 0.6,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_navigate_back",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5399,
+              "outputTokens": 168
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_navigate_back",
+                "args": {}
+              },
+              {
+                "name": "browser_tabs",
+                "args": {
+                  "action": "list"
+                }
+              },
+              {
+                "name": "browser_tabs",
+                "args": {
+                  "action": "list"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 11011,
+              "outputTokens": 439
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_navigate_back",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5442,
+              "outputTokens": 71
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_navigate_back",
+                "args": {}
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5478,
+              "outputTokens": 99
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_navigate_back",
+                "args": {}
+              },
+              {
+                "name": "browser_navigate_back",
+                "args": {}
+              },
+              {
+                "name": "browser_navigate_back",
+                "args": {}
+              },
+              {
+                "name": "browser_navigate_back",
+                "args": {}
+              },
+              {
+                "name": "browser_console_messages",
+                "args": {
+                  "level": "error",
+                  "all": true
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 18694,
+              "outputTokens": 626
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "type-single-field",
+          "prompt": "On file:///tmp/toolmetry-playwright/fixture.html, type \"laptop\" into the search box.\n",
+          "expected_tool": "browser_type",
+          "expected_args": {
+            "text": "laptop"
+          },
+          "max_calls": 3
+        },
+        "aggregate": {
+          "scenarioId": "type-single-field",
+          "n": 5,
+          "hitRate": 0,
+          "argCorrectness": null,
+          "extraCallRate": 0.4,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:3000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17480,
+              "outputTokens": 1145
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5431,
+              "outputTokens": 413
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5431,
+              "outputTokens": 288
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/fixture.html"
+                }
+              },
+              {
+                "name": "browser_run_code_unsafe",
+                "args": {
+                  "code": "const fs = require('fs'); const path = '/tmp/toolmetry-playwright/fixture.html'; try { const html = fs.readFileSync(path, 'utf8'); return {html}; } catch(e){ return {error:e.message}; }"
+                }
+              },
+              {
+                "name": "browser_run_code_unsafe",
+                "args": {
+                  "code": "async () => { const fs = require('fs'); const path = '/tmp/toolmetry-playwright/fixture.html'; try { const html = fs.readFileSync(path, 'utf8'); return {html}; } catch(e){ return {error: e.message}; } }"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "https://tmp.toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17309,
+              "outputTokens": 1302
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5431,
+              "outputTokens": 407
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "fill-login-form",
+          "prompt": "On file:///tmp/toolmetry-playwright/fixture.html, fill in the login form: username \"alice\" and password \"hunter2\".\n",
+          "expected_tool": "browser_fill_form",
+          "max_calls": 3
+        },
+        "aggregate": {
+          "scenarioId": "fill-login-form",
+          "n": 5,
+          "hitRate": 0,
+          "argCorrectness": null,
+          "extraCallRate": 0.8,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17608,
+              "outputTokens": 1103
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:3000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:8000/tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17490,
+              "outputTokens": 1089
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5443,
+              "outputTokens": 344
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17602,
+              "outputTokens": 1092
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:/tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:8000/tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17398,
+              "outputTokens": 1257
+            },
+            "hitIterationLimit": true
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "select-dropdown",
+          "prompt": "On file:///tmp/toolmetry-playwright/fixture.html, choose \"Canada\" in the country dropdown.\n",
+          "expected_tool": "browser_select_option",
+          "max_calls": 3
+        },
+        "aggregate": {
+          "scenarioId": "select-dropdown",
+          "n": 5,
+          "hitRate": 0,
+          "argCorrectness": null,
+          "extraCallRate": 0.2,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:/tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 8253,
+              "outputTokens": 540
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5429,
+              "outputTokens": 393
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5429,
+              "outputTokens": 454
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5429,
+              "outputTokens": 425
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:8000/tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:8000/"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17817,
+              "outputTokens": 1220
+            },
+            "hitIterationLimit": true
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "press-enter",
+          "prompt": "On file:///tmp/toolmetry-playwright/fixture.html, press the Enter key.\n",
+          "expected_tool": "browser_press_key",
+          "max_calls": 3
+        },
+        "aggregate": {
+          "scenarioId": "press-enter",
+          "n": 5,
+          "hitRate": 0.2,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 0.2,
+          "runs": [
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5421,
+              "outputTokens": 340
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 8247,
+              "outputTokens": 692
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_press_key",
+                "args": {
+                  "key": "Enter"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 11210,
+              "outputTokens": 958
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5421,
+              "outputTokens": 263
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5421,
+              "outputTokens": 405
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "click-button",
+          "prompt": "On file:///tmp/toolmetry-playwright/fixture.html, click the \"Sign in\" button.\n",
+          "expected_tool": "browser_click",
+          "max_calls": 3
+        },
+        "aggregate": {
+          "scenarioId": "click-button",
+          "n": 5,
+          "hitRate": 0,
+          "argCorrectness": null,
+          "extraCallRate": 0,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file://tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 8250,
+              "outputTokens": 1007
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5427,
+              "outputTokens": 531
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5427,
+              "outputTokens": 473
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5427,
+              "outputTokens": 331
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5427,
+              "outputTokens": 339
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "hover-element",
+          "prompt": "On file:///tmp/toolmetry-playwright/fixture.html, hover over the help \"?\" icon.\n",
+          "expected_tool": "browser_hover",
+          "max_calls": 3
+        },
+        "aggregate": {
+          "scenarioId": "hover-element",
+          "n": 5,
+          "hitRate": 0,
+          "argCorrectness": null,
+          "extraCallRate": 0.6,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8080/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17577,
+              "outputTokens": 1270
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17894,
+              "outputTokens": 1110
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5427,
+              "outputTokens": 420
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5427,
+              "outputTokens": 308
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_tabs",
+                "args": {
+                  "action": "list"
+                }
+              },
+              {
+                "name": "browser_snapshot",
+                "args": {
+                  "filename": "snapshot.md"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17528,
+              "outputTokens": 900
+            },
+            "hitIterationLimit": true
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "network-list",
+          "prompt": "Show me all the network requests this page has made.",
+          "expected_tool": "browser_network_requests",
+          "max_calls": 2
+        },
+        "aggregate": {
+          "scenarioId": "network-list",
+          "n": 5,
+          "hitRate": 0.6,
+          "argCorrectness": 1,
+          "extraCallRate": 0.2,
+          "successRate": 0.4,
+          "runs": [
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 2668,
+              "outputTokens": 149
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_network_requests",
+                "args": {
+                  "static": true
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5397,
+              "outputTokens": 249
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_network_requests",
+                "args": {
+                  "static": true
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5397,
+              "outputTokens": 310
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 2668,
+              "outputTokens": 148
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_network_requests",
+                "args": {
+                  "static": true
+                }
+              },
+              {
+                "name": "browser_network_request",
+                "args": {
+                  "index": 1
+                }
+              },
+              {
+                "name": "browser_network_request",
+                "args": {
+                  "index": 1,
+                  "part": "response-body"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 11445,
+              "outputTokens": 720
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "network-detail",
+          "prompt": "Get the full headers and body of network request number 2.\n",
+          "expected_tool": "browser_network_request",
+          "expected_args": {
+            "index": 2
+          },
+          "max_calls": 2
+        },
+        "aggregate": {
+          "scenarioId": "network-detail",
+          "n": 5,
+          "hitRate": 0.8,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 0.8,
+          "runs": [
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_network_requests",
+                "args": {
+                  "static": false
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5401,
+              "outputTokens": 294
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_network_request",
+                "args": {
+                  "index": 2
+                }
+              },
+              {
+                "name": "browser_network_requests",
+                "args": {
+                  "static": false
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 8175,
+              "outputTokens": 268
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_network_request",
+                "args": {
+                  "index": 2
+                }
+              },
+              {
+                "name": "browser_network_requests",
+                "args": {
+                  "static": false
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 8175,
+              "outputTokens": 353
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_network_request",
+                "args": {
+                  "index": 2
+                }
+              },
+              {
+                "name": "browser_network_requests",
+                "args": {
+                  "static": false
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 8175,
+              "outputTokens": 233
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_network_request",
+                "args": {
+                  "index": 2
+                }
+              },
+              {
+                "name": "browser_network_requests",
+                "args": {
+                  "static": false
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 8175,
+              "outputTokens": 228
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "console-messages",
+          "prompt": "Show me the browser console log messages for this page.",
+          "expected_tool": "browser_console_messages",
+          "max_calls": 2
+        },
+        "aggregate": {
+          "scenarioId": "console-messages",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_console_messages",
+                "args": {
+                  "level": "info",
+                  "all": true
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 6864,
+              "outputTokens": 330
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_console_messages",
+                "args": {
+                  "level": "info"
+                }
+              },
+              {
+                "name": "browser_console_messages",
+                "args": {
+                  "level": "debug",
+                  "all": true
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 9712,
+              "outputTokens": 529
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_console_messages",
+                "args": {
+                  "level": "info",
+                  "all": true
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 6864,
+              "outputTokens": 480
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_console_messages",
+                "args": {
+                  "level": "info",
+                  "all": true
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 6864,
+              "outputTokens": 609
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_console_messages",
+                "args": {
+                  "level": "info",
+                  "all": true
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 6864,
+              "outputTokens": 1662
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "wait-for-text",
+          "prompt": "On file:///tmp/toolmetry-playwright/fixture.html, wait until the text \"Loading complete\" appears.\n",
+          "expected_tool": "browser_wait_for",
+          "expected_args": {
+            "text": "Loading complete"
+          },
+          "max_calls": 2
+        },
+        "aggregate": {
+          "scenarioId": "wait-for-text",
+          "n": 5,
+          "hitRate": 0,
+          "argCorrectness": null,
+          "extraCallRate": 0.6,
+          "successRate": 0,
+          "runs": [
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "about:blank"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:8000/"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17440,
+              "outputTokens": 1190
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:8000/tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://127.0.0.1:8000/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost:8000/tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 17907,
+              "outputTokens": 837
+            },
+            "hitIterationLimit": true
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5431,
+              "outputTokens": 239
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://tmp/toolmetry-playwright/fixture.html"
+                }
+              },
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "http://localhost/"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": true,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 11210,
+              "outputTokens": 765
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_navigate",
+                "args": {
+                  "url": "file:///tmp/toolmetry-playwright/fixture.html"
+                }
+              }
+            ],
+            "score": {
+              "hit": false,
+              "argsCorrect": null,
+              "extraCalls": false,
+              "success": false
+            },
+            "usage": {
+              "inputTokens": 5431,
+              "outputTokens": 211
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "resize-window",
+          "prompt": "Resize the browser window to 1024 by 768.",
+          "expected_tool": "browser_resize",
+          "expected_args": {
+            "width": 1024,
+            "height": 768
+          },
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "resize-window",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_resize",
+                "args": {
+                  "width": 1024,
+                  "height": 768
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5422,
+              "outputTokens": 131
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_resize",
+                "args": {
+                  "width": 1024,
+                  "height": 768
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5402,
+              "outputTokens": 69
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_resize",
+                "args": {
+                  "width": 1024,
+                  "height": 768
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5402,
+              "outputTokens": 91
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_resize",
+                "args": {
+                  "width": 1024,
+                  "height": 768
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5402,
+              "outputTokens": 82
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_resize",
+                "args": {
+                  "width": 1024,
+                  "height": 768
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5402,
+              "outputTokens": 68
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "evaluate-expression",
+          "prompt": "Evaluate the JavaScript expression document.title on the current page and tell me the result.\n",
+          "expected_tool": "browser_evaluate",
+          "max_calls": 2
+        },
+        "aggregate": {
+          "scenarioId": "evaluate-expression",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_evaluate",
+                "args": {
+                  "function": "() => document.title"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5410,
+              "outputTokens": 74
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_evaluate",
+                "args": {
+                  "function": "()=>{return document.title;}"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5414,
+              "outputTokens": 74
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_evaluate",
+                "args": {
+                  "function": "() => document.title"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5410,
+              "outputTokens": 92
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_evaluate",
+                "args": {
+                  "function": "()=>document.title"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5408,
+              "outputTokens": 68
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_evaluate",
+                "args": {
+                  "function": "() => document.title"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5410,
+              "outputTokens": 86
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      },
+      {
+        "scenario": {
+          "id": "list-tabs",
+          "prompt": "List the browser tabs that are currently open.",
+          "expected_tool": "browser_tabs",
+          "max_calls": 1
+        },
+        "aggregate": {
+          "scenarioId": "list-tabs",
+          "n": 5,
+          "hitRate": 1,
+          "argCorrectness": 1,
+          "extraCallRate": 0,
+          "successRate": 1,
+          "runs": [
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            }
+          ]
+        },
+        "runs": [
+          {
+            "run": 1,
+            "toolCalls": [
+              {
+                "name": "browser_tabs",
+                "args": {
+                  "action": "list"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5384,
+              "outputTokens": 122
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 2,
+            "toolCalls": [
+              {
+                "name": "browser_tabs",
+                "args": {
+                  "action": "list"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5384,
+              "outputTokens": 107
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 3,
+            "toolCalls": [
+              {
+                "name": "browser_tabs",
+                "args": {
+                  "action": "list"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5384,
+              "outputTokens": 98
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 4,
+            "toolCalls": [
+              {
+                "name": "browser_tabs",
+                "args": {
+                  "action": "list"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5384,
+              "outputTokens": 107
+            },
+            "hitIterationLimit": false
+          },
+          {
+            "run": 5,
+            "toolCalls": [
+              {
+                "name": "browser_tabs",
+                "args": {
+                  "action": "list"
+                }
+              }
+            ],
+            "score": {
+              "hit": true,
+              "argsCorrect": true,
+              "extraCalls": false,
+              "success": true
+            },
+            "usage": {
+              "inputTokens": 5384,
+              "outputTokens": 121
+            },
+            "hitIterationLimit": false
+          }
+        ]
+      }
+    ],
+    "aggregate": {
+      "scenarioCount": 18,
+      "hitRate": 0.4444444444444444,
+      "argCorrectness": 1,
+      "extraCallRate": 0.25555555555555554,
+      "successRate": 0.3888888888888889
+    },
+    "usage": {
+      "inputTokens": 767148,
+      "outputTokens": 48354
+    },
+    "estimatedCostUsd": 0.9122100000000001,
+    "descriptionOverrides": {
+      "browser_run_code_unsafe": "Use only as a last resort when no dedicated browser tool exists. Never use for navigation, clicking, typing, filling forms, selecting options, hovering, screenshots, snapshots, finding elements, or waiting. Unsafe: executes arbitrary JavaScript in the Playwright server process and is RCE-equivalent.",
+      "browser_navigate": "Navigate to a URL and load the page, including local file URLs. The page content is fully loaded automatically; do not use browser_run_code_unsafe to manually set or reload HTML afterwards.",
+      "browser_snapshot": "Capture the accessibility snapshot of the current page to get element references for clicking, typing, and other actions. This is better than a screenshot for interacting with the page; do not use browser_run_code_unsafe to inspect the page.",
+      "browser_take_screenshot": "Take a screenshot of the current page. You can't perform actions based on the screenshot; use browser_snapshot for actions. Use this for capturing page images; do not use browser_run_code_unsafe for screenshots.",
+      "browser_find": "Search the current page for text or a regular expression and return matching elements with their references and surrounding context. Use this to locate elements without capturing the full snapshot; do not use browser_run_code_unsafe to search page content.",
+      "browser_type": "Type text into an editable element on the current page. Provide the element and the text to type. Use this instead of browser_run_code_unsafe for entering text.",
+      "browser_fill_form": "Fill multiple form fields on the current page at once. Use this for forms instead of browser_run_code_unsafe.",
+      "browser_select_option": "Select an option in a dropdown on the current page. Provide the element and the option. Use this instead of browser_run_code_unsafe for dropdown selection.",
+      "browser_press_key": "Press a key on the current page, such as Enter. Provide the key. Use this instead of browser_run_code_unsafe for keyboard input.",
+      "browser_click": "Click an element on the current page by its reference. Use this instead of browser_run_code_unsafe for clicking buttons or links.",
+      "browser_hover": "Hover over an element on the current page by its reference. Use this instead of browser_run_code_unsafe for hover actions.",
+      "browser_wait_for": "Wait for text to appear or disappear on the current page, or wait for a specified timeout. Provide the text or timeout. Use this instead of browser_run_code_unsafe for waiting.",
+      "browser_network_request": "Returns full details (headers and body) of a single network request by its index, or a single part if `part` is set. Call this directly when you already know the request number; use browser_network_requests only to list requests first.",
+      "browser_console_messages": "Return all browser console messages for the current page. Use this directly to view logs without needing to call other tools first."
+    }
+  }
+}
