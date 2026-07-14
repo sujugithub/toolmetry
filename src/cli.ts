@@ -35,6 +35,29 @@ import {
 } from './optimizer/rewrite.js';
 import { parseOverridesFile, startProxy } from './proxy/proxy.js';
 import { optimizeLoop } from './optimizer/loop.js';
+import { loadDotEnv } from './env.js';
+
+// .env in the working directory fills any gaps in the environment, so the
+// quickstart works without a manual `export`. Real env vars always win.
+loadDotEnv();
+
+/** Fail fast, before any scenario runs, when the provider key for a model is
+ * missing — otherwise every run errors identically and the report is all
+ * zeros, which reads as "the tool is broken" instead of "no key". */
+function assertProviderKey(model: string): void {
+  const needed = model.startsWith('accounts/')
+    ? 'FIREWORKS_API_KEY'
+    : 'ANTHROPIC_API_KEY';
+  if (!process.env[needed]) {
+    console.error(
+      red(
+        `✗ ${needed} is not set — model "${model}" needs it.\n` +
+          `  export ${needed}=... or add it to a .env file in this directory.`,
+      ),
+    );
+    process.exit(1);
+  }
+}
 
 /** Model id decides the provider: accounts/... → Fireworks, else Anthropic. */
 function makeClient(model: string): MessageCreator {
@@ -200,6 +223,7 @@ program
   .option('--price-in <usd>', 'USD per MTok input for unpriced models (activates budget guard)')
   .option('--price-out <usd>', 'USD per MTok output for unpriced models')
   .action(async (suitePath: string, opts) => {
+    assertProviderKey(opts.model);
     applyCustomPricing(opts.model, opts.priceIn, opts.priceOut);
     const runs = Number(opts.runs);
     if (runs < 5) {
@@ -264,6 +288,8 @@ program
     'known-good overrides JSON evaluated as round 0 (kept only if it beats the baseline)',
   )
   .action(async (suitePath: string, opts) => {
+    assertProviderKey(opts.model);
+    assertProviderKey(opts.rewriter);
     const suite = loadSuite(suitePath);
     applyCustomPricing(opts.model, opts.priceIn, opts.priceOut);
     const runs = Number(opts.runs);
