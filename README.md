@@ -23,7 +23,7 @@ The same optimization on a stronger agent (Claude Haiku 4.5) moved filesystem fr
 
 ## Quickstart
 
-![toolmetry measuring the official sqlite MCP server — per-scenario hit rate, extra calls, and strict success, with estimated cost](docs/quickstart.svg)
+![toolmetry measuring the official sqlite MCP server — per-scenario hit rate, extra calls, and strict success, with estimated cost](https://raw.githubusercontent.com/sujugithub/toolmetry/main/docs/quickstart.svg)
 
 ```bash
 npm install && npm run build
