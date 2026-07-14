@@ -317,12 +317,12 @@
       <p class="name">filesystem<small>official server</small></p>
       <div class="track">
         <span class="rail"></span>
-        <span class="span" style="left:74.4%;width:10%"></span>
-        <span class="pt b" style="left:74.4%"></span><span class="pt o" style="left:84.4%"></span>
-        <span class="val b" style="left:74.4%">74.4</span><span class="val o" style="left:84.4%">84.4</span>
+        <span class="span" style="left:74.4%;width:16.7%"></span>
+        <span class="pt b" style="left:74.4%"></span><span class="pt o" style="left:91.1%"></span>
+        <span class="val b" style="left:74.4%">74.4</span><span class="val o" style="left:91.1%">91.1</span>
       </div>
-      <p class="delta">+10.0</p>
-      <p class="note">A deprecated read_file alias kept trapping agents into the old tool.</p>
+      <p class="delta">+16.7</p>
+      <p class="note">A deprecated read_file alias kept trapping agents; candidate-sampled rewrites climbed to a 100% hit rate.</p>
     </div>
   </div>
   <p class="footnote">Every number above comes from committed run data, and the memory and git
@@ -378,7 +378,7 @@
     <div>
       <b>Rewrites are high-variance.</b>
       <p>Two attempts on the same baseline scored <span class="num">+10.0</span> and
-      <span class="num neg">−2.2</span> points. That&rsquo;s why the loop measures every rewrite and discards regressions automatically.</p>
+      <span class="num neg">−2.2</span> points. That&rsquo;s why the loop measures every rewrite, discards regressions, and can sample several candidates per round and keep only the measured best (<code>--candidates</code>) — that loop took filesystem from +10.0 to +16.7.</p>
     </div>
     <div>
       <b>Deltas are agent-specific.</b>

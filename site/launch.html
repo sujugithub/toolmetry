@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>I let an LLM rewrite the tool descriptions of 4 popular MCP servers — the before/after data</title>
-<meta name="description" content="If you change nothing but the descriptions, how much better do agents get? Measured N=5 on four official MCP servers: +66, +34.5, +21.7, +10 points strict success.">
+<meta name="description" content="If you change nothing but the descriptions, how much better do agents get? Measured N=5 on four official MCP servers: +66, +34.5, +21.7, +16.7 points strict success.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
@@ -89,7 +89,7 @@
       <li>Feed the failures + current descriptions to an LLM rewriter. Apply the rewritten descriptions <strong>in-memory</strong> — the server is never modified.</li>
       <li>Re-measure. Keep the rewrite only if it measurably improved. Discard regressions.</li>
     </ul>
-    <p>Agent: <code>gpt-oss-120b</code> (a deliberately mid-tier agent — more on why below). Rewriter: Kimi K2. Total API spend for everything in this post: <strong>about $4</strong>.</p>
+    <p>Agent: <code>gpt-oss-120b</code> (a deliberately mid-tier agent — more on why below). Rewriter: Kimi K2. Total API spend for everything in this post: <strong>about $6</strong>.</p>
 
     <h2>The results</h2>
     <table>
@@ -98,7 +98,7 @@
         <tr><td>official sqlite server</td><td><span class="before">34.0%</span> → <span class="after">100%</span></td><td class="delta">+66.0</td></tr>
         <tr><td>official memory server</td><td><span class="before">61.8%</span> → <span class="after">96.4%</span></td><td class="delta">+34.5</td></tr>
         <tr><td>official git server</td><td><span class="before">75.0%</span> → <span class="after">96.7%</span></td><td class="delta">+21.7</td></tr>
-        <tr><td>official filesystem server</td><td><span class="before">74.4%</span> → <span class="after">84.4%</span></td><td class="delta">+10.0</td></tr>
+        <tr><td>official filesystem server</td><td><span class="before">74.4%</span> → <span class="after">91.1%</span></td><td class="delta">+16.7</td></tr>
       </tbody>
     </table>
     <p>Three different failure archetypes showed up, and description rewrites fixed all three:</p>
@@ -110,6 +110,7 @@
     <p>I ran the same optimization with <strong>Claude Haiku 4.5</strong> as the agent instead. Its <em>baseline</em> (84.4%) roughly equaled the mid-tier model's <em>optimized</em> score — and optimization only moved it +2.2 pts.</p>
     <p><strong>Better agents route around your bad descriptions. Weaker agents can't.</strong> Which means description quality is a tax on exactly the agents people deploy for high-volume work — the cheap, fast ones. If your MCP server is "flaky with cheap models," this might be why, and it's fixable for under a dollar.</p>
     <p>The other honest finding: <strong>LLM rewrites are high-variance.</strong> Two independent rewrite attempts on the same baseline scored <span class="after">+10.0</span> and <span class="before">−2.2</span> points. You cannot one-shot this — you have to measure, and you have to be willing to throw a rewrite away. (Toolmetry's loop does this automatically; it discarded regressions twice during these runs.)</p>
+    <p><em>Update (Jul 14):</em> that variance is now engineered out. <code>--candidates K</code> samples K independent rewrites per round, screens them on just the failing scenarios, and full-measures only the winner. On the same filesystem baseline the loop climbed <strong>74.4 → 83.3 → 88.9 → 91.1</strong> (<span class="after">+16.7</span>, the number in the table above) — monotonically, with no regression ever reaching a full measure.</p>
 
     <h2>Ship it without forking</h2>
     <p>The rewritten descriptions live in a JSON file. <code>toolmetry proxy</code> wraps any MCP server and rewrites its <code>tools/list</code> responses on the fly:</p>
