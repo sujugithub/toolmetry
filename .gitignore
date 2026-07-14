@@ -10,6 +10,9 @@ dist/
 # OS noise
 .DS_Store
 
+# playwright-mcp session artifacts (inspection scratch)
+.playwright-mcp/
+
 # internal project management + session tooling (local only)
 CLAUDE.md
 .claude/

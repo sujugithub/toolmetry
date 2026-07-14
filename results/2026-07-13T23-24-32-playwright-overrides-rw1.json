@@ -1,0 +1,36 @@
+{
+  "round": 1,
+  "diagnosis": "The agent systematically calls `browser_run_code_unsafe` instead of the correct dedicated tools across almost all failing scenarios. Its current description ('Run a Playwright code snippet') presents it as a general-purpose swiss-army knife without stating it should be avoided for standard operations, so the agent falls back to it for navigation, clicking, typing, form filling, hovering, screenshots, snapshots, finding elements, and waiting. The dedicated tools have terse descriptions (e.g., 'Type text into editable element', 'Press a key on the keyboard') that fail to mention their key gating parameters and do not explicitly discourage the agent from using `browser_run_code_unsafe`. `browser_navigate` ('Navigate to a URL') is too vague, so the agent does not trust that local file URLs are loaded and attempts to manually inject HTML with `browser_run_code_unsafe`. `browser_snapshot` ('this is better than screenshot') does not strongly signal that it yields element references needed for subsequent actions, so the agent avoids it. `browser_find` mentions 'accessibility snapshot' which the agent misinterprets as requiring a separate capture step, prompting it to read raw HTML via `browser_run_code_unsafe` instead. `browser_take_screenshot` does not mention saving, so the agent writes custom screenshot code. `browser_network_request` says 'Use the number from browser_network_requests', which the agent reads as a mandatory prerequisite, causing unnecessary `browser_network_requests` and `browser_navigate` calls. `browser_console_messages` ('Returns all console messages') is too brief, leading the agent to omit it entirely in some runs.",
+  "rationales": {
+    "browser_run_code_unsafe": "Prevents the agent from using this as a generic fallback for standard browser operations.",
+    "browser_navigate": "Convinces the agent that navigation works and that manual HTML injection is unnecessary.",
+    "browser_snapshot": "Clarifies that this is the tool to obtain element references for actions.",
+    "browser_take_screenshot": "Directs the agent to use the dedicated tool instead of writing custom screenshot code.",
+    "browser_find": "Frames the tool as a direct page search rather than requiring raw HTML manipulation.",
+    "browser_type": "Makes it clear this is the dedicated tool for typing text.",
+    "browser_fill_form": "Directs the agent to use the dedicated form-filling tool.",
+    "browser_select_option": "Makes it clear this is the dedicated tool for dropdown selection.",
+    "browser_press_key": "Makes it clear this is the dedicated tool for keyboard events.",
+    "browser_click": "Makes it clear this is the dedicated tool for clicking.",
+    "browser_hover": "Makes it clear this is the dedicated tool for hovering.",
+    "browser_wait_for": "Makes it clear this is the dedicated tool for waiting.",
+    "browser_network_request": "Removes the implication that `browser_network_requests` must be called first.",
+    "browser_console_messages": "Prevents the agent from omitting the call or thinking prerequisites are needed."
+  },
+  "overrides": {
+    "browser_run_code_unsafe": "Use only as a last resort when no dedicated browser tool exists. Never use for navigation, clicking, typing, filling forms, selecting options, hovering, screenshots, snapshots, finding elements, or waiting. Unsafe: executes arbitrary JavaScript in the Playwright server process and is RCE-equivalent.",
+    "browser_navigate": "Navigate to a URL and load the page, including local file URLs. The page content is fully loaded automatically; do not use browser_run_code_unsafe to manually set or reload HTML afterwards.",
+    "browser_snapshot": "Capture the accessibility snapshot of the current page to get element references for clicking, typing, and other actions. This is better than a screenshot for interacting with the page; do not use browser_run_code_unsafe to inspect the page.",
+    "browser_take_screenshot": "Take a screenshot of the current page. You can't perform actions based on the screenshot; use browser_snapshot for actions. Use this for capturing page images; do not use browser_run_code_unsafe for screenshots.",
+    "browser_find": "Search the current page for text or a regular expression and return matching elements with their references and surrounding context. Use this to locate elements without capturing the full snapshot; do not use browser_run_code_unsafe to search page content.",
+    "browser_type": "Type text into an editable element on the current page. Provide the element and the text to type. Use this instead of browser_run_code_unsafe for entering text.",
+    "browser_fill_form": "Fill multiple form fields on the current page at once. Use this for forms instead of browser_run_code_unsafe.",
+    "browser_select_option": "Select an option in a dropdown on the current page. Provide the element and the option. Use this instead of browser_run_code_unsafe for dropdown selection.",
+    "browser_press_key": "Press a key on the current page, such as Enter. Provide the key. Use this instead of browser_run_code_unsafe for keyboard input.",
+    "browser_click": "Click an element on the current page by its reference. Use this instead of browser_run_code_unsafe for clicking buttons or links.",
+    "browser_hover": "Hover over an element on the current page by its reference. Use this instead of browser_run_code_unsafe for hover actions.",
+    "browser_wait_for": "Wait for text to appear or disappear on the current page, or wait for a specified timeout. Provide the text or timeout. Use this instead of browser_run_code_unsafe for waiting.",
+    "browser_network_request": "Returns full details (headers and body) of a single network request by its index, or a single part if `part` is set. Call this directly when you already know the request number; use browser_network_requests only to list requests first.",
+    "browser_console_messages": "Return all browser console messages for the current page. Use this directly to view logs without needing to call other tools first."
+  }
+}
